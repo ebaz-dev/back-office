@@ -12,7 +12,7 @@ async function middleware(req: NextRequest) {
     return NextResponse.redirect(newUrl);
   }
 
-  if (!session && req.nextUrl.pathname === '/customer') {
+  if (!session && req.nextUrl.pathname === '/merchants') {
     return NextResponse.redirect(newUrl);
   }
 
@@ -37,6 +37,10 @@ async function middleware(req: NextRequest) {
   }
 
   if (!session && req.nextUrl.pathname === '/warehouse') {
+    return NextResponse.redirect(newUrl);
+  }
+
+  if (!session && req.nextUrl.pathname === '/suppliers') {
     return NextResponse.redirect(newUrl);
   }
 
