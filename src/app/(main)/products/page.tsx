@@ -1,9 +1,10 @@
+import ProductsBoard from '@/components/products/ProductsBoard';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {}
 
 const ProductsPage: FunctionComponent<ProductsPageProps> = () => {
-  return <div>ProductsPage</div>;
+  return <ProductsBoard />;
 };
 
 export default ProductsPage;

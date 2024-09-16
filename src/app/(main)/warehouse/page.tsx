@@ -1,9 +1,10 @@
+import WarehouseBoard from '@/components/warehouse/WarehouseBoard';
 import { FunctionComponent } from 'react';
 
 interface WarehouseProps {}
 
 const Warehouse: FunctionComponent<WarehouseProps> = () => {
-  return <div>Warehouse</div>;
+  return <WarehouseBoard />;
 };
 
 export default Warehouse;
