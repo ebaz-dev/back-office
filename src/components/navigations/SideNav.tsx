@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@nextui-org/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import CoreSvgIcon from '@/components/core/CoreSvgIcon';
-import CoreImage from '../core/CoreImage';
+import CoreImage from '@/components/core/CoreImage';
 
 interface SideNavProps {
   isOpen: boolean;

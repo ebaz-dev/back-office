@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { cn } from '@/lib/utils';
 import CoreThemeSwitcher from '@/components/core/CoreThemeSwitcher';
-import CoreUserDropDown from '../core/CoreUserDropDown';
+import CoreUserDropDown from '@/components/core/CoreUserDropDown';
 
 interface MainNavProps {
   isOpen: boolean;

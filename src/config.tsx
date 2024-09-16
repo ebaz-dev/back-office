@@ -10,7 +10,8 @@ export const MenuList = [
   { icon: 'dashboard', label: 'Хяналтын самбар', url: '/dashboard' },
   { icon: 'order', label: 'Захиалга', url: '/order' },
   { icon: 'products', label: 'Бүтээгдэхүүн', url: '/products' },
-  { icon: 'customer', label: 'Харилцагч', url: '/customer' },
+  { icon: 'merchants', label: 'Харилцагч', url: '/merchants' },
   { icon: 'warehouse', label: 'Агуулах', url: '/warehouse' },
+  { icon: 'suppliers', label: 'Нийлүүлэгч', url: '/suppliers' },
   { icon: 'noat', label: 'НӨАТ', url: '/noat' }
 ];
