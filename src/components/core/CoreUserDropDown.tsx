@@ -6,8 +6,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownTrigger,
-  User
+  DropdownTrigger
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import { logoutAction } from '@/app/actions/auth';
