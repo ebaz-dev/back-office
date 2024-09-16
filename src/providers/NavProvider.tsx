@@ -22,7 +22,7 @@ const NavProvider: FunctionComponent<NavProviderProps> = ({ children }) => {
           <MainNav isOpen={isOpen} />
         </div>
 
-        <div className='px-8 gap-4 py-4 flex-1'>{children}</div>
+        <div className='p-4 flex-1'>{children}</div>
       </div>
     </div>
   );
