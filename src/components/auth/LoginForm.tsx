@@ -3,7 +3,7 @@
 import { loginAction } from '@/app/actions/auth';
 import { tr } from '@/lib/utils';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { Button, Input } from '@nextui-org/react';
+import { Input } from '@nextui-org/react';
 import { FunctionComponent, useState } from 'react';
 import { useFormState } from 'react-dom';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
@@ -49,10 +49,6 @@ const LoginForm: FunctionComponent<LoginFormProps> = () => {
       />
 
       <CoreSubmitButton text='Нэвтрэх' />
-
-      <Button type='button' fullWidth>
-        {tr('Бүртгүүлэх')}
-      </Button>
     </form>
   );
 };
