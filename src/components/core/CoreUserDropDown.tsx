@@ -19,7 +19,12 @@ const CoreUserDropDown: FunctionComponent<CoreUserDropDownProps> = () => {
       <DropdownTrigger className='cursor-pointer'>
         <Avatar />
       </DropdownTrigger>
-      <DropdownMenu aria-label='User Actions'>
+
+      <DropdownMenu aria-label='actions'>
+        <DropdownItem key='settings' href='/settings'>
+          {tr('Тохиргоо')}
+        </DropdownItem>
+
         <DropdownItem
           key='logout'
           className='text-danger'

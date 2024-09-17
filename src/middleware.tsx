@@ -32,7 +32,7 @@ async function middleware(req: NextRequest) {
     return NextResponse.redirect(newUrl);
   }
 
-  if (!session && req.nextUrl.pathname === '/profile') {
+  if (!session && req.nextUrl.pathname === '/settings') {
     return NextResponse.redirect(newUrl);
   }
 
