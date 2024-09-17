@@ -17,7 +17,7 @@ const NavProvider: FunctionComponent<NavProviderProps> = ({ children }) => {
         <SideNav isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
 
-      <div className='flex-1 flex flex-col h-full'>
+      <div className='flex-1 flex flex-col h-full w-full overflow-hidden'>
         <div className='h-14'>
           <MainNav isOpen={isOpen} />
         </div>

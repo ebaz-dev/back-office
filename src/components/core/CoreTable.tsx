@@ -2,7 +2,7 @@
 
 import { IColumn } from '@/lib/types';
 import {
-  Button,
+  getKeyValue,
   Pagination,
   Table,
   TableBody,
@@ -11,46 +11,37 @@ import {
   TableHeader,
   TableRow
 } from '@nextui-org/react';
-import { usePathname, useRouter } from 'next/navigation';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 
 interface CoreTableProps {
+  data: any[];
   columns: IColumn[];
-  items: any[];
+  rowsPerPage?: number;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
-  const { columns, items } = props;
-
-  const router = useRouter();
-  const pathname = usePathname();
-
+  const { columns, data, rowsPerPage = 10 } = props;
   const [page, setPage] = useState(1);
+
+  const pages = Math.ceil(data.length / rowsPerPage);
+
+  const items = useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return data.slice(start, end);
+  }, [page, data]);
 
   const renderCell = useCallback((item: any, columnKey: any) => {
     switch (columnKey) {
       default:
-        return null;
+        return getKeyValue(item, columnKey);
     }
   }, []);
 
-  const pages: number = 10;
-
-  const onNextPage = useCallback(() => {
-    if (page < pages) {
-      setPage(page + 1), router.push(`${pathname}?page=${page}`);
-    }
-  }, [page, pages, router, pathname]);
-
-  const onPreviousPage = useCallback(() => {
-    if (page > 1) {
-      setPage(page - 1), router.push(`${pathname}?page=${page}`);
-    }
-  }, [page, router, pathname]);
-
   const bottomContent = useMemo(() => {
     return (
-      <div className='py-2 px-2 flex justify-between items-center'>
+      <div className='py-2 px-2 flex justify-center items-center'>
         <Pagination
           isCompact
           showControls
@@ -60,39 +51,32 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
           total={pages}
           onChange={setPage}
         />
-        <div className='hidden sm:flex w-[30%] justify-end gap-2'>
-          <Button
-            isDisabled={pages === 1}
-            size='sm'
-            variant='flat'
-            onPress={onPreviousPage}
-          >
-            Previous
-          </Button>
-          <Button
-            isDisabled={pages === 1}
-            size='sm'
-            variant='flat'
-            onPress={onNextPage}
-          >
-            Next
-          </Button>
-        </div>
       </div>
     );
   }, [items.length, page, pages]);
 
   return (
-    <Table bottomContent={bottomContent}>
+    <Table
+      aria-label='core table'
+      bottomContent={bottomContent}
+      bottomContentPlacement='outside'
+      isHeaderSticky
+      classNames={{
+        base: 'h-full',
+        table: 'h-full',
+        tbody: 'h-full',
+        wrapper: 'h-full'
+      }}
+    >
       <TableHeader>
-        {columns.map((column: IColumn) => {
-          return <TableColumn key={column.key}>{column.label}</TableColumn>;
-        })}
+        <TableHeader columns={columns}>
+          {column => <TableColumn key={column.key}>{column.label}</TableColumn>}
+        </TableHeader>
       </TableHeader>
 
-      <TableBody items={items}>
+      <TableBody items={items} emptyContent={null}>
         {item => (
-          <TableRow key={item.name}>
+          <TableRow key={item.key}>
             {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}
