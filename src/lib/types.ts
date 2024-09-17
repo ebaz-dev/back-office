@@ -1,4 +1,4 @@
 export interface IColumn {
-  key: string;
+  uid: string;
   label: string;
 }
