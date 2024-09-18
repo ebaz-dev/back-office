@@ -9,10 +9,11 @@ interface CoreSubmitButtonProps {
   text: string;
   className?: string;
   isDisabled?: boolean;
+  onPress?: () => void;
 }
 
 const CoreSubmitButton: FunctionComponent<CoreSubmitButtonProps> = props => {
-  const { text, className, isDisabled } = props;
+  const { text, className, isDisabled, onPress } = props;
 
   const { pending } = useFormStatus();
 
@@ -24,6 +25,7 @@ const CoreSubmitButton: FunctionComponent<CoreSubmitButtonProps> = props => {
       isLoading={pending}
       className={className}
       isDisabled={isDisabled}
+      onPress={onPress}
     >
       {tr(text)}
     </Button>
