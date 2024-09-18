@@ -6,7 +6,7 @@ interface SettingsBoardProps {}
 
 const SettingsBoard: FunctionComponent<SettingsBoardProps> = () => {
   return (
-    <Card>
+    <Card className='h-full'>
       <CardHeader>{tr('Тохиргоо')}</CardHeader>
       <CardBody></CardBody>
     </Card>
