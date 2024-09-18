@@ -1,4 +1,5 @@
 import SettingsUserInfo from '@/components/settings/SettingsUserInfo';
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import { FunctionComponent, ReactNode } from 'react';
 
 interface SettingsLayoutProps {
@@ -12,7 +13,10 @@ const SettingsLayout: FunctionComponent<SettingsLayoutProps> = ({
     <div className='flex gap-4 h-full'>
       <SettingsUserInfo />
 
-      <div className='flex-1 h-full'>{children}</div>
+      <Card className='flex-1 h-full'>
+        <CardHeader>Tохиргоо</CardHeader>
+        <CardBody>{children}</CardBody>
+      </Card>
     </div>
   );
 };

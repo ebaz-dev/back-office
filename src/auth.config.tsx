@@ -30,14 +30,14 @@ export default {
 
     async jwt({ token, user }: any) {
       if (user) {
-        token = user;
+        token.token = user.token;
       }
 
       return token;
     },
 
     async session({ session, token }: any) {
-      session = token;
+      session.token = token.token;
 
       return session;
     }
