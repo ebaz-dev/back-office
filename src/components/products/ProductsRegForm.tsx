@@ -5,6 +5,8 @@ import { useFormState } from 'react-dom';
 import { productRegAction } from '@/app/actions/products';
 import { IOption } from '@/lib/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
+import { Input } from '@nextui-org/react';
+import { tr } from '@/lib/utils';
 
 interface ProductsRegFormProps {
   onClose: () => void;
@@ -29,6 +31,17 @@ const ProductsRegForm: FunctionComponent<ProductsRegFormProps> = ({
 
   return (
     <form action={action} className='flex flex-col gap-4'>
+      <Input
+        type='file'
+        variant='bordered'
+        size='md'
+        name='product_image'
+        label={tr('Бүтээгдэхүүний зураг')}
+        classNames={{
+          label: 'text-xs'
+        }}
+      />
+
       <div className='w-full grid grid-cols-2 gap-4'>
         <CoreFormFields fields={ProductsRegFormFields(fieldOptions)} />
       </div>

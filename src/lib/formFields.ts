@@ -68,8 +68,8 @@ export const ProductsRegFormFields = (
   {
     type: 'input',
     name: '',
-    label: 'Сагслах тоо хамжээ /ш/',
-    placeholder: 'Сагслах тоо хамжээ /ш/',
+    label: 'Сагслах тоо хэмжээ /ш/',
+    placeholder: 'Сагслах тоо хэмжээ /ш/',
     options: [],
     defaultValue: ''
   },

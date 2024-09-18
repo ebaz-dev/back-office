@@ -19,6 +19,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
     if (type === 'autocomplete') {
       return (
         <Autocomplete
+          key={index}
           label={label}
           placeholder={label}
           name='supplier_name'
@@ -61,6 +62,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
     return (
       <Input
         key={index}
+        type={type}
         name={name}
         placeholder={placeholder}
         label={label}
