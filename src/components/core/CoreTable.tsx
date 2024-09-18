@@ -14,16 +14,23 @@ import {
   TableHeader,
   TableRow
 } from '@nextui-org/react';
-import { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import {
+  FunctionComponent,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState
+} from 'react';
 
 interface CoreTableProps {
   data: any[];
   columns: IColumn[];
   rowsPerPage?: number;
+  customTopContents?: ReactNode;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
-  const { columns, data, rowsPerPage = 10 } = props;
+  const { columns, data, rowsPerPage = 10, customTopContents } = props;
   const [page, setPage] = useState(1);
   const [filterValue, setFilterValue] = useState('');
 
@@ -59,13 +66,17 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
 
   const topContent = useMemo(() => {
     return (
-      <div className='bg-content1 p-4 rounded-large shadow-small'>
+      <div className='bg-content1 p-4 rounded-large shadow-small flex gap-2 justify-between'>
+        {customTopContents}
+
         <Input
           isClearable
           className='max-w-80'
           variant='faded'
           placeholder={tr('Хайлт')}
-          startContent={<MagnifyingGlassIcon className='h-4 w-4' />}
+          startContent={
+            <MagnifyingGlassIcon className='h-5 w-5 text-default' />
+          }
           value={filterValue}
           onClear={() => onClear()}
           onValueChange={onSearchChange}

@@ -26,3 +26,30 @@ export const OrderColumns: IColumn[] = [
   { uid: '23', label: 'Түгээгч код/нэр' },
   { uid: '24', label: 'Агуулах' }
 ];
+
+export const ProductsColumns: IColumn[] = [
+  { uid: '1', label: 'ID' },
+  { uid: '2', label: 'Show' },
+  { uid: '3', label: 'Нийлүүлэгч' },
+  { uid: '4', label: 'Image' },
+  { uid: '5', label: 'Name' },
+  { uid: '6', label: 'Vendor' },
+  { uid: '7', label: 'Ангилал' },
+  { uid: '8', label: 'Дэлгэрэнгүй' },
+  { uid: '9', label: 'Үлдэгдэл' },
+  { uid: '10', label: 'Зохистой хэмжээ' },
+  { uid: '11', label: 'Аюулгүйн нөөц' },
+  { uid: '12', label: 'Min_order qty' },
+  { uid: '13', label: 'Sup_min order' },
+  { uid: '14', label: 'Хүргэлтийн өдөр' },
+  { uid: '15', label: 'Barcode' },
+  { uid: '16', label: 'SKU' },
+  { uid: '17', label: 'PPID' },
+  { uid: '18', label: 'Price' },
+  { uid: '19', label: 'Сагслах тоо' },
+  { uid: '20', label: 'Хотын татвар' },
+  { uid: '21', label: 'Бутархайгаар сагслах' },
+  { uid: '22', label: 'Pickpack' },
+  { uid: '23', label: 'Устгах' },
+  { uid: '24', label: 'Дэлгүүр тохируулах' }
+];
