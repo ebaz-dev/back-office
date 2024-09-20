@@ -1,5 +1,4 @@
 import CoreThemeSwitcher from '@/components/core/CoreThemeSwitcher';
-import { Button } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 
 interface HomePAgeProps {}
