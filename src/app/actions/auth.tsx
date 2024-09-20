@@ -16,8 +16,8 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
     };
   } else {
     const response = await postFetch('/users/signIn', {
-      email: 'test5@test.com',
-      password: 'qweqwe123'
+      email: validatedFields.data?.username || 'test5@test.com',
+      password: validatedFields.data?.password || 'qweqwe123'
     });
 
     if (response && response.id) {
