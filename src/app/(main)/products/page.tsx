@@ -1,5 +1,5 @@
 import ProductsBoard from '@/components/products/ProductsBoard';
-import { getFetchWithSession } from '@/lib/fetch';
+import { getFetch } from '@/lib/fetch';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
@@ -11,9 +11,7 @@ interface ProductsPageProps {
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
   searchParams: { page = 1 }
 }) => {
-  const products = await getFetchWithSession(
-    `/product/list?page=${page}&limit=10`
-  );
+  const products = await getFetch(`/product/list?page=${page}&limit=10`);
 
   return (
     <ProductsBoard
