@@ -21,48 +21,41 @@ import {
   useMemo,
   useState
 } from 'react';
+import CoreImage from '@/components/core/CoreImage';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface CoreTableProps {
   data: any[];
   columns: IColumn[];
   rowsPerPage?: number;
+  totalPages: number;
+  currentPage: number;
   customTopContents?: ReactNode;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
-  const { columns, data, rowsPerPage = 10, customTopContents } = props;
-  const [page, setPage] = useState(1);
+  const { columns, data, customTopContents, totalPages, currentPage } = props;
+
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [filterValue, setFilterValue] = useState('');
-
-  const pages = Math.ceil(data.length / rowsPerPage);
-
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return data.slice(start, end);
-  }, [page, data]);
-
-  const renderCell = useCallback((item: any, columnKey: any) => {
-    switch (columnKey) {
-      default:
-        return getKeyValue(item, columnKey);
-    }
-  }, []);
 
   const onClear = useCallback(() => {
     setFilterValue('');
-    setPage(1);
   }, []);
 
   const onSearchChange = useCallback((value: string) => {
     if (value) {
       setFilterValue(value);
-      setPage(1);
     } else {
       setFilterValue('');
     }
   }, []);
+
+  const onPageChange = (value: number) => {
+    router.push(`${pathname}?page=${value}`);
+  };
 
   const topContent = useMemo(() => {
     return (
@@ -83,7 +76,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         />
       </div>
     );
-  }, [filterValue]);
+  }, [filterValue, customTopContents]);
 
   const bottomContent = useMemo(() => {
     return (
@@ -93,13 +86,26 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
           showControls
           showShadow
           color='primary'
-          page={page}
-          total={pages}
-          onChange={setPage}
+          page={currentPage}
+          total={totalPages}
+          onChange={onPageChange}
         />
       </div>
     );
-  }, [items.length, page, pages]);
+  }, [currentPage, totalPages]);
+
+  const renderCell = useCallback((item: any, columnKey: any) => {
+    switch (columnKey) {
+      case 'images':
+        return (
+          <div className='w-10 h-10'>
+            <CoreImage src={item.images[0]} />
+          </div>
+        );
+      default:
+        return getKeyValue(item, columnKey);
+    }
+  }, []);
 
   return (
     <Table
@@ -122,7 +128,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         </TableHeader>
       </TableHeader>
 
-      <TableBody items={items} emptyContent={null}>
+      <TableBody items={data} emptyContent={null}>
         {item => (
           <TableRow key={item.uid}>
             {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}

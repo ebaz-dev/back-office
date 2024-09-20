@@ -2,6 +2,7 @@
 
 import { signIn, signOut } from '@/auth';
 import { LoginFormSchema, LoginFormState } from '@/lib/definitions';
+import { postFetch } from '@/lib/fetch';
 
 export async function loginAction(state: LoginFormState, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
@@ -14,10 +15,17 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
       errors: validatedFields.error.flatten().fieldErrors
     };
   } else {
-    await signIn('credentials', {
-      token: 'test',
-      redirectTo: '/dashboard'
+    const response = await postFetch('/users/signIn', {
+      email: 'test5@test.com',
+      password: 'qweqwe123'
     });
+
+    if (!response || !response.errors) {
+      await signIn('credentials', {
+        token: 'test',
+        redirectTo: '/dashboard'
+      });
+    }
   }
 }
 

@@ -1,3 +1,4 @@
+import { NextImageSizes } from '@/config';
 import Image from 'next/image';
 import { FunctionComponent } from 'react';
 
@@ -8,7 +9,17 @@ interface CoreImageProps {
 const CoreImage: FunctionComponent<CoreImageProps> = ({ src }) => {
   return (
     <div className='w-full h-full relative'>
-      <Image fill priority alt='ebazaar' src={src} />
+      <Image
+        fill
+        priority
+        alt='ebazaar'
+        src={src}
+        sizes={NextImageSizes}
+        style={{
+          objectFit: 'contain',
+          objectPosition: 'center'
+        }}
+      />
     </div>
   );
 };
