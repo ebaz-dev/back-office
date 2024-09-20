@@ -26,6 +26,10 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
         redirectTo: '/dashboard'
       });
     }
+
+    return {
+      message: response?.errors[0].message
+    };
   }
 }
 

@@ -3,7 +3,7 @@
 import { loginAction } from '@/app/actions/auth';
 import { tr } from '@/lib/utils';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { Input } from '@nextui-org/react';
+import { Card, CardBody, Input } from '@nextui-org/react';
 import { FunctionComponent, useState } from 'react';
 import { useFormState } from 'react-dom';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
@@ -19,6 +19,12 @@ const LoginForm: FunctionComponent<LoginFormProps> = () => {
 
   return (
     <form action={action} className='flex flex-col gap-4'>
+      {state?.message && (
+        <Card className='bg-danger text-white text-xs'>
+          <CardBody>{state?.message}</CardBody>
+        </Card>
+      )}
+
       <Input
         name='username'
         variant='bordered'
