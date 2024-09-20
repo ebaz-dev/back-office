@@ -45,13 +45,17 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     setFilterValue('');
   }, []);
 
-  const onSearchChange = useCallback((value: string) => {
-    if (value) {
-      setFilterValue(value);
-    } else {
-      setFilterValue('');
-    }
-  }, []);
+  const onSearchChange = useCallback(
+    (value: string) => {
+      if (value) {
+        setFilterValue(value);
+        router.push(`${pathname}?page=1`);
+      } else {
+        setFilterValue('');
+      }
+    },
+    [router, pathname]
+  );
 
   const onPageChange = (value: number) => {
     router.push(`${pathname}?page=${value}`);
@@ -128,9 +132,9 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         </TableHeader>
       </TableHeader>
 
-      <TableBody items={data} emptyContent={null}>
+      <TableBody items={data ?? []} emptyContent={null}>
         {item => (
-          <TableRow key={item.uid}>
+          <TableRow key={item?.uid}>
             {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}

@@ -20,9 +20,9 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
       password: 'qweqwe123'
     });
 
-    if (!response || !response.errors) {
+    if (response && response.id) {
       await signIn('credentials', {
-        token: 'test',
+        token: response.id,
         redirectTo: '/dashboard'
       });
     }
