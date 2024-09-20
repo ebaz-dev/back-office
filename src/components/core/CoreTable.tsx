@@ -119,12 +119,16 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
       isHeaderSticky
-      classNames={{
-        base: 'h-full',
-        table: 'h-full',
-        tbody: 'h-full',
-        wrapper: 'h-full'
-      }}
+      classNames={
+        data.length === 0
+          ? {
+              base: 'h-full',
+              table: 'h-full',
+              tbody: 'h-full',
+              wrapper: 'h-full'
+            }
+          : {}
+      }
     >
       <TableHeader>
         <TableHeader columns={columns}>
