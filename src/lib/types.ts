@@ -35,17 +35,58 @@ export interface IProduct {
   description: string;
   prices: string[];
   images: string[];
-  attributes: IProductAttribute[];
+  attributes: IAttribute[];
   inCase: number;
-  createdAt: string | Date;
-  updatedAt: string | Date;
+  isActive: boolean;
+  isAlcohol: boolean;
+  cityTax: boolean;
+  priority: number;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   inventoryId: string;
-  inventory: {
-    totalStock: number;
-    reservedStock: number;
-    availableStock: number;
-    id: string;
+  inventory: IInventory;
+  brand: IBrand;
+  categories: ICategory[];
+  adjustedPrice: {
+    price: number;
+    cost: number;
   };
-  adjustedPrice: { price: number; cost: number };
+  id: string;
+}
+
+export interface IBrand {
+  name: string;
+  slug: string;
+  customerId: string;
+  image: string;
+  isActive: boolean;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  id: string;
+}
+
+export interface IAttribute {
+  name: string;
+  slug: string;
+  key: string;
+  value: number | string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  id: string;
+}
+
+export interface ICategory {
+  name: string;
+  slug: string;
+  customerId: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  id: string;
+}
+
+export interface IInventory {
+  totalStock: number;
+  reservedStock: number;
+  availableStock: number;
   id: string;
 }

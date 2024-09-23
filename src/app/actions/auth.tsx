@@ -22,7 +22,7 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
 
     if (response && response.id) {
       await signIn('credentials', {
-        token: response.id,
+        userId: response.id,
         redirectTo: '/dashboard'
       });
     }

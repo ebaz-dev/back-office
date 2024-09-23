@@ -1,8 +1,6 @@
-export const BASE_URL = process.env.BASE_URL;
+export const API_URL = process.env.API_URL;
 
 export const MEDIA_URL = process.env.MEDIA_URL;
-
-export const OLD_MEDIA_URL = process.env.OLD_MEDIA_URL;
 
 export const NextImageSizes = '(max-width: 768px) 100vw, 33vw';
 

@@ -7,16 +7,15 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
-import ProductsRegForm from '@/components/products/ProductsRegForm';
+import ProductsCreateForm from '@/components/products/ProductsCreateForm';
 
-interface ProductsRegProps {}
+interface ProductsCreateProps {}
 
-const ProductsReg: FunctionComponent<ProductsRegProps> = () => {
+const ProductsCreate: FunctionComponent<ProductsCreateProps> = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -37,7 +36,7 @@ const ProductsReg: FunctionComponent<ProductsRegProps> = () => {
                 {tr('Бүтээгдэхүүн бүртгэх')}
               </ModalHeader>
               <ModalBody className='pb-4'>
-                <ProductsRegForm onClose={onClose} />
+                <ProductsCreateForm onClose={onClose} />
               </ModalBody>
             </>
           )}
@@ -47,4 +46,4 @@ const ProductsReg: FunctionComponent<ProductsRegProps> = () => {
   );
 };
 
-export default ProductsReg;
+export default ProductsCreate;

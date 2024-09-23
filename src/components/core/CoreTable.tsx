@@ -1,7 +1,7 @@
 'use client';
 
 import { IColumn } from '@/lib/types';
-import { tr } from '@/lib/utils';
+import { getNestedValue, isImagePath, tr } from '@/lib/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {
   getKeyValue,
@@ -18,6 +18,7 @@ import {
   FunctionComponent,
   ReactNode,
   useCallback,
+  useEffect,
   useMemo,
   useState
 } from 'react';
@@ -31,15 +32,28 @@ interface CoreTableProps {
   totalPages: number;
   currentPage: number;
   customTopContents?: ReactNode;
+  onRowAction: (key: any) => void;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
-  const { columns, data, customTopContents, totalPages, currentPage } = props;
+  const {
+    columns,
+    data,
+    customTopContents,
+    totalPages,
+    currentPage,
+    onRowAction
+  } = props;
 
   const router = useRouter();
   const pathname = usePathname();
 
   const [filterValue, setFilterValue] = useState('');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const onClear = useCallback(() => {
     setFilterValue('');
@@ -99,15 +113,21 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
   }, [currentPage, totalPages]);
 
   const renderCell = useCallback((item: any, columnKey: any) => {
-    switch (columnKey) {
-      case 'images':
+    const value = getNestedValue(item, columnKey.split('.'));
+
+    const type = isImagePath(value) ? 'image' : '';
+
+    switch (type) {
+      case 'image':
         return (
           <div className='w-10 h-10'>
-            <CoreImage src={item.images[0]} />
+            <CoreImage src={value} />
           </div>
         );
       default:
-        return getKeyValue(item, columnKey);
+        return (
+          <div className='line-clamp-3'>{getKeyValue(value, columnKey)}</div>
+        );
     }
   }, []);
 
@@ -118,7 +138,9 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
       topContentPlacement='outside'
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
+      selectionMode={isClient ? 'multiple' : 'none'}
       isHeaderSticky
+      onRowAction={onRowAction}
       classNames={
         data.length === 0
           ? {
@@ -138,8 +160,12 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
 
       <TableBody items={data ?? []} emptyContent={null}>
         {item => (
-          <TableRow key={item?.uid}>
-            {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+          <TableRow key={item.id}>
+            {columnKey => (
+              <TableCell className='text-xs'>
+                {renderCell(item, columnKey)}
+              </TableCell>
+            )}
           </TableRow>
         )}
       </TableBody>

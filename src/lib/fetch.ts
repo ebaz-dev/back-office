@@ -1,7 +1,7 @@
-import { BASE_URL } from '@/config';
+import { API_URL } from '@/config';
 
 export async function getFetch(endpoint: string) {
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  const response = await fetch(`${API_URL}${endpoint}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json; charset=utf-8'
@@ -14,7 +14,7 @@ export async function getFetch(endpoint: string) {
 }
 
 export async function postFetch(endpoint: string, body: any) {
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  const response = await fetch(`${API_URL}${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8'

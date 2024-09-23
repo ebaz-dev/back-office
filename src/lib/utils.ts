@@ -1,3 +1,4 @@
+import { MEDIA_URL } from '@/config';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,3 +13,15 @@ export function tr(text: string) {
 export const formatUnit = (value: string | number, unit: string) => {
   return value ? `${value.toLocaleString()} ${unit}` : `0 ${unit}`;
 };
+
+export const getNestedValue = (obj: any, pathArray: string[]) => {
+  return pathArray.reduce((acc, key) => acc?.[key], obj);
+};
+
+export function isImagePath(str: string) {
+  const imageExtensions = /\.(jpg|jpeg|png|gif|bmp|svg)$/i;
+
+  return imageExtensions.test(str);
+}
+
+export const replaceMediaUrl = (imageUrl: string) => {};

@@ -8,10 +8,10 @@ export default {
       credentials: {},
 
       async authorize(credentials) {
-        const { token } = credentials as any;
+        const { userId } = credentials as any;
 
         const user: any = {
-          token
+          userId
         };
 
         return user;
@@ -21,7 +21,7 @@ export default {
 
   callbacks: {
     async signIn({ user }: any) {
-      if (user && user.token) {
+      if (user && user.userId) {
         return true;
       }
 
@@ -30,14 +30,14 @@ export default {
 
     async jwt({ token, user }: any) {
       if (user) {
-        token.token = user.token;
+        token.userId = user.userId;
       }
 
       return token;
     },
 
     async session({ session, token }: any) {
-      session.token = token.token;
+      session.token = token.userId;
 
       return session;
     }

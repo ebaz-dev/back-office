@@ -6,7 +6,7 @@ interface ProductsRegFormFieldsProps {
   brandOptions: IOption[];
 }
 
-export const ProductsRegFormFields = (
+export const ProductsCreateFormFields = (
   props: ProductsRegFormFieldsProps
 ): IFormField[] => [
   {
