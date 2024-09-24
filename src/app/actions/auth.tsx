@@ -16,8 +16,10 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
     };
   } else {
     const response = await postFetch('/users/signIn', {
-      email: validatedFields.data?.username || 'test5@test.com',
-      password: validatedFields.data?.password || 'qweqwe123'
+      phoneNumber: validatedFields.data?.username,
+      password: validatedFields.data?.password,
+      deviceType: 'web',
+      deviceName: 'web browser'
     });
 
     if (response && response.id) {

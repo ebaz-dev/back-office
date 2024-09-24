@@ -16,6 +16,7 @@ import {
 } from '@nextui-org/react';
 import {
   FunctionComponent,
+  Key,
   ReactNode,
   useCallback,
   useEffect,
@@ -32,7 +33,7 @@ interface CoreTableProps {
   totalPages: number;
   currentPage: number;
   customTopContents?: ReactNode;
-  onRowAction: (key: any) => void;
+  onRowAction: (key: Key) => void;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {

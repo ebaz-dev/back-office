@@ -1,10 +1,10 @@
 'use client';
 
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, Key, useState } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { ProductsColumns } from '@/lib/columns';
 import ProductsCreate from '@/components/products/ProductsCreate';
-import { IProduct } from '@/lib/types';
+import { ICustomer, IProduct } from '@/lib/types';
 import {
   Modal,
   ModalBody,
@@ -15,27 +15,28 @@ import {
 } from '@nextui-org/react';
 import { tr } from '@/lib/utils';
 import { getProductAction } from '@/app/actions/products';
-import ProductsDetail from './ProductsDetail';
-import CoreEmpty from '../core/CoreEmpty';
+import ProductsDetail from '@/components/products/ProductsDetail';
+import CoreLoading from '@/components/core/CoreLoading';
+import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
 
 interface ProductsBoardProps {
   products: IProduct[];
   totalPages: number;
   currentPage: number;
+  suppliers: ICustomer[];
+  supplier: ICustomer;
 }
 
-const ProductsBoard: FunctionComponent<ProductsBoardProps> = ({
-  products,
-  totalPages,
-  currentPage
-}) => {
+const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
+  const { products, totalPages, currentPage, suppliers, supplier } = props;
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState();
 
-  const onRowAction = async (key: any) => {
+  const onRowAction = async (key: Key) => {
     onOpen();
 
-    const product = await getProductAction(key);
+    const product = await getProductAction(key.toString());
 
     setSelectedProduct(product);
   };
@@ -50,7 +51,9 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = ({
           currentPage={currentPage}
           customTopContents={
             <div className='flex gap-2'>
-              <ProductsCreate />
+              <CoreSelectSupplier suppliers={suppliers} supplier={supplier} />
+
+              <ProductsCreate suppliers={suppliers} />
             </div>
           }
           onRowAction={onRowAction}
@@ -65,10 +68,10 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = ({
                 {tr('Бүтээгдэхүүний дэлгэрэнгүй')}
               </ModalHeader>
               <ModalBody className='pb-4'>
-                {selectedProduct ? (
-                  <ProductsDetail product={selectedProduct} />
+                {!selectedProduct ? (
+                  <CoreLoading />
                 ) : (
-                  <CoreEmpty />
+                  <ProductsDetail product={selectedProduct} />
                 )}
               </ModalBody>
               <ModalFooter></ModalFooter>

@@ -11,7 +11,7 @@ export const ProductsCreateFormFields = (
 ): IFormField[] => [
   {
     type: 'autocomplete',
-    name: 'supplier_name',
+    name: 'customerId',
     label: 'Нийлүүлэгч нэр',
     placeholder: 'Нийлүүлэгч нэр',
     options: props.supplierOptions,
@@ -19,7 +19,7 @@ export const ProductsCreateFormFields = (
   },
   {
     type: 'autocomplete',
-    name: 'product_category',
+    name: 'categoryId',
     label: 'Бүтээгдэхүүний категори',
     placeholder: 'Бүтээгдэхүүний категори',
     options: props.categoryOptions,
@@ -27,7 +27,7 @@ export const ProductsCreateFormFields = (
   },
   {
     type: 'autocomplete',
-    name: 'product_category',
+    name: 'brandId',
     label: 'Бүтээгдэхүүний брэнд',
     placeholder: 'Бүтээгдэхүүний брэнд',
     options: props.brandOptions,
@@ -35,7 +35,7 @@ export const ProductsCreateFormFields = (
   },
   {
     type: 'input',
-    name: 'product_name',
+    name: 'name',
     label: 'Бүтээгдэхүүний нэр',
     placeholder: 'Бүтээгдэхүүний нэр',
     options: [],
@@ -43,7 +43,7 @@ export const ProductsCreateFormFields = (
   },
   {
     type: 'input',
-    name: '',
+    name: 'description',
     label: 'Бүтээгдэхүүний дэлгэрэнгүй бичиглэл',
     placeholder: 'Бүтээгдэхүүний дэлгэрэнгүй бичиглэл',
     options: [],
@@ -51,7 +51,7 @@ export const ProductsCreateFormFields = (
   },
   {
     type: 'input',
-    name: '',
+    name: 'sku',
     label: 'Бүтээгдэхүүний sku',
     placeholder: 'Бүтээгдэхүүний sku',
     options: [],
@@ -59,74 +59,31 @@ export const ProductsCreateFormFields = (
   },
   {
     type: 'input',
-    name: '',
+    name: 'barCode',
     label: 'Бүтээгдэхүүний barcode',
     placeholder: 'Бүтээгдэхүүний barcode',
     options: [],
     defaultValue: ''
   },
   {
-    type: 'input',
-    name: '',
-    label: 'Сагслах тоо хэмжээ /ш/',
-    placeholder: 'Сагслах тоо хэмжээ /ш/',
-    options: [],
-    defaultValue: ''
-  },
-  {
-    type: 'input',
-    name: '',
-    label: 'Бүтээгдэхүүний жин',
-    placeholder: 'Бүтээгдэхүүний жин',
-    options: [],
-    defaultValue: ''
-  },
-  {
-    type: 'input',
-    name: '',
-    label: 'Бүтээгдэхүүний үнэ',
-    placeholder: 'Бүтээгдэхүүний үнэ',
-    options: [],
-    defaultValue: ''
-  },
-  {
-    type: 'input',
-    name: '',
-    label: 'Бүтээгдэхүүний үлдэгдэл тоо',
-    placeholder: 'Бүтээгдэхүүний үлдэгдэл тоо',
-    options: [],
-    defaultValue: ''
-  },
-  {
     type: 'select',
-    name: '',
+    name: 'isAlcohol',
     label: 'Алкохол төрөл',
     placeholder: 'Алкохол төрөл',
     options: [
-      { value: '1', label: 'Тийм' },
-      { value: '2', label: 'Үгүй' }
+      { value: true, label: 'Тийм' },
+      { value: false, label: 'Үгүй' }
     ],
     defaultValue: ''
   },
   {
     type: 'select',
-    name: '',
-    label: 'НӨАТ',
-    placeholder: 'НӨАТ',
-    options: [
-      { value: '1', label: 'Тийм' },
-      { value: '2', label: 'Үгүй' }
-    ],
-    defaultValue: ''
-  },
-  {
-    type: 'select',
-    name: '',
+    name: 'cityTax',
     label: 'Хотын татвар',
     placeholder: 'Хотын татвар',
     options: [
-      { value: '1', label: 'Тийм' },
-      { value: '2', label: 'Үгүй' }
+      { value: true, label: 'Тийм' },
+      { value: false, label: 'Үгүй' }
     ],
     defaultValue: ''
   }

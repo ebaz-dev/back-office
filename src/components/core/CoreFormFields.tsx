@@ -22,7 +22,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
           key={index}
           label={label}
           placeholder={label}
-          name='supplier_name'
+          name={name}
           labelPlacement='outside'
           size='md'
           variant='bordered'
@@ -34,7 +34,9 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
           defaultItems={options}
         >
           {item => (
-            <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>
+            <AutocompleteItem key={item.value.toString()}>
+              {item.label}
+            </AutocompleteItem>
           )}
         </Autocomplete>
       );
@@ -44,6 +46,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
       return (
         <Select
           key={index}
+          name={name}
           items={options}
           label={label}
           labelPlacement='outside'
@@ -54,7 +57,11 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
             label: 'text-xs'
           }}
         >
-          {option => <SelectItem key={option.value}>{option.label}</SelectItem>}
+          {option => (
+            <SelectItem key={option.value.toString()}>
+              {option.label}
+            </SelectItem>
+          )}
         </Select>
       );
     }

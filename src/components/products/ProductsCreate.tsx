@@ -12,17 +12,26 @@ import {
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import ProductsCreateForm from '@/components/products/ProductsCreateForm';
+import { ICustomer } from '@/lib/types';
 
-interface ProductsCreateProps {}
+interface ProductsCreateProps {
+  suppliers: ICustomer[];
+}
 
-const ProductsCreate: FunctionComponent<ProductsCreateProps> = () => {
+const ProductsCreate: FunctionComponent<ProductsCreateProps> = ({
+  suppliers
+}) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const onPress = () => {
+    onOpen();
+  };
 
   return (
     <div>
       <Button
         color='primary'
-        onPress={onOpen}
+        onPress={onPress}
         startContent={<PlusIcon className='w-5 h-5' />}
       >
         {tr('Нэг бүтээгдэхүүн бүртгэх')}
@@ -36,7 +45,7 @@ const ProductsCreate: FunctionComponent<ProductsCreateProps> = () => {
                 {tr('Бүтээгдэхүүн бүртгэх')}
               </ModalHeader>
               <ModalBody className='pb-4'>
-                <ProductsCreateForm onClose={onClose} />
+                <ProductsCreateForm onClose={onClose} suppliers={suppliers} />
               </ModalBody>
             </>
           )}

@@ -5,7 +5,9 @@ interface ProductsDetailProps {
   product: IProduct;
 }
 
-const ProductsDetail: FunctionComponent<ProductsDetailProps> = () => {
+const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
+  const { product } = props;
+
   return <div></div>;
 };
 

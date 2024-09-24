@@ -4,8 +4,21 @@ export interface IColumn {
 }
 
 export interface IOption {
-  value: string;
+  value: string | boolean;
   label: string;
+}
+
+export interface ICustomer {
+  type: string;
+  name: string;
+  regNo: string;
+  address: string;
+  phone: string;
+  deliveryDays: Date[] | string[];
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  version: number;
+  id: string;
 }
 
 export interface IFormField {

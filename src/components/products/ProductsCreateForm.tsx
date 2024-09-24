@@ -3,21 +3,26 @@ import CoreFormFields from '@/components/core/CoreFormFields';
 import { ProductsCreateFormFields } from '@/lib/formFields';
 import { useFormState } from 'react-dom';
 import { createProductAction } from '@/app/actions/products';
-import { IOption } from '@/lib/types';
+import { ICustomer, IOption } from '@/lib/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { Input } from '@nextui-org/react';
 import { tr } from '@/lib/utils';
 
 interface ProductsCreateFormProps {
   onClose: () => void;
+  suppliers: ICustomer[];
 }
 
-const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
-  onClose
-}) => {
+const ProductsCreateForm: FunctionComponent<
+  ProductsCreateFormProps
+> = props => {
+  const { onClose, suppliers } = props;
+
   const [state, action] = useFormState(createProductAction, undefined);
 
-  const supplierOptions: IOption[] = [{ value: '123123', label: 'supplier 1' }];
+  const supplierOptions: IOption[] = suppliers.map(supplier => {
+    return { value: supplier.id, label: supplier.name };
+  });
 
   const brandOptions: IOption[] = [{ value: '123123', label: 'brand 1' }];
 
@@ -35,7 +40,7 @@ const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
         type='file'
         variant='bordered'
         size='md'
-        name='product_image'
+        name='images'
         label={tr('Бүтээгдэхүүний зураг')}
         classNames={{
           label: 'text-xs'
