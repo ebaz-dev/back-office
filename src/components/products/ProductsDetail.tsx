@@ -8,7 +8,7 @@ interface ProductsDetailProps {
 const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
   const { product } = props;
 
-  return <div></div>;
+  return <div>{product.name}</div>;
 };
 
 export default ProductsDetail;

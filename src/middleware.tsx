@@ -44,6 +44,10 @@ async function middleware(req: NextRequest) {
     return NextResponse.redirect(newUrl);
   }
 
+  if (!session && req.nextUrl.pathname === '/feedback') {
+    return NextResponse.redirect(newUrl);
+  }
+
   return NextResponse.next();
 }
 

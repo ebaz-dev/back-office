@@ -29,11 +29,11 @@ import { usePathname, useRouter } from 'next/navigation';
 interface CoreTableProps {
   data: any[];
   columns: IColumn[];
-  rowsPerPage?: number;
   totalPages: number;
   currentPage: number;
+  rowsPerPage?: number;
   customTopContents?: ReactNode;
-  onRowAction: (key: Key) => void;
+  onRowAction?: (key: Key) => void;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
