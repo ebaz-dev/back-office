@@ -11,5 +11,6 @@ export const MenuList = [
   { icon: 'merchants', label: 'Харилцагч', url: '/merchants' },
   { icon: 'warehouse', label: 'Агуулах', url: '/warehouse' },
   { icon: 'suppliers', label: 'Нийлүүлэгч', url: '/suppliers' },
-  { icon: 'noat', label: 'НӨАТ', url: '/noat' }
+  { icon: 'noat', label: 'НӨАТ', url: '/noat' },
+  { icon: 'feedback', label: 'Санал хүсэлт', url: '/feedback' }
 ];

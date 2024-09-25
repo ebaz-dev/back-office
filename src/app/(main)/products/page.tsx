@@ -10,23 +10,21 @@ interface ProductsPageProps {
   };
 }
 
+const getProducts = async (id: string, page: string | number) =>
+  await getFetch(`/product/list?customerId=${id}&page=${page}&limit=10`);
+
+const getSuppliers = async () => await getFetch(`/customer/list?name=supplier`);
+
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
   searchParams: { page = 1 }
 }) => {
   const supplier = await getCookie('supplier');
 
-  const products = await getFetch(
-    `/product/list?customerId=${
-      supplier ? supplier.id : ''
-    }&page=${page}&limit=10`
-  );
+  const productsData = getProducts(supplier ? supplier.id : '', page);
+  const supplierData = getSuppliers();
 
-  const suppliers = await getFetch(
-    `/customer/list?name=supplier&page=${page}&limit=10`
-  );
-
-  console.log(suppliers, products);
-
+  const [products, suppliers] = await Promise.all([productsData, supplierData]);
+  console.log(suppliers);
   return (
     <ProductsBoard
       products={products?.data || []}

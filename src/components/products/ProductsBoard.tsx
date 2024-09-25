@@ -18,6 +18,7 @@ import { getProductAction } from '@/app/actions/products';
 import ProductsDetail from '@/components/products/ProductsDetail';
 import CoreLoading from '@/components/core/CoreLoading';
 import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
+import ProductsImport from '@/components/products/ProductsImport';
 
 interface ProductsBoardProps {
   products: IProduct[];
@@ -54,6 +55,8 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
               <CoreSelectSupplier suppliers={suppliers} supplier={supplier} />
 
               <ProductsCreate suppliers={suppliers} />
+
+              <ProductsImport />
             </div>
           }
           onRowAction={onRowAction}

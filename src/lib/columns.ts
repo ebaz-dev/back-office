@@ -2,28 +2,31 @@ import { IColumn } from '@/lib/types';
 
 export const OrderColumns: IColumn[] = [
   { uid: '1', label: 'Захиалгын дугаар' },
+  { uid: '123', label: 'Trade shop ID' },
   { uid: '2', label: 'Нийлүүлэгч' },
-  { uid: '3', label: 'Статус' },
   { uid: '4', label: 'Захиалгын зураг' },
-  { uid: '5', label: 'Захиалгын огноо' },
-  { uid: '6', label: 'Хүргүүлэх огноо' },
+  { uid: '3', label: 'Захиалгын төлөв' },
+  { uid: '5', label: 'Захиалсан өдөр' },
+  { uid: '6', label: 'Хүргүүлэх өдөр ' },
   { uid: '7', label: 'Захиалгын дүн' },
   { uid: '8', label: 'Төлөгдсөн дүн' },
-  { uid: '9', label: 'Төлбөрийн хэлбэр' },
-  { uid: '10', label: 'Купон' },
   { uid: '11', label: 'Тэмдэглэл' },
+  { uid: '14', label: 'Бизнесийн суваг' },
   { uid: '12', label: 'Утасны дугаар' },
   { uid: '13', label: 'Харилцагчийн нэр' },
-  { uid: '14', label: 'Суваг' },
   { uid: '15', label: 'Хот/аймаг' },
   { uid: '16', label: 'Дүүрэг/сум' },
   { uid: '17', label: 'Хороо/Баг' },
   { uid: '18', label: 'Дэлгэрэнгүй хаяг' },
-  { uid: '19', label: 'Pickpack' },
-  { uid: '20', label: 'Origin' },
-  { uid: '21', label: 'VAT' },
-  { uid: '22', label: 'ХТ код/нэр' },
-  { uid: '23', label: 'Түгээгч код/нэр' },
+  { uid: '101', label: 'Бүсчлэл' },
+  { uid: '9', label: 'Төлбөрийн хэлбэр' },
+  { uid: '10', label: 'Купон' },
+  { uid: '102', label: 'Захиалгын эх үүсвэр' },
+  { uid: '22', label: 'Худалдааны төлөөлөгийн код' },
+  { uid: '23', label: 'Түгээгчийн код' },
+  { uid: '19', label: 'НӨАТ' },
+  { uid: '20', label: 'Буцаалт' },
+  { uid: '21', label: 'Шуурхай түгээлт' },
   { uid: '24', label: 'Агуулах' }
 ];
 
@@ -46,4 +49,24 @@ export const ProductsColumns: IColumn[] = [
   { uid: 'inCase', label: 'Хайрцаган дахь тоо' },
   { uid: 'isAlcohol', label: 'Алкохолны төрөл эсэх' },
   { uid: 'cityTax', label: 'Хотын татвар төлөх эсэх' }
+];
+
+export const CustomerColumns: IColumn[] = [
+  { uid: 'id', label: 'Харилцагчийн нэр' },
+  { uid: 'id', label: 'Утасны дугаар' },
+  { uid: 'id', label: 'Худалдааны цэгийн нэр' },
+  { uid: 'id', label: 'Худалдааны цэгийн ерөнхий  байршил' },
+  { uid: 'id', label: 'Худалдааны цэгийн байршил' },
+  { uid: 'id', label: 'Худалдааны цэгийн газарзүйн координат' },
+  { uid: 'id', label: 'Аж ахуйн нэгжийн төрөл' },
+  { uid: 'id', label: 'Худалдааны цэгийн суваг' },
+  { uid: 'id', label: 'Худалдааны цэгийн үндсэн ангилал' },
+  { uid: 'id', label: 'Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо' },
+  { uid: 'id', label: 'Хот/Аймаг/сонголтоор/' },
+  { uid: 'id', label: 'Дүүрэг/Сум/сонголтоор/' },
+  { uid: 'id', label: 'Хороо/Баг/сонголтоор/' },
+  { uid: 'id', label: 'И-мэйл' },
+  { uid: 'id', label: 'Дэлгэрэнгүй хаяг' },
+  { uid: 'id', label: 'Тусгай зөвшөөрөл' },
+  { uid: 'id', label: 'Хариуцсан ХТ код' }
 ];
