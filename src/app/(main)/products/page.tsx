@@ -24,7 +24,7 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
   const supplierData = getSuppliers();
 
   const [products, suppliers] = await Promise.all([productsData, supplierData]);
-  console.log(suppliers);
+
   return (
     <ProductsBoard
       products={products?.data || []}
