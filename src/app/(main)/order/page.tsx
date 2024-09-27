@@ -16,7 +16,7 @@ const OrderPage: FunctionComponent<OrderPageProps> = async ({
   const supplierId = customerId || (await getCookie('supplierId')) || '';
 
   const ordersData = getOrders(supplierId, page);
-  const supplierData = getCustomers('supplier');
+  const supplierData = getCustomers('merchant');
 
   const [orders, suppliers] = await Promise.all([ordersData, supplierData]);
 

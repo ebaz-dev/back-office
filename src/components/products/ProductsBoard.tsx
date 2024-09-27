@@ -17,7 +17,7 @@ import { tr } from '@/lib/utils';
 import { getProductAction } from '@/app/actions/products';
 import ProductsDetail from '@/components/products/ProductsDetail';
 import CoreLoading from '@/components/core/CoreLoading';
-import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
+import CoreSelectCustomer from '@/components/core/CoreSelectCustomer';
 import ProductsImport from '@/components/products/ProductsImport';
 
 interface ProductsBoardProps {
@@ -52,7 +52,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           currentPage={currentPage}
           customTopContents={
             <div className='flex gap-2'>
-              <CoreSelectSupplier
+              <CoreSelectCustomer
                 suppliers={suppliers}
                 supplierId={supplierId}
               />

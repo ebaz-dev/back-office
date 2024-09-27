@@ -7,13 +7,13 @@ import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { FunctionComponent, Key } from 'react';
 
-interface CoreSelectSupplierProps {
+interface CoreSelectCustomerProps {
   suppliers: ICustomer[];
   supplierId: string;
 }
 
-const CoreSelectSupplier: FunctionComponent<
-  CoreSelectSupplierProps
+const CoreSelectCustomer: FunctionComponent<
+  CoreSelectCustomerProps
 > = props => {
   const { suppliers, supplierId } = props;
 
@@ -59,4 +59,4 @@ const CoreSelectSupplier: FunctionComponent<
   );
 };
 
-export default CoreSelectSupplier;
+export default CoreSelectCustomer;

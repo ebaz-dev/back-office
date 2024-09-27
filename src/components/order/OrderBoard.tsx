@@ -4,7 +4,7 @@ import { FunctionComponent, Key } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { OrderColumns } from '@/lib/columns';
 import { ICustomer, IOrder } from '@/lib/types';
-import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
+import CoreSelectCustomer from '@/components/core/CoreSelectCustomer';
 import {
   Modal,
   ModalBody,
@@ -43,7 +43,7 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
           onRowAction={onRowAction}
           customTopContents={
             <div className='flex gap-2'>
-              <CoreSelectSupplier
+              <CoreSelectCustomer
                 suppliers={suppliers}
                 supplierId={supplierId}
               />
