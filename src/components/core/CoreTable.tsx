@@ -108,6 +108,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
           page={currentPage}
           total={totalPage}
           onChange={onPageChange}
+          classNames={{ wrapper: 'shadow-md' }}
         />
       </div>
     );
@@ -161,7 +162,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
 
       <TableBody items={data ?? []} emptyContent={null}>
         {item => (
-          <TableRow key={item.id}>
+          <TableRow key={item.id || item._id}>
             {columnKey => (
               <TableCell className='text-xs'>
                 {renderCell(item, columnKey)}

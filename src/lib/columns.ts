@@ -52,7 +52,7 @@ export const ProductsColumns: IColumn[] = [
 ];
 
 export const CustomerColumns: IColumn[] = [
-  { uid: 'id', label: 'Харилцагчийн нэр' },
+  { uid: '_id', label: 'Харилцагчийн нэр' },
   { uid: 'id1', label: 'Утасны дугаар' },
   { uid: 'id2', label: 'Худалдааны цэгийн нэр' },
   { uid: 'id3', label: 'Худалдааны цэгийн ерөнхий  байршил' },
