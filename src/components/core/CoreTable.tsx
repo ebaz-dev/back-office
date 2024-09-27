@@ -29,7 +29,7 @@ import { usePathname, useRouter } from 'next/navigation';
 interface CoreTableProps {
   data: any[];
   columns: IColumn[];
-  totalPages: number;
+  totalPage: number;
   currentPage: number;
   rowsPerPage?: number;
   customTopContents?: ReactNode;
@@ -41,7 +41,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     columns,
     data,
     customTopContents,
-    totalPages,
+    totalPage,
     currentPage,
     onRowAction
   } = props;
@@ -106,12 +106,12 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
           showShadow
           color='primary'
           page={currentPage}
-          total={totalPages}
+          total={totalPage}
           onChange={onPageChange}
         />
       </div>
     );
-  }, [currentPage, totalPages]);
+  }, [currentPage, totalPage]);
 
   const renderCell = useCallback((item: any, columnKey: any) => {
     const value = getNestedValue(item, columnKey.split('.'));

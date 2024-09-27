@@ -9,16 +9,18 @@ export interface IOption {
 }
 
 export interface ICustomer {
-  type: string;
+  _id: string;
+  parentId: string;
   name: string;
   regNo: string;
+  userId: string;
   address: string;
   phone: string;
-  deliveryDays: Date[] | string[];
+  type: string;
+  bankAccounts: [];
   createdAt: Date | string;
   updatedAt: Date | string;
   version: number;
-  id: string;
 }
 
 export interface IFormField {
@@ -101,5 +103,20 @@ export interface IInventory {
   totalStock: number;
   reservedStock: number;
   availableStock: number;
+  id: string;
+}
+
+export interface IOrder {
+  status: string;
+  supplierId: string;
+  merchantId: string;
+  userId: string;
+  cartId: string;
+  products: IProduct[];
+  orderedAt: Date | string;
+  deliveryDate: Date | string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  version: number;
   id: string;
 }

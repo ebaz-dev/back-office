@@ -1,13 +1,20 @@
+import { setCookie } from '@/app/actions/cookies';
 import { API_URL } from '@/config';
+import { cookies } from 'next/headers';
 
 export async function getFetch(endpoint: string) {
+  const session = cookies().get('session')?.value || '';
+
   const response = await fetch(`${API_URL}${endpoint}`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Cookie: session.replace(',', '; ')
     }
   })
-    .then(res => res.json())
+    .then(res => {
+      return res.json();
+    })
     .catch(err => console.log(err));
 
   return response;
@@ -41,6 +48,8 @@ export async function loginFetch(username: string, password: string) {
     })
   })
     .then(res => {
+      setCookie('session', res.headers.get('set-cookie'));
+
       return res.json();
     })
     .catch(err => console.log(err));

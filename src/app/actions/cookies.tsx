@@ -3,17 +3,11 @@
 import { cookies } from 'next/headers';
 
 export async function setCookie(name: string, value: any) {
-  cookies().set(name, JSON.stringify(value));
+  cookies().set(name, value);
 }
 
 export async function getCookie(name: string) {
-  const data: any = cookies().get(name)?.value;
-
-  if (!data) {
-    return null;
-  }
-
-  return JSON.parse(data);
+  return cookies().get(name)?.value;
 }
 
 export async function deleteCookie(name: string) {

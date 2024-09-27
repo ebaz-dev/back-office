@@ -11,7 +11,7 @@ const MainNav: FunctionComponent<MainNavProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        'w-full flex items-center justify-end gap-4 p-2 fixed top-0 left-0 transition-all shadow-md bg-background ',
+        'w-full flex items-center justify-end gap-4 p-2 fixed top-0 left-0 transition-all shadow-md bg-background z-40',
         isOpen ? 'pl-60' : 'pl-20'
       )}
     >

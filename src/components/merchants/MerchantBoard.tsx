@@ -10,7 +10,7 @@ const MerchantBoard: FunctionComponent<MerchantBoardProps> = () => {
       <CoreTable
         data={[]}
         columns={CustomerColumns}
-        totalPages={1}
+        totalPage={1}
         currentPage={1}
       />
     </div>

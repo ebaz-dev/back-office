@@ -3,6 +3,7 @@
 import { signIn, signOut } from '@/auth';
 import { LoginFormSchema, LoginFormState } from '@/lib/definitions';
 import { loginFetch } from '@/lib/fetch';
+import { deleteCookie } from '@/app/actions/cookies';
 
 export async function loginAction(state: LoginFormState, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
@@ -33,5 +34,6 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
 }
 
 export async function logoutAction() {
+  deleteCookie('session');
   await signOut({ redirectTo: '/login' });
 }

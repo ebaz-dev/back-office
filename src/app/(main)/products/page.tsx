@@ -1,6 +1,6 @@
 import { getCookie } from '@/app/actions/cookies';
 import ProductsBoard from '@/components/products/ProductsBoard';
-import { getFetch } from '@/lib/fetch';
+import { getCustomers, getProducts } from '@/lib/requests';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
@@ -10,28 +10,23 @@ interface ProductsPageProps {
   };
 }
 
-const getProducts = async (id: string, page: string | number) =>
-  await getFetch(`/product/list?customerId=${id}&page=${page}&limit=10`);
-
-const getSuppliers = async () => await getFetch(`/customer/list?name=supplier`);
-
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
-  searchParams: { page = 1 }
+  searchParams: { page = 1, customerId }
 }) => {
-  const supplier = await getCookie('supplier');
+  const supplierId = customerId || (await getCookie('supplierId')) || '';
 
-  const productsData = getProducts(supplier ? supplier.id : '', page);
-  const supplierData = getSuppliers();
+  const supplierData = getCustomers('supplier');
+  const productsData = getProducts(supplierId, page);
 
   const [products, suppliers] = await Promise.all([productsData, supplierData]);
 
   return (
     <ProductsBoard
       products={products?.data || []}
-      totalPages={products?.totalPages}
+      totalPage={products?.totalPages}
       currentPage={products?.currentPage}
       suppliers={suppliers?.data || []}
-      supplier={supplier}
+      supplierId={supplierId}
     />
   );
 };

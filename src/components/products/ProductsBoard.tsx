@@ -22,14 +22,14 @@ import ProductsImport from '@/components/products/ProductsImport';
 
 interface ProductsBoardProps {
   products: IProduct[];
-  totalPages: number;
+  totalPage: number;
   currentPage: number;
   suppliers: ICustomer[];
-  supplier: ICustomer;
+  supplierId: string;
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { products, totalPages, currentPage, suppliers, supplier } = props;
+  const { products, totalPage, currentPage, suppliers, supplierId } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState();
@@ -48,11 +48,14 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
         <CoreTable
           columns={ProductsColumns}
           data={products}
-          totalPages={totalPages}
+          totalPage={totalPage}
           currentPage={currentPage}
           customTopContents={
             <div className='flex gap-2'>
-              <CoreSelectSupplier suppliers={suppliers} supplier={supplier} />
+              <CoreSelectSupplier
+                suppliers={suppliers}
+                supplierId={supplierId}
+              />
 
               <ProductsCreate suppliers={suppliers} />
 

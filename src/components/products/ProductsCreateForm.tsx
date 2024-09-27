@@ -21,7 +21,7 @@ const ProductsCreateForm: FunctionComponent<
   const [state, action] = useFormState(createProductAction, undefined);
 
   const supplierOptions: IOption[] = suppliers.map(supplier => {
-    return { value: supplier.id, label: supplier.name };
+    return { value: supplier._id, label: supplier.name };
   });
 
   const brandOptions: IOption[] = [{ value: '123123', label: 'brand 1' }];

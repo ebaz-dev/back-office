@@ -9,36 +9,36 @@ import { FunctionComponent, Key } from 'react';
 
 interface CoreSelectSupplierProps {
   suppliers: ICustomer[];
-  supplier: ICustomer;
+  supplierId: string;
 }
 
 const CoreSelectSupplier: FunctionComponent<
   CoreSelectSupplierProps
 > = props => {
-  const { suppliers, supplier } = props;
+  const { suppliers, supplierId } = props;
 
   const router = useRouter();
   const pathname = usePathname();
 
   const onSelectionChange = (key: Key | null) => {
-    const supplier = suppliers.find(supplier => supplier.id === key);
+    const findSupplier = suppliers.find(supplier => supplier._id === key);
 
-    setCookie('supplier', supplier);
+    setCookie('supplierId', findSupplier?._id);
 
     router.push(`${pathname}?customerId=${key ? key : ''}&page=1`);
   };
 
   const onClear = () => {
-    deleteCookie('supplier');
+    deleteCookie('supplierId');
 
     router.push(`${pathname}`);
   };
 
   return (
     <Autocomplete
-      selectedKey={supplier?.id}
       aria-label='supplier complete'
       defaultItems={suppliers}
+      defaultSelectedKey={supplierId}
       variant='bordered'
       placeholder={tr('Нийлүүлэгч сонгох')}
       className='max-w-xs'
@@ -53,7 +53,7 @@ const CoreSelectSupplier: FunctionComponent<
       }}
     >
       {supplier => (
-        <AutocompleteItem key={supplier.id}>{supplier.name}</AutocompleteItem>
+        <AutocompleteItem key={supplier._id}>{supplier.name}</AutocompleteItem>
       )}
     </Autocomplete>
   );
