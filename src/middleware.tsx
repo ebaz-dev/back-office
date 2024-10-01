@@ -13,7 +13,7 @@ const protectedRoutes = [
   '/settings'
 ];
 
-const publicRoutes = ['/login'];
+const publicRoutes = ['/login', '/'];
 
 async function middleware(req: NextRequest) {
   const session: any = await auth();
