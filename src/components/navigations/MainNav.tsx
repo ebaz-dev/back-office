@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { cn } from '@/lib/utils';
 import CoreThemeSwitcher from '@/components/core/CoreThemeSwitcher';
 import CoreUserDropDown from '@/components/core/CoreUserDropDown';
-import CoreSelectCustomer from '@/components/core/CoreSelectCustomer';
+import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
 import { ICustomer } from '@/lib/types';
 
 interface MainNavProps {
@@ -21,7 +21,7 @@ const MainNav: FunctionComponent<MainNavProps> = props => {
         isOpen ? 'pl-60' : 'pl-20'
       )}
     >
-      <CoreSelectCustomer
+      <CoreSelectSupplier
         suppliers={suppliers}
         chosenSupplier={chosenSupplier}
       />
