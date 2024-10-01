@@ -16,7 +16,7 @@ const MerchantsPage: FunctionComponent<MerchantsPageProps> = async ({
 
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 
-  const merchantsData = getCustomers(supplierId, 'merchant', page);
+  const merchantsData = getCustomers('merchant', supplierId, page);
 
   const [merchants] = await Promise.all([merchantsData]);
 

@@ -23,8 +23,8 @@ export const getProductCategories = async () =>
   await getFetch(`/product/categories?limit=all`);
 
 export const getCustomers = async (
-  customerId?: string,
   type?: string,
+  customerId?: string,
   page?: string | number
 ) =>
   await getFetch(
