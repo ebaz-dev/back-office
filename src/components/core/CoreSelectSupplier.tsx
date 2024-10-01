@@ -37,7 +37,7 @@ const CoreSelectSupplier: FunctionComponent<
       defaultSelectedKey={chosenSupplier?.id}
       defaultItems={suppliers}
       color='primary'
-      label={tr('-- Харилцагч сонгох --')}
+      label={tr('-- Нийлүүлэгч сонгох --')}
       variant='flat'
       radius='none'
       onSelectionChange={onSelectionChange}
@@ -46,7 +46,7 @@ const CoreSelectSupplier: FunctionComponent<
       }}
       listboxProps={{
         emptyContent: (
-          <span className='text-xs'>{tr('Харилцагч олдсонгүй')}.</span>
+          <span className='text-xs'>{tr('Нийлүүлэгч олдсонгүй')}.</span>
         )
       }}
     >

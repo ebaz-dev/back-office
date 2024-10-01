@@ -34,6 +34,7 @@ export async function loginAction(state: LoginFormState, formData: FormData) {
 }
 
 export async function logoutAction() {
-  deleteCookie('session');
-  await signOut({ redirectTo: '/login' });
+  deleteCookie('supplier'),
+    deleteCookie('session'),
+    await signOut({ redirectTo: '/login' });
 }

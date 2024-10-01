@@ -22,5 +22,13 @@ export const getProducts = async (
 export const getProductCategories = async () =>
   await getFetch(`/product/categories?limit=all`);
 
-export const getCustomers = async (type?: String) =>
-  await getFetch(`/customer/list?${type ? `type=${type}&` : ''}limit=all`);
+export const getCustomers = async (
+  customerId?: string,
+  type?: string,
+  page?: string | number
+) =>
+  await getFetch(
+    `/customer/list?${customerId ? `customerId=${customerId}&` : ''}${
+      type ? `type=${type}&` : ''
+    }page=${page}&limit=10`
+  );

@@ -91,7 +91,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
       ? 'image'
       : typeof value === 'boolean'
       ? 'switch'
-      : columnKey == 'id'
+      : columnKey === 'id'
       ? 'id'
       : '';
 

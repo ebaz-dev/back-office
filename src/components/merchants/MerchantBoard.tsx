@@ -13,13 +13,15 @@ const MerchantBoard: FunctionComponent<MerchantBoardProps> = props => {
   const { merchants, totalPage, currentPage } = props;
 
   return (
-    <div className='h-full'>
-      <CoreTable
-        data={merchants}
-        columns={CustomerColumns}
-        totalPage={totalPage}
-        currentPage={currentPage}
-      />
+    <div className='h-full flex flex-col gap-4'>
+      <div className='flex-1'>
+        <CoreTable
+          data={merchants}
+          columns={CustomerColumns}
+          totalPage={totalPage}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };

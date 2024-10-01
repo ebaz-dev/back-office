@@ -52,7 +52,7 @@ export const ProductsColumns: IColumn[] = [
 ];
 
 export const CustomerColumns: IColumn[] = [
-  { uid: '_id', label: 'Харилцагчийн нэр' },
+  { uid: 'name', label: 'Харилцагчийн нэр' },
   { uid: 'id1', label: 'Утасны дугаар' },
   { uid: 'id2', label: 'Худалдааны цэгийн нэр' },
   { uid: 'id3', label: 'Худалдааны цэгийн ерөнхий  байршил' },
@@ -62,11 +62,11 @@ export const CustomerColumns: IColumn[] = [
   { uid: 'id7', label: 'Худалдааны цэгийн суваг' },
   { uid: 'id8', label: 'Худалдааны цэгийн үндсэн ангилал' },
   { uid: 'id9', label: 'Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо' },
-  { uid: 'id12', label: 'Хот/Аймаг/сонголтоор/' },
-  { uid: 'id13', label: 'Дүүрэг/Сум/сонголтоор/' },
-  { uid: 'id14', label: 'Хороо/Баг/сонголтоор/' },
-  { uid: 'id15', label: 'И-мэйл' },
+  { uid: 'id12', label: 'Хот/Аймаг' },
+  { uid: 'id13', label: 'Дүүрэг/Сум' },
+  { uid: 'id14', label: 'Хороо/Баг' },
   { uid: 'id16', label: 'Дэлгэрэнгүй хаяг' },
+  { uid: 'id15', label: 'И-мэйл' },
   { uid: 'id17', label: 'Тусгай зөвшөөрөл' },
   { uid: 'id18', label: 'Хариуцсан ХТ код' }
 ];
