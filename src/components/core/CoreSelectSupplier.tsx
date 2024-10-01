@@ -1,4 +1,5 @@
-import { deleteCookie, setCookie } from '@/app/actions/cookies';
+import { deleteCookie } from '@/app/actions/cookies';
+import { chooseSupplierAction } from '@/app/actions/main';
 import { ICustomer } from '@/lib/types';
 import { tr } from '@/lib/utils';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
@@ -22,8 +23,7 @@ const CoreSelectSupplier: FunctionComponent<
     const findSupplier = suppliers.find(supplier => supplier.id === key);
 
     if (findSupplier && key) {
-      setCookie('supplier', JSON.stringify(findSupplier)),
-        router.push(`${pathname}?supplierId=${key}`);
+      chooseSupplierAction(findSupplier, pathname, key);
     }
   };
 
