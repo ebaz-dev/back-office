@@ -58,7 +58,7 @@ const SideNav: FunctionComponent<SideNavProps> = props => {
               <Button
                 key={index}
                 as={Link}
-                href={`${menu.url}?customerId=${
+                href={`${menu.url}?supplierId=${
                   chosenSupplier ? chosenSupplier.id : ''
                 }`}
                 color={isActive ? 'primary' : 'default'}

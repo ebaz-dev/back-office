@@ -28,7 +28,7 @@ const ProductsFilterForm: FunctionComponent<
   const [state, action] = useFormState(filterProductsAction, initialState);
 
   const clearAllFilter = () => {
-    router.push(`/products?customerId=${supplierId}`);
+    router.push(`/products?supplierId=${supplierId}`);
   };
 
   const fieldOptions = {
