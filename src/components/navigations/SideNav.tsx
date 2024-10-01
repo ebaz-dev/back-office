@@ -7,14 +7,16 @@ import { Button } from '@nextui-org/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import CoreSvgIcon from '@/components/core/CoreSvgIcon';
 import CoreImage from '@/components/core/CoreImage';
+import { ICustomer } from '@/lib/types';
 
 interface SideNavProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  chosenSupplier: ICustomer;
 }
 
 const SideNav: FunctionComponent<SideNavProps> = props => {
-  const { isOpen, setIsOpen } = props;
+  const { isOpen, setIsOpen, chosenSupplier } = props;
 
   const pathname = usePathname();
 
@@ -56,7 +58,9 @@ const SideNav: FunctionComponent<SideNavProps> = props => {
               <Button
                 key={index}
                 as={Link}
-                href={menu.url}
+                href={`${menu.url}?customerId=${
+                  chosenSupplier ? chosenSupplier.id : ''
+                }`}
                 color={isActive ? 'primary' : 'default'}
                 size='sm'
                 fullWidth

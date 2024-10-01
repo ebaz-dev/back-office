@@ -3,54 +3,36 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export default auth(middleware);
 
+const protectedRoutes = [
+  '/dashboard',
+  '/orders',
+  '/products',
+  '/merchants',
+  '/notification',
+  '/feedback',
+  '/settings'
+];
+
+const publicRoutes = ['/login'];
+
 async function middleware(req: NextRequest) {
   const session: any = await auth();
 
-  const newUrl = new URL('/login', req.nextUrl.origin);
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
 
-  if (req.nextUrl.pathname === '/') {
-    return NextResponse.redirect(newUrl);
+  if (isProtectedRoute && !session) {
+    return NextResponse.redirect(new URL('/login', req.nextUrl));
   }
 
-  if (!session && req.nextUrl.pathname === '/merchants') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/dashboard') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/noat') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/order') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/products') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/settings') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/warehouse') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/suppliers') {
-    return NextResponse.redirect(newUrl);
-  }
-
-  if (!session && req.nextUrl.pathname === '/feedback') {
-    return NextResponse.redirect(newUrl);
+  if (isPublicRoute && session && !path.startsWith('/dashboard')) {
+    return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)']
 };

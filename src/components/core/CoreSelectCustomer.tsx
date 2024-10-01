@@ -21,15 +21,14 @@ const CoreSelectCustomer: FunctionComponent<
   const onSelectionChange = (key: Key | null) => {
     const findSupplier = suppliers.find(supplier => supplier.id === key);
 
-    findSupplier && setCookie('supplier', JSON.stringify(findSupplier));
-
-    router.push(`${pathname}?customerId=${key ? key : ''}&page=1`);
+    if (findSupplier && key) {
+      setCookie('supplier', JSON.stringify(findSupplier)),
+        router.push(`${pathname}?supplierId=${key}`);
+    }
   };
 
   const onClear = () => {
-    deleteCookie('supplier');
-
-    router.push(`${pathname}`);
+    deleteCookie('supplier'), router.push(pathname);
   };
 
   return (
@@ -38,8 +37,7 @@ const CoreSelectCustomer: FunctionComponent<
       defaultSelectedKey={chosenSupplier?.id}
       defaultItems={suppliers}
       color='primary'
-      label={tr('Нийлүүлэгч')}
-      placeholder={tr('--Сонгох--')}
+      label={tr('-- Харилцагч сонгох --')}
       variant='flat'
       radius='none'
       onSelectionChange={onSelectionChange}
@@ -48,7 +46,7 @@ const CoreSelectCustomer: FunctionComponent<
       }}
       listboxProps={{
         emptyContent: (
-          <span className='text-xs'>{tr('Нийлүүлэгч олдсонгүй')}.</span>
+          <span className='text-xs'>{tr('Харилцагч олдсонгүй')}.</span>
         )
       }}
     >

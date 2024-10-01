@@ -3,7 +3,7 @@
 import { FunctionComponent, Key, useState } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { ProductsColumns } from '@/lib/columns';
-import { ICategory, IProduct } from '@/lib/types';
+import { IProduct } from '@/lib/types';
 import {
   Modal,
   ModalBody,
@@ -16,18 +16,15 @@ import { tr } from '@/lib/utils';
 import { getProductAction } from '@/app/actions/products';
 import ProductsDetail from '@/components/products/ProductsDetail';
 import CoreLoading from '@/components/core/CoreLoading';
-import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsBoardProps {
   products: IProduct[];
   totalPage: number;
   currentPage: number;
-  supplierId: string;
-  categories: ICategory[];
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { products, totalPage, currentPage, supplierId, categories } = props;
+  const { products, totalPage, currentPage } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState();
@@ -48,12 +45,6 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           data={products}
           totalPage={totalPage}
           currentPage={currentPage}
-          customTopContents={
-            <ProductsFilterForm
-              supplierId={supplierId}
-              categories={categories}
-            />
-          }
           onRowAction={onRowAction}
         />
       </div>

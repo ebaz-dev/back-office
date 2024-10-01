@@ -3,7 +3,7 @@
 import { FunctionComponent, Key } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { OrderColumns } from '@/lib/columns';
-import { ICustomer, IOrder } from '@/lib/types';
+import { IOrder } from '@/lib/types';
 import {
   Modal,
   ModalBody,
@@ -18,11 +18,10 @@ interface OrderBoardProps {
   orders: IOrder[];
   currentPage: number;
   totalPage: number;
-  supplierId: string;
 }
 
 const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
-  const { orders, totalPage, currentPage, supplierId } = props;
+  const { orders, totalPage, currentPage } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 

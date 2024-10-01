@@ -1,6 +1,6 @@
 import { getCookie } from '@/app/actions/cookies';
 import ProductsBoard from '@/components/products/ProductsBoard';
-import { getProductCategories, getProducts } from '@/lib/requests';
+import { getProducts } from '@/lib/requests';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
@@ -29,20 +29,13 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
     id
   );
 
-  const categoriesData = getProductCategories();
-
-  const [products, categories] = await Promise.all([
-    productsData,
-    categoriesData
-  ]);
+  const [products] = await Promise.all([productsData]);
 
   return (
     <ProductsBoard
       products={products?.data || []}
       totalPage={products?.totalPages}
       currentPage={products?.currentPage}
-      supplierId={supplierId}
-      categories={categories?.data ?? []}
     />
   );
 };

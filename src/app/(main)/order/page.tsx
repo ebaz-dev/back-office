@@ -6,14 +6,15 @@ import { FunctionComponent } from 'react';
 interface OrderPageProps {
   searchParams: {
     page: string;
-    customerId: string;
   };
 }
 
 const OrderPage: FunctionComponent<OrderPageProps> = async ({
-  searchParams: { page = 1, customerId }
+  searchParams: { page = 1 }
 }) => {
-  const supplierId = customerId || (await getCookie('supplierId')) || '';
+  const supplier: any = await getCookie('supplier');
+
+  const supplierId = supplier ? JSON.parse(supplier).id : '';
 
   const ordersData = getOrders(supplierId, page);
 
@@ -24,7 +25,6 @@ const OrderPage: FunctionComponent<OrderPageProps> = async ({
       currentPage={orders?.currentPage}
       totalPage={orders?.totalPages}
       orders={orders?.data ?? []}
-      supplierId={supplierId}
     />
   );
 };

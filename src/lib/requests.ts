@@ -23,4 +23,4 @@ export const getProductCategories = async () =>
   await getFetch(`/product/categories?limit=all`);
 
 export const getCustomers = async (type?: String) =>
-  await getFetch(`/customer/list?type=${type}&limit=all`);
+  await getFetch(`/customer/list?${type ? `type=${type}&` : ''}limit=all`);
