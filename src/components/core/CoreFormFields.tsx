@@ -10,9 +10,12 @@ import { FunctionComponent } from 'react';
 
 interface CoreFormFieldsProps {
   fields: IFormField[];
+  isClearable?: boolean;
 }
 
-const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
+const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
+  const { fields, isClearable } = props;
+
   return fields.map((field: IFormField, index: number) => {
     const { name, type, placeholder, label, options } = field;
 
@@ -21,8 +24,11 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
         <Autocomplete
           key={index}
           label={label}
-          placeholder={label}
           name={name}
+          defaultItems={options}
+          placeholder={placeholder}
+          className='max-w-xs'
+          isClearable={isClearable}
           labelPlacement='outside'
           size='md'
           variant='bordered'
@@ -31,11 +37,10 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
               label: 'text-xs'
             }
           }}
-          defaultItems={options}
         >
-          {item => (
-            <AutocompleteItem key={item.value.toString()}>
-              {item.label}
+          {option => (
+            <AutocompleteItem key={option.value}>
+              {option.label}
             </AutocompleteItem>
           )}
         </Autocomplete>
@@ -71,8 +76,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = ({ fields }) => {
         key={index}
         type={type}
         name={name}
-        placeholder={placeholder}
         label={label}
+        placeholder={placeholder}
         size='md'
         labelPlacement='outside'
         variant='bordered'

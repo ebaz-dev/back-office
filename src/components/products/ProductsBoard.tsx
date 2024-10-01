@@ -3,8 +3,7 @@
 import { FunctionComponent, Key, useState } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { ProductsColumns } from '@/lib/columns';
-import ProductsCreate from '@/components/products/ProductsCreate';
-import { ICustomer, IProduct } from '@/lib/types';
+import { ICategory, IProduct } from '@/lib/types';
 import {
   Modal,
   ModalBody,
@@ -17,19 +16,18 @@ import { tr } from '@/lib/utils';
 import { getProductAction } from '@/app/actions/products';
 import ProductsDetail from '@/components/products/ProductsDetail';
 import CoreLoading from '@/components/core/CoreLoading';
-import CoreSelectCustomer from '@/components/core/CoreSelectCustomer';
-import ProductsImport from '@/components/products/ProductsImport';
+import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsBoardProps {
   products: IProduct[];
   totalPage: number;
   currentPage: number;
-  suppliers: ICustomer[];
   supplierId: string;
+  categories: ICategory[];
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { products, totalPage, currentPage, suppliers, supplierId } = props;
+  const { products, totalPage, currentPage, supplierId, categories } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState();
@@ -51,16 +49,10 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           customTopContents={
-            <div className='flex gap-2'>
-              <CoreSelectCustomer
-                suppliers={suppliers}
-                supplierId={supplierId}
-              />
-
-              <ProductsCreate suppliers={suppliers} />
-
-              <ProductsImport />
-            </div>
+            <ProductsFilterForm
+              supplierId={supplierId}
+              categories={categories}
+            />
           }
           onRowAction={onRowAction}
         />

@@ -4,12 +4,12 @@ export interface IColumn {
 }
 
 export interface IOption {
-  value: string | boolean;
+  value: string | number;
   label: string;
 }
 
 export interface ICustomer {
-  _id: string;
+  id: string;
   parentId: string;
   name: string;
   regNo: string;
@@ -26,10 +26,9 @@ export interface ICustomer {
 export interface IFormField {
   type: string;
   name: string;
-  label: string;
-  placeholder: string;
-  options: IOption[];
-  defaultValue: string;
+  label?: string;
+  placeholder?: string;
+  options?: IOption[];
 }
 
 export interface IProductAttribute {
@@ -93,6 +92,7 @@ export interface IAttribute {
 export interface ICategory {
   name: string;
   slug: string;
+  parentId: string;
   customerId: string;
   createdAt: Date | string;
   updatedAt: Date | string;

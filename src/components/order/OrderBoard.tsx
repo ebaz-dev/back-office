@@ -4,7 +4,6 @@ import { FunctionComponent, Key } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { OrderColumns } from '@/lib/columns';
 import { ICustomer, IOrder } from '@/lib/types';
-import CoreSelectCustomer from '@/components/core/CoreSelectCustomer';
 import {
   Modal,
   ModalBody,
@@ -17,14 +16,13 @@ import { tr } from '@/lib/utils';
 
 interface OrderBoardProps {
   orders: IOrder[];
-  suppliers: ICustomer[];
-  supplierId: string;
   currentPage: number;
   totalPage: number;
+  supplierId: string;
 }
 
 const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
-  const { orders, suppliers, supplierId, totalPage, currentPage } = props;
+  const { orders, totalPage, currentPage, supplierId } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -41,14 +39,6 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
-          customTopContents={
-            <div className='flex gap-2'>
-              <CoreSelectCustomer
-                suppliers={suppliers}
-                supplierId={supplierId}
-              />
-            </div>
-          }
         />
       </div>
 

@@ -1,6 +1,6 @@
 import { getCookie } from '@/app/actions/cookies';
 import OrderBoard from '@/components/order/OrderBoard';
-import { getCustomers, getOrders } from '@/lib/requests';
+import { getOrders } from '@/lib/requests';
 import { FunctionComponent } from 'react';
 
 interface OrderPageProps {
@@ -16,16 +16,14 @@ const OrderPage: FunctionComponent<OrderPageProps> = async ({
   const supplierId = customerId || (await getCookie('supplierId')) || '';
 
   const ordersData = getOrders(supplierId, page);
-  const supplierData = getCustomers('merchant');
 
-  const [orders, suppliers] = await Promise.all([ordersData, supplierData]);
+  const [orders] = await Promise.all([ordersData]);
 
   return (
     <OrderBoard
       currentPage={orders?.currentPage}
       totalPage={orders?.totalPages}
-      orders={orders.data ?? []}
-      suppliers={suppliers?.data || []}
+      orders={orders?.data ?? []}
       supplierId={supplierId}
     />
   );

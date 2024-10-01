@@ -2,22 +2,35 @@ import { FunctionComponent } from 'react';
 import { cn } from '@/lib/utils';
 import CoreThemeSwitcher from '@/components/core/CoreThemeSwitcher';
 import CoreUserDropDown from '@/components/core/CoreUserDropDown';
+import CoreSelectCustomer from '@/components/core/CoreSelectCustomer';
+import { ICustomer } from '@/lib/types';
 
 interface MainNavProps {
   isOpen: boolean;
+  suppliers: ICustomer[];
+  chosenSupplier: ICustomer;
 }
 
-const MainNav: FunctionComponent<MainNavProps> = ({ isOpen }) => {
+const MainNav: FunctionComponent<MainNavProps> = props => {
+  const { isOpen, suppliers, chosenSupplier } = props;
+
   return (
     <div
       className={cn(
-        'w-full flex items-center justify-end gap-4 p-2 fixed top-0 left-0 transition-all shadow-md bg-background z-40',
+        'w-full flex items-center gap-4 fixed top-0 left-0 transition-all shadow-md bg-background z-40',
         isOpen ? 'pl-60' : 'pl-20'
       )}
     >
-      <CoreThemeSwitcher />
+      <CoreSelectCustomer
+        suppliers={suppliers}
+        chosenSupplier={chosenSupplier}
+      />
 
-      <CoreUserDropDown />
+      <div className='flex ml-auto p-2 items-center gap-4'>
+        <CoreThemeSwitcher />
+
+        <CoreUserDropDown />
+      </div>
     </div>
   );
 };

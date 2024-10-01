@@ -9,8 +9,6 @@ export const MenuList = [
   { icon: 'order', label: 'Захиалга', url: '/order' },
   { icon: 'products', label: 'Бүтээгдэхүүн', url: '/products' },
   { icon: 'merchants', label: 'Харилцагч', url: '/merchants' },
-  { icon: 'warehouse', label: 'Агуулах', url: '/warehouse' },
-  { icon: 'suppliers', label: 'Нийлүүлэгч', url: '/suppliers' },
-  { icon: 'noat', label: 'НӨАТ', url: '/noat' },
+  { icon: 'notification', label: 'Мэдэгдэл', url: '/notification' },
   { icon: 'feedback', label: 'Санал хүсэлт', url: '/feedback' }
 ];

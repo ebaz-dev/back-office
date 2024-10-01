@@ -1,32 +1,48 @@
 import { getCookie } from '@/app/actions/cookies';
 import ProductsBoard from '@/components/products/ProductsBoard';
-import { getCustomers, getProducts } from '@/lib/requests';
+import { getProductCategories, getProducts } from '@/lib/requests';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
   searchParams: {
     page: string;
-    customerId: string;
+    categoryId: string;
+    brandId: string;
+    name: string;
+    id: string;
   };
 }
 
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
-  searchParams: { page = 1, customerId }
+  searchParams: { page = 1, categoryId, brandId, name, id }
 }) => {
-  const supplierId = customerId || (await getCookie('supplierId')) || '';
+  const supplier: any = await getCookie('supplier');
 
-  const supplierData = getCustomers('supplier');
-  const productsData = getProducts(supplierId, page);
+  const supplierId = supplier ? JSON.parse(supplier).id : '';
 
-  const [products, suppliers] = await Promise.all([productsData, supplierData]);
+  const productsData = getProducts(
+    supplierId,
+    page,
+    categoryId,
+    brandId,
+    name,
+    id
+  );
+
+  const categoriesData = getProductCategories();
+
+  const [products, categories] = await Promise.all([
+    productsData,
+    categoriesData
+  ]);
 
   return (
     <ProductsBoard
       products={products?.data || []}
       totalPage={products?.totalPages}
       currentPage={products?.currentPage}
-      suppliers={suppliers?.data || []}
       supplierId={supplierId}
+      categories={categories?.data ?? []}
     />
   );
 };

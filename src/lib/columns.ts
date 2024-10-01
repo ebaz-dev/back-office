@@ -33,7 +33,7 @@ export const OrderColumns: IColumn[] = [
 export const ProductsColumns: IColumn[] = [
   { uid: 'id', label: 'Ебазаар бүтээгдэхүүний ID' },
   { uid: 'isActive', label: 'Active' },
-  { uid: '', label: 'Нийлүүлэгч' },
+  { uid: 'customer.name', label: 'Нийлүүлэгч' },
   { uid: 'name', label: 'Бүтээгдэхүүний нэр' },
   { uid: 'barCode', label: 'Баркод' },
   { uid: 'sku', label: 'Бүтээгдхүүний SKU' },

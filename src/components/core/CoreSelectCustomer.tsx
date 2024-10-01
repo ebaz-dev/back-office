@@ -1,5 +1,3 @@
-'use client';
-
 import { deleteCookie, setCookie } from '@/app/actions/cookies';
 import { ICustomer } from '@/lib/types';
 import { tr } from '@/lib/utils';
@@ -9,39 +7,41 @@ import { FunctionComponent, Key } from 'react';
 
 interface CoreSelectCustomerProps {
   suppliers: ICustomer[];
-  supplierId: string;
+  chosenSupplier: ICustomer;
 }
 
 const CoreSelectCustomer: FunctionComponent<
   CoreSelectCustomerProps
 > = props => {
-  const { suppliers, supplierId } = props;
+  const { suppliers, chosenSupplier } = props;
 
   const router = useRouter();
   const pathname = usePathname();
 
   const onSelectionChange = (key: Key | null) => {
-    const findSupplier = suppliers.find(supplier => supplier._id === key);
+    const findSupplier = suppliers.find(supplier => supplier.id === key);
 
-    setCookie('supplierId', findSupplier?._id);
+    findSupplier && setCookie('supplier', JSON.stringify(findSupplier));
 
     router.push(`${pathname}?customerId=${key ? key : ''}&page=1`);
   };
 
   const onClear = () => {
-    deleteCookie('supplierId');
+    deleteCookie('supplier');
 
     router.push(`${pathname}`);
   };
 
   return (
     <Autocomplete
-      aria-label='supplier complete'
-      defaultItems={suppliers}
-      defaultSelectedKey={supplierId}
-      variant='bordered'
-      placeholder={tr('Нийлүүлэгч сонгох')}
       className='max-w-xs'
+      defaultSelectedKey={chosenSupplier?.id}
+      defaultItems={suppliers}
+      color='primary'
+      label={tr('Нийлүүлэгч')}
+      placeholder={tr('--Сонгох--')}
+      variant='flat'
+      radius='none'
       onSelectionChange={onSelectionChange}
       clearButtonProps={{
         onPress: onClear
@@ -52,9 +52,7 @@ const CoreSelectCustomer: FunctionComponent<
         )
       }}
     >
-      {supplier => (
-        <AutocompleteItem key={supplier._id}>{supplier.name}</AutocompleteItem>
-      )}
+      {item => <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>}
     </Autocomplete>
   );
 };

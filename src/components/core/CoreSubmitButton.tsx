@@ -20,7 +20,6 @@ const CoreSubmitButton: FunctionComponent<CoreSubmitButtonProps> = props => {
   return (
     <Button
       type='submit'
-      fullWidth
       color='primary'
       isLoading={pending}
       className={className}
