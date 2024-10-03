@@ -12,7 +12,6 @@ import {
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import ProductsCreateForm from '@/components/products/ProductsCreateForm';
-import { ICustomer } from '@/lib/types';
 
 interface ProductsCreateProps {}
 

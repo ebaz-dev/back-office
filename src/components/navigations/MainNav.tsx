@@ -4,6 +4,9 @@ import CoreThemeSwitcher from '@/components/core/CoreThemeSwitcher';
 import CoreUserDropDown from '@/components/core/CoreUserDropDown';
 import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
 import { ICustomer } from '@/lib/types';
+import { usePathname } from 'next/navigation';
+import ProductsCreate from '@/components/products/ProductsCreate';
+import ProductsImport from '@/components/products/ProductsImport';
 
 interface MainNavProps {
   isOpen: boolean;
@@ -13,6 +16,8 @@ interface MainNavProps {
 
 const MainNav: FunctionComponent<MainNavProps> = props => {
   const { isOpen, suppliers, chosenSupplier } = props;
+
+  const pathname = usePathname();
 
   return (
     <div
@@ -25,6 +30,14 @@ const MainNav: FunctionComponent<MainNavProps> = props => {
         suppliers={suppliers}
         chosenSupplier={chosenSupplier}
       />
+
+      {pathname.startsWith('/products') && (
+        <>
+          <ProductsCreate />
+
+          <ProductsImport />
+        </>
+      )}
 
       <div className='flex ml-auto p-2 items-center gap-4'>
         <CoreThemeSwitcher />

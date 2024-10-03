@@ -62,8 +62,8 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'select',
     placeholder: 'Төлөв',
     options: [
-      { value: true, label: 'Идэвхтэй' },
-      { value: false, label: 'Идэвхгүй' }
+      { value: 'true', label: 'Идэвхтэй' },
+      { value: 'false', label: 'Идэвхгүй' }
     ],
     isFilter: true
   },
@@ -72,7 +72,8 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     label: 'Нийлүүлэгч',
     name: 'supplier',
     fieldType: 'autocomplete',
-    placeholder: 'Нийлүүлэгч'
+    placeholder: 'Нийлүүлэгч',
+    options: props?.supplierOptions || []
   },
   {
     uid: 'barCode',
@@ -169,8 +170,8 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'select',
     placeholder: 'Алкохолны төрөл эсэх',
     options: [
-      { value: true, label: 'Тийм' },
-      { value: false, label: 'Үгүй' }
+      { value: 'true', label: 'Тийм' },
+      { value: 'false', label: 'Үгүй' }
     ],
     isFilter: true
   },
@@ -181,8 +182,8 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'select',
     placeholder: 'Хотын татвар төлөх эсэх',
     options: [
-      { value: true, label: 'Тийм' },
-      { value: false, label: 'Үгүй' }
+      { value: 'true', label: 'Тийм' },
+      { value: 'false', label: 'Үгүй' }
     ],
     isFilter: true
   }

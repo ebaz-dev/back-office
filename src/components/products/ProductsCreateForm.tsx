@@ -19,15 +19,17 @@ const ProductsCreateForm: FunctionComponent<
 
   const supplierOptions: IOption[] = [{ value: '123123', label: 'supplier 1' }];
 
-  const brandOptions: IOption[] = [{ value: '123123', label: 'brand 1' }];
+  const brandOptions: IOption[] = [{ value: '123123asd', label: 'brand 1' }];
 
   const generalCategories: IOption[] = [
     { value: '123123', label: 'category 1' }
   ];
 
-  const subCategories: IOption[] = [{ value: '123123', label: 'category 1' }];
+  const subCategories: IOption[] = [{ value: '123123123', label: 'dada 1' }];
 
-  const finalCategories: IOption[] = [{ value: '123123', label: 'category 1' }];
+  const finalCategories: IOption[] = [
+    { value: '123123123123', label: 'catedadagory 1' }
+  ];
 
   const fieldOptions: IProductsFieldProps = {
     supplierOptions,

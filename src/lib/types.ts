@@ -9,7 +9,7 @@ export interface IColumn {
 }
 
 export interface IOption {
-  value: string | number | boolean;
+  value: string | number;
   label: string;
 }
 

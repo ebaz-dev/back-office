@@ -13,12 +13,10 @@ import { tr } from '@/lib/utils';
 import { IProduct } from '@/lib/types';
 import { ProductsColumns } from '@/lib/columns';
 import { getProductAction } from '@/app/actions/products';
-import ProductsDetail from '@/components/products/ProductsDetail';
-import ProductsCreate from '@/components/products/ProductsCreate';
-import ProductsImport from '@/components/products/ProductsImport';
 import CoreTable from '@/components/core/CoreTable';
 import CoreLoading from '@/components/core/CoreLoading';
-import ProductsFilterForm from './ProductsFilterForm';
+import ProductsDetail from '@/components/products/ProductsDetail';
+import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsBoardProps {
   products: IProduct[];
@@ -49,15 +47,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
-          customTopContents={
-            <div className='flex gap-4 flex-wrap'>
-              <ProductsCreate />
-
-              <ProductsImport />
-
-              <ProductsFilterForm />
-            </div>
-          }
+          customTopContents={<ProductsFilterForm />}
         />
       </div>
 

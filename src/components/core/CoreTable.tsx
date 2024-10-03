@@ -24,7 +24,8 @@ import {
   useState
 } from 'react';
 import CoreImage from '@/components/core/CoreImage';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { onPageChangeAction } from '@/app/actions/main';
 
 interface CoreTableProps {
   data: any[];
@@ -46,7 +47,6 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     onRowAction
   } = props;
 
-  const router = useRouter();
   const pathname = usePathname();
 
   const [isClient, setIsClient] = useState(false);
@@ -56,7 +56,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
   }, []);
 
   const onPageChange = (value: number) => {
-    router.push(`${pathname}?page=${value}`);
+    onPageChangeAction(pathname, value);
   };
 
   const topContent = useMemo(() => {

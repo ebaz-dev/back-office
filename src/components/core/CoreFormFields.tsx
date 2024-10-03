@@ -1,4 +1,4 @@
-import { IColumn, IFormField } from '@/lib/types';
+import { IColumn } from '@/lib/types';
 import {
   Autocomplete,
   AutocompleteItem,
@@ -45,7 +45,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           }}
         >
           {option => (
-            <AutocompleteItem key={option.value.toString()}>
+            <AutocompleteItem key={option.value}>
               {option.label}
             </AutocompleteItem>
           )}
