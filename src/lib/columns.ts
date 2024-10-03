@@ -1,4 +1,4 @@
-import { IColumn } from '@/lib/types';
+import { IColumn, IProductsFieldProps } from '@/lib/types';
 
 export const OrderColumns: IColumn[] = [
   { uid: 'id', label: 'Захиалгын дугаар' },
@@ -30,25 +30,164 @@ export const OrderColumns: IColumn[] = [
   { uid: '24', label: 'Агуулах' }
 ];
 
-export const ProductsColumns: IColumn[] = [
-  { uid: 'id', label: 'Ебазаар бүтээгдэхүүний ID' },
-  { uid: 'isActive', label: 'Active' },
-  { uid: 'customer.name', label: 'Нийлүүлэгч' },
-  { uid: 'name', label: 'Бүтээгдэхүүний нэр' },
-  { uid: 'barCode', label: 'Баркод' },
-  { uid: 'sku', label: 'Бүтээгдхүүний SKU' },
-  { uid: 'images.0', label: 'Зураг' },
-  { uid: 'brand.name', label: 'Брэнд' },
-  { uid: 'categories.2.name', label: 'Ерөнхий ангилал' },
-  { uid: 'categories.1.name', label: 'Дэд ангилал' },
-  { uid: 'categories.0.name', label: 'Эцсийн ангилал' },
-  { uid: 'description', label: 'Бүтээгдэхүүний дэлгэрэнгүй' },
-  { uid: 'inventory.totalStock', label: 'Үлдэгдэл' },
-  { uid: 'adjustedPrice.price', label: 'Үнэ' },
-  { uid: 'inventory.availableStock', label: 'Сагслах тоо' },
-  { uid: 'inCase', label: 'Хайрцаган дахь тоо' },
-  { uid: 'isAlcohol', label: 'Алкохолны төрөл эсэх' },
-  { uid: 'cityTax', label: 'Хотын татвар төлөх эсэх' }
+export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
+  {
+    uid: 'images.0',
+    label: 'Зураг',
+    name: 'images',
+    fieldType: 'file',
+    placeholder: 'Зураг',
+    isFilter: false
+  },
+  {
+    uid: 'id',
+    label: 'Бүтээгдэхүүний ID',
+    name: 'id',
+    fieldType: 'input',
+    placeholder: 'Бүтээгдэхүүний ID',
+    isFilter: true
+  },
+  {
+    uid: 'name',
+    label: 'Бүтээгдэхүүний нэр',
+    name: 'name',
+    fieldType: 'input',
+    placeholder: 'Бүтээгдэхүүний нэр',
+    isFilter: true
+  },
+  {
+    uid: 'isActive',
+    label: 'Төлөв',
+    name: 'isActive',
+    fieldType: 'select',
+    placeholder: 'Төлөв',
+    options: [
+      { value: true, label: 'Идэвхтэй' },
+      { value: false, label: 'Идэвхгүй' }
+    ],
+    isFilter: true
+  },
+  {
+    uid: 'customer.name',
+    label: 'Нийлүүлэгч',
+    name: 'supplier',
+    fieldType: 'autocomplete',
+    placeholder: 'Нийлүүлэгч',
+    options: props?.supplierOptions || [],
+    isFilter: true
+  },
+  {
+    uid: 'barCode',
+    label: 'Баркод',
+    name: 'barCode',
+    fieldType: 'input',
+    placeholder: 'Баркод',
+    isFilter: true
+  },
+  {
+    uid: 'sku',
+    label: 'Бүтээгдхүүний SKU',
+    name: 'sku',
+    fieldType: 'input',
+    placeholder: 'Бүтээгдхүүний SKU',
+    isFilter: true
+  },
+  {
+    uid: 'brand.name',
+    label: 'Брэнд',
+    name: 'brand',
+    fieldType: 'autocomplete',
+    placeholder: 'Брэнд',
+    options: props?.brandOptions || [],
+    isFilter: true
+  },
+  {
+    uid: 'description',
+    label: 'Бүтээгдэхүүний дэлгэрэнгүй',
+    name: 'description',
+    fieldType: 'input',
+    placeholder: 'Бүтээгдэхүүний дэлгэрэнгүй',
+    isFilter: true
+  },
+  {
+    uid: 'categories.2.name',
+    label: 'Ерөнхий ангилал',
+    name: '',
+    fieldType: 'autocomplete',
+    placeholder: 'Ерөнхий ангилал',
+    options: props?.generalCategories || [],
+    isFilter: true
+  },
+  {
+    uid: 'categories.1.name',
+    label: 'Дэд ангилал',
+    name: '',
+    fieldType: 'autocomplete',
+    placeholder: 'Дэд ангилал',
+    options: props?.subCategories || [],
+    isFilter: true
+  },
+  {
+    uid: 'categories.0.name',
+    label: 'Эцсийн ангилал',
+    name: '',
+    fieldType: 'autocomplete',
+    placeholder: 'Эцсийн ангилал',
+    options: props?.finalCategories || [],
+    isFilter: true
+  },
+  {
+    uid: 'inventory.totalStock',
+    label: 'Үлдэгдэл',
+    name: 'stock',
+    fieldType: 'input',
+    placeholder: 'Үлдэгдэл'
+  },
+  {
+    uid: 'adjustedPrice.price',
+    label: 'Үнэ',
+    name: 'price',
+    fieldType: 'input',
+    placeholder: 'Үнэ'
+  },
+  {
+    uid: 'inventory.availableStock',
+    label: 'Сагслах тоо',
+    name: 'availableStock',
+    fieldType: 'input',
+    placeholder: 'Сагслах тоо'
+  },
+  {
+    uid: 'inCase',
+    label: 'Хайрцаган дахь тоо',
+    name: 'inCase',
+    fieldType: 'input',
+    placeholder: 'Хайрцаган дахь тоо'
+  },
+  {
+    uid: 'isAlcohol',
+    label: 'Алкохолны төрөл эсэх',
+    name: 'isAlcohol',
+    fieldType: 'select',
+    placeholder: 'Алкохолны төрөл эсэх',
+    options: [
+      { value: true, label: 'Тийм' },
+      { value: false, label: 'Үгүй' }
+    ],
+    isFilter: true
+  },
+  {
+    uid: 'cityTax',
+    label: 'Хотын татвар төлөх эсэх',
+    name: 'cityTax',
+    fieldType: 'select',
+    placeholder: 'Хотын татвар төлөх эсэх',
+    options: [
+      { value: true, label: 'Тийм' },
+      { value: false, label: 'Үгүй' }
+    ],
+    isFilter: true
+  }
 ];
 
 export const CustomerColumns: IColumn[] = [

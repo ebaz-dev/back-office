@@ -4,15 +4,9 @@ import { getFetch } from '@/lib/fetch';
 import { redirect } from 'next/navigation';
 
 export async function filterProductsAction(state: any, formData: FormData) {
-  const categoryId = formData.get('categoryId');
-  const brandId = formData.get('brandId');
-  const name = formData.get('name');
-  const id = formData.get('id');
-  const customerId = state?.supplierId ? `customerId=${state.supplierId}&` : '';
+  console.log(formData);
 
-  redirect(
-    `/products?${customerId}categoryId=${categoryId}&brandId=${brandId}&name=${name}&id=${id}`
-  );
+  redirect(`/products`);
 }
 
 export async function createProductAction(state: any, formData: FormData) {}

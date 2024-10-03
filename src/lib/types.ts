@@ -1,10 +1,15 @@
 export interface IColumn {
   uid: string;
   label: string;
+  fieldType?: string;
+  name?: string;
+  placeholder?: string;
+  options?: IOption[];
+  isFilter?: boolean;
 }
 
 export interface IOption {
-  value: string | number;
+  value: string | number | boolean;
   label: string;
 }
 
@@ -119,4 +124,12 @@ export interface IOrder {
   updatedAt: Date | string;
   version: number;
   id: string;
+}
+
+export interface IProductsFieldProps {
+  supplierOptions: IOption[];
+  brandOptions: IOption[];
+  generalCategories: IOption[];
+  subCategories: IOption[];
+  finalCategories: IOption[];
 }

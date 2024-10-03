@@ -1,9 +1,6 @@
 'use client';
 
 import { FunctionComponent, Key, useState } from 'react';
-import CoreTable from '@/components/core/CoreTable';
-import { ProductsColumns } from '@/lib/columns';
-import { IProduct } from '@/lib/types';
 import {
   Modal,
   ModalBody,
@@ -13,9 +10,15 @@ import {
   useDisclosure
 } from '@nextui-org/react';
 import { tr } from '@/lib/utils';
+import { IProduct } from '@/lib/types';
+import { ProductsColumns } from '@/lib/columns';
 import { getProductAction } from '@/app/actions/products';
 import ProductsDetail from '@/components/products/ProductsDetail';
+import ProductsCreate from '@/components/products/ProductsCreate';
+import ProductsImport from '@/components/products/ProductsImport';
+import CoreTable from '@/components/core/CoreTable';
 import CoreLoading from '@/components/core/CoreLoading';
+import ProductsFilterForm from './ProductsFilterForm';
 
 interface ProductsBoardProps {
   products: IProduct[];
@@ -41,11 +44,20 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
     <div className='h-full flex flex-col gap-4'>
       <div className='flex-1'>
         <CoreTable
-          columns={ProductsColumns}
+          columns={ProductsColumns()}
           data={products}
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
+          customTopContents={
+            <div className='flex gap-4 flex-wrap'>
+              <ProductsCreate />
+
+              <ProductsImport />
+
+              <ProductsFilterForm />
+            </div>
+          }
         />
       </div>
 

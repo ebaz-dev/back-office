@@ -2,53 +2,45 @@ import { FunctionComponent } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
 import { useFormState } from 'react-dom';
 import { createProductAction } from '@/app/actions/products';
-import { ICustomer, IOption } from '@/lib/types';
+import { IOption, IProductsFieldProps } from '@/lib/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
-import { Input } from '@nextui-org/react';
-import { tr } from '@/lib/utils';
-import { ProductsFormFields } from '@/lib/formFields';
+import { ProductsColumns } from '@/lib/columns';
 
 interface ProductsCreateFormProps {
   onClose: () => void;
-  suppliers: ICustomer[];
 }
 
 const ProductsCreateForm: FunctionComponent<
   ProductsCreateFormProps
 > = props => {
-  const { onClose, suppliers } = props;
+  const { onClose } = props;
 
   const [state, action] = useFormState(createProductAction, undefined);
 
-  const supplierOptions: IOption[] = suppliers.map(supplier => {
-    return { value: supplier._id, label: supplier.name };
-  });
+  const supplierOptions: IOption[] = [{ value: '123123', label: 'supplier 1' }];
 
   const brandOptions: IOption[] = [{ value: '123123', label: 'brand 1' }];
 
-  const categoryOptions: IOption[] = [{ value: '123123', label: 'category 1' }];
+  const generalCategories: IOption[] = [
+    { value: '123123', label: 'category 1' }
+  ];
 
-  const fieldOptions = {
-    categoryOptions,
+  const subCategories: IOption[] = [{ value: '123123', label: 'category 1' }];
+
+  const finalCategories: IOption[] = [{ value: '123123', label: 'category 1' }];
+
+  const fieldOptions: IProductsFieldProps = {
     supplierOptions,
-    brandOptions
+    brandOptions,
+    generalCategories,
+    subCategories,
+    finalCategories
   };
 
   return (
     <form action={action} className='flex flex-col gap-4'>
-      <Input
-        type='file'
-        variant='bordered'
-        size='md'
-        name='images'
-        label={tr('Бүтээгдэхүүний зураг')}
-        classNames={{
-          label: 'text-xs'
-        }}
-      />
-
-      <div className='w-full grid grid-cols-2 gap-4'>
-        <CoreFormFields fields={ProductsFormFields(fieldOptions)} />
+      <div className='w-full grid grid-cols-3 gap-4'>
+        <CoreFormFields fields={ProductsColumns(fieldOptions)} />
       </div>
 
       <CoreSubmitButton text='Хадгалах' onPress={onClose} />

@@ -1,46 +1,36 @@
 import { FunctionComponent } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
-import { ProductsFormFields } from '@/lib/formFields';
 import { useFormState } from 'react-dom';
 import { filterProductsAction } from '@/app/actions/products';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { ICategory } from '@/lib/types';
+import { ICategory, IProductsFieldProps } from '@/lib/types';
+import { ProductsColumns } from '@/lib/columns';
 
-interface ProductsFilterFormProps {
-  supplierId: string;
-  categories: ICategory[];
-}
+interface ProductsFilterFormProps {}
 
 const ProductsFilterForm: FunctionComponent<
   ProductsFilterFormProps
 > = props => {
-  const { supplierId, categories } = props;
-
   const router = useRouter();
 
-  const initialState: any = {
-    supplierId
-  };
+  const initialState: any = {};
 
   const [state, action] = useFormState(filterProductsAction, initialState);
 
   const clearAllFilter = () => {
-    router.push(`/products?supplierId=${supplierId}`);
-  };
-
-  const fieldOptions = {
-    brandOptions: [{ value: '123', label: 'asda' }],
-    categoryOptions: categories.map((category: ICategory) => {
-      return { value: category.id, label: category.name };
-    })
+    router.push(`/products`);
   };
 
   return (
-    <form action={action} className='flex gap-2 items-end'>
-      <CoreFormFields fields={ProductsFormFields(fieldOptions)} />
+    <form action={action} className='flex gap-2 flex-wrap items-end'>
+      <CoreFormFields
+        fields={ProductsColumns()}
+        className='max-w-xs'
+        hideFields={true}
+      />
 
       <CoreSubmitButton text='Хайх' />
 

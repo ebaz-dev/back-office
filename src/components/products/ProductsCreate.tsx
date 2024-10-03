@@ -14,13 +14,9 @@ import { FunctionComponent } from 'react';
 import ProductsCreateForm from '@/components/products/ProductsCreateForm';
 import { ICustomer } from '@/lib/types';
 
-interface ProductsCreateProps {
-  suppliers: ICustomer[];
-}
+interface ProductsCreateProps {}
 
-const ProductsCreate: FunctionComponent<ProductsCreateProps> = ({
-  suppliers
-}) => {
+const ProductsCreate: FunctionComponent<ProductsCreateProps> = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const onPress = () => {
@@ -45,7 +41,7 @@ const ProductsCreate: FunctionComponent<ProductsCreateProps> = ({
                 {tr('Бүтээгдэхүүн бүртгэх')}
               </ModalHeader>
               <ModalBody className='pb-4'>
-                <ProductsCreateForm onClose={onClose} suppliers={suppliers} />
+                <ProductsCreateForm onClose={onClose} />
               </ModalBody>
             </>
           )}

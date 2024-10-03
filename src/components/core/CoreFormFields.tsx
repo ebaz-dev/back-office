@@ -1,4 +1,4 @@
-import { IFormField } from '@/lib/types';
+import { IColumn, IFormField } from '@/lib/types';
 import {
   Autocomplete,
   AutocompleteItem,
@@ -9,17 +9,23 @@ import {
 import { FunctionComponent } from 'react';
 
 interface CoreFormFieldsProps {
-  fields: IFormField[];
+  fields: IColumn[];
   isClearable?: boolean;
+  className?: string;
+  hideFields?: boolean;
 }
 
 const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
-  const { fields, isClearable } = props;
+  const { fields, isClearable, className, hideFields } = props;
 
-  return fields.map((field: IFormField, index: number) => {
-    const { name, type, placeholder, label, options } = field;
+  return fields.map((field: IColumn, index: number) => {
+    const { name, fieldType, placeholder, label, options, isFilter } = field;
 
-    if (type === 'autocomplete') {
+    if (hideFields && !isFilter) {
+      return null;
+    }
+
+    if (fieldType === 'autocomplete') {
       return (
         <Autocomplete
           key={index}
@@ -27,8 +33,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           name={name}
           defaultItems={options}
           placeholder={placeholder}
-          className='max-w-xs'
           isClearable={isClearable}
+          className={className}
           labelPlacement='outside'
           size='md'
           variant='bordered'
@@ -39,7 +45,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           }}
         >
           {option => (
-            <AutocompleteItem key={option.value}>
+            <AutocompleteItem key={option.value.toString()}>
               {option.label}
             </AutocompleteItem>
           )}
@@ -47,13 +53,14 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
       );
     }
 
-    if (type === 'select') {
+    if (fieldType === 'select') {
       return (
         <Select
           key={index}
           name={name}
           items={options}
           label={label}
+          className={className}
           labelPlacement='outside'
           placeholder={placeholder}
           variant='bordered'
@@ -74,10 +81,11 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
     return (
       <Input
         key={index}
-        type={type}
+        type={fieldType}
         name={name}
         label={label}
         placeholder={placeholder}
+        className={className}
         size='md'
         labelPlacement='outside'
         variant='bordered'
