@@ -18,7 +18,7 @@ const CoreSelectSupplier: FunctionComponent<
   const pathname = usePathname();
 
   const onSelectionChange = (key: Key | null) => {
-    const findSupplier = suppliers.find(supplier => supplier._id === key);
+    const findSupplier = suppliers.find(supplier => supplier.id === key);
 
     if (findSupplier && key) {
       chooseSupplierAction(findSupplier, pathname, key);
@@ -32,7 +32,7 @@ const CoreSelectSupplier: FunctionComponent<
   return (
     <Autocomplete
       className='max-w-xs'
-      defaultSelectedKey={chosenSupplier?._id}
+      defaultSelectedKey={chosenSupplier?.id}
       defaultItems={suppliers}
       color='primary'
       label={tr('-- Нийлүүлэгч сонгох --')}
@@ -48,7 +48,7 @@ const CoreSelectSupplier: FunctionComponent<
         )
       }}
     >
-      {item => <AutocompleteItem key={item._id}>{item.name}</AutocompleteItem>}
+      {item => <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>}
     </Autocomplete>
   );
 };

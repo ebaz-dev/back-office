@@ -151,7 +151,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
 
       <TableBody items={data ?? []} emptyContent={null}>
         {item => (
-          <TableRow key={item.id || item._id}>
+          <TableRow key={item.id || item.id}>
             {columnKey => (
               <TableCell className='text-xs'>
                 {renderCell(item, columnKey)}

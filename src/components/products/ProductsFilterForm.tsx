@@ -25,7 +25,7 @@ const ProductsFilterForm: FunctionComponent<
   };
 
   return (
-    <form action={action} className='flex gap-2 flex-wrap items-end'>
+    <form action={action} className='grid grid-cols-7 gap-2 items-end'>
       <CoreFormFields
         fields={ProductsColumns()}
         className='max-w-xs'

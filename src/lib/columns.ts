@@ -72,9 +72,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     label: 'Нийлүүлэгч',
     name: 'supplier',
     fieldType: 'autocomplete',
-    placeholder: 'Нийлүүлэгч',
-    options: props?.supplierOptions || [],
-    isFilter: true
+    placeholder: 'Нийлүүлэгч'
   },
   {
     uid: 'barCode',
@@ -112,7 +110,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'categories.2.name',
     label: 'Ерөнхий ангилал',
-    name: '',
+    name: 'generalCategory',
     fieldType: 'autocomplete',
     placeholder: 'Ерөнхий ангилал',
     options: props?.generalCategories || [],
@@ -121,7 +119,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'categories.1.name',
     label: 'Дэд ангилал',
-    name: '',
+    name: 'subCategory',
     fieldType: 'autocomplete',
     placeholder: 'Дэд ангилал',
     options: props?.subCategories || [],
@@ -130,7 +128,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'categories.0.name',
     label: 'Эцсийн ангилал',
-    name: '',
+    name: 'finalCategory',
     fieldType: 'autocomplete',
     placeholder: 'Эцсийн ангилал',
     options: props?.finalCategories || [],

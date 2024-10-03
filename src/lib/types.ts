@@ -14,7 +14,7 @@ export interface IOption {
 }
 
 export interface ICustomer {
-  _id: string;
+  id: string;
   parentId: string;
   name: string;
   regNo: string;
