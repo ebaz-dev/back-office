@@ -6,6 +6,7 @@ import {
   getKeyValue,
   Pagination,
   Snippet,
+  Spinner,
   Switch,
   Table,
   TableBody,
@@ -50,13 +51,15 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
   const pathname = usePathname();
 
   const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    setIsLoading(false);
+  }, [data]);
 
   const onPageChange = (value: number) => {
-    onPageChangeAction(pathname, value);
+    setIsLoading(true), onPageChangeAction(pathname, value);
   };
 
   const topContent = useMemo(() => {
@@ -149,7 +152,12 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         </TableHeader>
       </TableHeader>
 
-      <TableBody items={data ?? []} emptyContent={null}>
+      <TableBody
+        items={data ?? []}
+        emptyContent={null}
+        isLoading={isLoading}
+        loadingContent={<Spinner />}
+      >
         {item => (
           <TableRow key={item.id || item.id}>
             {columnKey => (
