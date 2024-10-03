@@ -14,7 +14,7 @@ const MerchantsPage: FunctionComponent<MerchantsPageProps> = async ({
 }) => {
   const supplier: any = await getCookie('supplier');
 
-  const supplierId = supplier ? JSON.parse(supplier).id : '';
+  const supplierId = supplier ? JSON.parse(supplier)._id : '';
 
   const merchantsData = getCustomers('merchant', supplierId, page);
 

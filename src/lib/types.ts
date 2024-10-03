@@ -9,7 +9,7 @@ export interface IOption {
 }
 
 export interface ICustomer {
-  id: string;
+  _id: string;
   parentId: string;
   name: string;
   regNo: string;

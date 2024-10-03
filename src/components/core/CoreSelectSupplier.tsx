@@ -1,9 +1,8 @@
-import { deleteCookie } from '@/app/actions/cookies';
-import { chooseSupplierAction } from '@/app/actions/main';
+import { chooseSupplierAction, removeSupplierAction } from '@/app/actions/main';
 import { ICustomer } from '@/lib/types';
 import { tr } from '@/lib/utils';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { FunctionComponent, Key } from 'react';
 
 interface CoreSelectSupplierProps {
@@ -16,11 +15,10 @@ const CoreSelectSupplier: FunctionComponent<
 > = props => {
   const { suppliers, chosenSupplier } = props;
 
-  const router = useRouter();
   const pathname = usePathname();
 
   const onSelectionChange = (key: Key | null) => {
-    const findSupplier = suppliers.find(supplier => supplier.id === key);
+    const findSupplier = suppliers.find(supplier => supplier._id === key);
 
     if (findSupplier && key) {
       chooseSupplierAction(findSupplier, pathname, key);
@@ -28,13 +26,13 @@ const CoreSelectSupplier: FunctionComponent<
   };
 
   const onClear = () => {
-    deleteCookie('supplier'), router.push(pathname);
+    removeSupplierAction(pathname);
   };
 
   return (
     <Autocomplete
       className='max-w-xs'
-      defaultSelectedKey={chosenSupplier?.id}
+      defaultSelectedKey={chosenSupplier?._id}
       defaultItems={suppliers}
       color='primary'
       label={tr('-- Нийлүүлэгч сонгох --')}
@@ -50,7 +48,7 @@ const CoreSelectSupplier: FunctionComponent<
         )
       }}
     >
-      {item => <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>}
+      {item => <AutocompleteItem key={item._id}>{item.name}</AutocompleteItem>}
     </Autocomplete>
   );
 };

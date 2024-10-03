@@ -1,6 +1,6 @@
 'use server';
 
-import { setCookie } from '@/app/actions/cookies';
+import { deleteCookie, setCookie } from '@/app/actions/cookies';
 import { ICustomer } from '@/lib/types';
 import { redirect } from 'next/navigation';
 import { Key } from 'react';
@@ -12,4 +12,8 @@ export const chooseSupplierAction = (
 ) => {
   setCookie('supplier', JSON.stringify(supplier)),
     redirect(`${pathname}?supplierId=${key}`);
+};
+
+export const removeSupplierAction = (pathname: string) => {
+  deleteCookie('supplier'), redirect(pathname);
 };

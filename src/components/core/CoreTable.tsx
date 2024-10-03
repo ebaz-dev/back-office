@@ -91,7 +91,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
       ? 'image'
       : typeof value === 'boolean'
       ? 'switch'
-      : columnKey === 'id'
+      : columnKey.includes('id')
       ? 'id'
       : '';
 
@@ -151,7 +151,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
 
       <TableBody items={data ?? []} emptyContent={null}>
         {item => (
-          <TableRow key={item.id}>
+          <TableRow key={item.id || item._id}>
             {columnKey => (
               <TableCell className='text-xs'>
                 {renderCell(item, columnKey)}
