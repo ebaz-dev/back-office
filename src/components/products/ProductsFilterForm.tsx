@@ -1,40 +1,51 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useRef } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
 import { useFormState } from 'react-dom';
 import { filterProductsAction } from '@/app/actions/products';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
-import { ICategory, IProductsFieldProps } from '@/lib/types';
 import { ProductsColumns } from '@/lib/columns';
+import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 
 interface ProductsFilterFormProps {}
 
 const ProductsFilterForm: FunctionComponent<
   ProductsFilterFormProps
 > = props => {
-  const router = useRouter();
+  const ref = useRef<HTMLFormElement>(null);
 
-  const initialState: any = {};
-
-  const [state, action] = useFormState(filterProductsAction, initialState);
+  const [state, action] = useFormState(filterProductsAction, {} as any);
 
   const clearAllFilter = () => {
-    router.push(`/products`);
+    ref.current?.reset();
   };
 
   return (
-    <form action={action} className='grid grid-cols-7 gap-2 items-end'>
+    <form
+      action={action}
+      ref={ref}
+      className='grid grid-cols-7 gap-2 items-end'
+    >
       <CoreFormFields
         fields={ProductsColumns()}
         className='max-w-xs'
         hideFields={true}
       />
 
-      <CoreSubmitButton text='Хайх' />
+      <CoreSubmitButton
+        text='Хайх'
+        startContent={<FunnelIcon className='w-4 h-4' />}
+      />
 
-      <Button onPress={clearAllFilter}>{tr('Цэвэрлэх')}</Button>
+      <Button
+        type='button'
+        onPress={clearAllFilter}
+        color='danger'
+        endContent={<BackspaceIcon className='w-4 h-4' />}
+      >
+        {tr('Цэвэрлэх')}
+      </Button>
     </form>
   );
 };

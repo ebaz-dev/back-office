@@ -2,7 +2,7 @@
 
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { useFormStatus } from 'react-dom';
 
 interface CoreSubmitButtonProps {
@@ -10,10 +10,11 @@ interface CoreSubmitButtonProps {
   className?: string;
   isDisabled?: boolean;
   onPress?: () => void;
+  startContent?: ReactNode;
 }
 
 const CoreSubmitButton: FunctionComponent<CoreSubmitButtonProps> = props => {
-  const { text, className, isDisabled, onPress } = props;
+  const { text, className, isDisabled, onPress, startContent } = props;
 
   const { pending } = useFormStatus();
 
@@ -25,6 +26,7 @@ const CoreSubmitButton: FunctionComponent<CoreSubmitButtonProps> = props => {
       className={className}
       isDisabled={isDisabled}
       onPress={onPress}
+      startContent={startContent}
     >
       {tr(text)}
     </Button>
