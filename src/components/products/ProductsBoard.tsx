@@ -28,7 +28,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   const { products, totalPage, currentPage } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedProduct, setSelectedProduct] = useState();
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   const onRowAction = async (key: Key) => {
     onOpen();
