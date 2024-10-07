@@ -1,5 +1,11 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
 import { NextUIProvider } from '@/providers/NextUIProvider';
 import { NextThemeProvider } from '@/providers/NextThemeProvider';
 

@@ -1,71 +1,212 @@
 import { IColumn, IProductsFieldProps } from '@/lib/types';
 
-export const OrderColumns: IColumn[] = [
-  { uid: 'id', label: 'Захиалгын дугаар' },
-  { uid: '123', label: 'Trade shop ID' },
-  { uid: 'supplierId', label: 'Нийлүүлэгч' },
-  { uid: '4', label: 'Захиалгын зураг' },
-  { uid: '3', label: 'Захиалгын төлөв' },
-  { uid: 'orderedAt', label: 'Захиалсан өдөр' },
-  { uid: 'deliveryDate', label: 'Хүргүүлэх өдөр ' },
-  { uid: '7', label: 'Захиалгын дүн' },
-  { uid: '8', label: 'Төлөгдсөн дүн' },
-  { uid: '11', label: 'Тэмдэглэл' },
-  { uid: '14', label: 'Бизнесийн суваг' },
-  { uid: '12', label: 'Утасны дугаар' },
-  { uid: '13', label: 'Харилцагчийн нэр' },
-  { uid: '15', label: 'Хот/аймаг' },
-  { uid: '16', label: 'Дүүрэг/сум' },
-  { uid: '17', label: 'Хороо/Баг' },
-  { uid: '18', label: 'Дэлгэрэнгүй хаяг' },
-  { uid: '101', label: 'Бүсчлэл' },
-  { uid: '9', label: 'Төлбөрийн хэлбэр' },
-  { uid: '10', label: 'Купон' },
-  { uid: '102', label: 'Захиалгын эх үүсвэр' },
-  { uid: '22', label: 'Худалдааны төлөөлөгийн код' },
-  { uid: '23', label: 'Түгээгчийн код' },
-  { uid: '19', label: 'НӨАТ' },
-  { uid: '20', label: 'Буцаалт' },
-  { uid: '21', label: 'Шуурхай түгээлт' },
-  { uid: '24', label: 'Агуулах' }
+export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
+  {
+    uid: 'id',
+    label: 'Захиалгын дугаар',
+    name: 'id',
+    fieldType: 'input',
+    isFilter: true,
+    placeholder: 'Захиалгын дугаар'
+  },
+  {
+    uid: 'merchant.tradeShops.0._id',
+    label: 'Trade shop ID',
+    name: 'tradeshopId',
+    fieldType: 'input',
+    isFilter: false,
+    placeholder: 'Trade shop ID'
+  },
+  {
+    uid: 'supplier.name',
+    label: 'Нийлүүлэгч'
+  },
+  {
+    uid: 'products.0.images.0',
+    label: 'Захиалгын зураг'
+  },
+  {
+    uid: 'status',
+    label: 'Захиалгын төлөв',
+    name: 'status',
+    fieldType: 'select',
+    isFilter: true,
+    placeholder: 'Захиалгын төлөв',
+    options: []
+  },
+  {
+    uid: 'orderedAt',
+    label: 'Захиалсан өдөр',
+    name: 'images',
+    fieldType: 'datepicker',
+    isFilter: true
+  },
+  {
+    uid: 'deliveryDate',
+    label: 'Хүргүүлэх өдөр ',
+    name: 'images',
+    fieldType: 'datepicker',
+    isFilter: true
+  },
+  {
+    uid: '7',
+    label: 'Захиалгын дүн'
+  },
+  {
+    uid: '8',
+    label: 'Төлөгдсөн дүн'
+  },
+  {
+    uid: 'paymentMethod',
+    label: 'Төлбөрийн хэлбэр',
+    placeholder: 'Төлбөрийн хэлбэр',
+    name: 'paymentMethod',
+    fieldType: 'select',
+    options: [],
+    isFilter: false
+  },
+  {
+    uid: '11',
+    label: 'Тэмдэглэл'
+  },
+  {
+    uid: 'channel',
+    label: 'Бизнесийн суваг',
+    name: 'channel',
+    fieldType: 'select',
+    options: [],
+    isFilter: false
+  },
+  {
+    uid: 'merchant.phone',
+    label: 'Утасны дугаар',
+    name: 'merchant.phone',
+    fieldType: 'input',
+    placeholder: 'Утасны дугаар',
+    isFilter: false
+  },
+  {
+    uid: 'merchant.name',
+    label: 'Харилцагчийн нэр'
+  },
+  {
+    uid: '15',
+    label: 'Хот/аймаг',
+    name: 'images',
+    fieldType: 'select',
+    options: [],
+    placeholder: 'Хот/аймаг',
+    isFilter: false
+  },
+  {
+    uid: '16',
+    label: 'Дүүрэг/сум',
+    name: 'images',
+    fieldType: 'select',
+    options: [],
+    placeholder: 'Дүүрэг/сум',
+    isFilter: false
+  },
+  {
+    uid: '17',
+    label: 'Хороо/Баг',
+    name: 'images',
+    fieldType: 'select',
+    options: [],
+    placeholder: 'Хороо/Баг',
+    isFilter: false
+  },
+  {
+    uid: 'address',
+    label: 'Дэлгэрэнгүй хаяг',
+    name: 'address',
+    fieldType: 'input',
+    isFilter: false
+  },
+  {
+    uid: '101',
+    label: 'Бүсчлэл',
+    placeholder: 'Бүсчлэл',
+    name: 'images',
+    fieldType: 'select',
+    options: [],
+    isFilter: false
+  },
+  {
+    uid: '10',
+    label: 'Купон',
+    placeholder: 'Купон',
+    name: 'coupon',
+    fieldType: 'input',
+    isFilter: false
+  },
+  {
+    uid: '102',
+    label: 'Захиалгын эх үүсвэр',
+    placeholder: 'Захиалгын эх үүсвэр',
+    name: 'images',
+    fieldType: 'select',
+    options: [],
+    isFilter: false
+  },
+  {
+    uid: '22',
+    label: 'Худалдааны төлөөлөгийн код',
+    name: 'images',
+    fieldType: 'file',
+    isFilter: false
+  },
+  {
+    uid: '23',
+    label: 'Түгээгчийн код',
+    name: 'images',
+    fieldType: 'file',
+    isFilter: false
+  },
+  {
+    uid: '19',
+    label: 'НӨАТ'
+  },
+  {
+    uid: '20',
+    label: 'Буцаалт',
+    name: 'images',
+    fieldType: 'file',
+    isFilter: false
+  },
+  {
+    uid: '21',
+    label: 'Шуурхай түгээлт'
+  },
+  {
+    uid: '24',
+    label: 'Агуулах',
+    name: 'images',
+    fieldType: 'file',
+    isFilter: false
+  }
 ];
 
 export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
-    uid: 'images.0',
-    label: 'Зураг',
-    name: 'images',
-    fieldType: 'file',
-    placeholder: 'Зураг',
-    isFilter: false
-  },
-  {
     uid: 'id',
-    label: 'Бүтээгдэхүүний ID',
+    label: 'Ебазаар бүтээгдэхүүний ID',
     name: 'id',
     fieldType: 'input',
-    placeholder: 'Бүтээгдэхүүний ID',
-    isFilter: true
-  },
-  {
-    uid: 'name',
-    label: 'Бүтээгдэхүүний нэр',
-    name: 'name',
-    fieldType: 'input',
-    placeholder: 'Бүтээгдэхүүний нэр',
+    placeholder: 'Ебазаар бүтээгдэхүүний ID',
     isFilter: true
   },
   {
     uid: 'isActive',
-    label: 'Төлөв',
+    label: 'Active',
     name: 'isActive',
     fieldType: 'select',
-    placeholder: 'Төлөв',
+    placeholder: 'Active',
     options: [
       { value: 'true', label: 'Идэвхтэй' },
       { value: 'false', label: 'Идэвхгүй' }
     ],
-    isFilter: true
+    isFilter: false
   },
   {
     uid: 'customer.name',
@@ -74,6 +215,14 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'autocomplete',
     placeholder: 'Нийлүүлэгч',
     options: props?.supplierOptions || []
+  },
+  {
+    uid: 'name',
+    label: 'Бүтээгдэхүүний нэр',
+    name: 'name',
+    fieldType: 'input',
+    placeholder: 'Бүтээгдэхүүний нэр',
+    isFilter: true
   },
   {
     uid: 'barCode',
@@ -92,6 +241,14 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     isFilter: true
   },
   {
+    uid: 'images.0',
+    label: 'Зураг',
+    name: 'images',
+    fieldType: 'file',
+    placeholder: 'Зураг',
+    isFilter: false
+  },
+  {
     uid: 'brand.name',
     label: 'Брэнд',
     name: 'brand',
@@ -101,21 +258,13 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     isFilter: true
   },
   {
-    uid: 'description',
-    label: 'Бүтээгдэхүүний дэлгэрэнгүй',
-    name: 'description',
-    fieldType: 'input',
-    placeholder: 'Бүтээгдэхүүний дэлгэрэнгүй',
-    isFilter: true
-  },
-  {
     uid: 'categories.2.name',
     label: 'Ерөнхий ангилал',
     name: 'generalCategory',
     fieldType: 'autocomplete',
     placeholder: 'Ерөнхий ангилал',
     options: props?.generalCategories || [],
-    isFilter: true
+    isFilter: false
   },
   {
     uid: 'categories.1.name',
@@ -124,7 +273,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'autocomplete',
     placeholder: 'Дэд ангилал',
     options: props?.subCategories || [],
-    isFilter: true
+    isFilter: false
   },
   {
     uid: 'categories.0.name',
@@ -133,7 +282,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'autocomplete',
     placeholder: 'Эцсийн ангилал',
     options: props?.finalCategories || [],
-    isFilter: true
+    isFilter: false
   },
   {
     uid: 'inventory.totalStock',
@@ -143,7 +292,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     placeholder: 'Үлдэгдэл'
   },
   {
-    uid: 'adjustedPrice.price',
+    uid: '',
     label: 'Үнэ',
     name: 'price',
     fieldType: 'input',
@@ -173,7 +322,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
       { value: 'true', label: 'Тийм' },
       { value: 'false', label: 'Үгүй' }
     ],
-    isFilter: true
+    isFilter: false
   },
   {
     uid: 'cityTax',
@@ -185,7 +334,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
       { value: 'true', label: 'Тийм' },
       { value: 'false', label: 'Үгүй' }
     ],
-    isFilter: true
+    isFilter: false
   }
 ];
 

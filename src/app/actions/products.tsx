@@ -4,8 +4,6 @@ import { getFetch } from '@/lib/fetch';
 import { redirect } from 'next/navigation';
 
 export async function filterProductsAction(state: any, formData: FormData) {
-  console.log(formData);
-
   redirect(`/products`);
 }
 

@@ -24,4 +24,10 @@ export function isImagePath(str: string) {
   return imageExtensions.test(str);
 }
 
+export function isDate(date: string) {
+  const newDate: string = new Date(date).toString();
+
+  return newDate !== 'Invalid Date';
+}
+
 export const replaceMediaUrl = (imageUrl: string) => {};

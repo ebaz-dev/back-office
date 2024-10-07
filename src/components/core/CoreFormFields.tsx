@@ -2,6 +2,7 @@ import { IColumn } from '@/lib/types';
 import {
   Autocomplete,
   AutocompleteItem,
+  DatePicker,
   Input,
   Select,
   SelectItem
@@ -23,6 +24,20 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
 
     if (hideFields && !isFilter) {
       return null;
+    }
+
+    if (fieldType === 'datepicker') {
+      return (
+        <DatePicker
+          key={index}
+          name={name}
+          label={label}
+          className={className}
+          labelPlacement='outside'
+          variant='bordered'
+          dateInputClassNames={{ label: 'text-xs' }}
+        />
+      );
     }
 
     if (fieldType === 'autocomplete') {

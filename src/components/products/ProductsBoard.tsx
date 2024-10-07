@@ -51,7 +51,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
         />
       </div>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='4xl'>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
         <ModalContent>
           {onClose => (
             <>

@@ -1,13 +1,11 @@
 'use client';
 
 import { IColumn } from '@/lib/types';
-import { getNestedValue, isImagePath } from '@/lib/utils';
+import { getNestedValue, isDate, isImagePath } from '@/lib/utils';
 import {
   getKeyValue,
   Pagination,
-  Snippet,
   Spinner,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -24,9 +22,10 @@ import {
   useMemo,
   useState
 } from 'react';
-import CoreImage from '@/components/core/CoreImage';
 import { usePathname } from 'next/navigation';
 import { onPageChangeAction } from '@/app/actions/main';
+import CoreEmpty from '@/components/core/CoreEmpty';
+import CoreImage from '@/components/core/CoreImage';
 
 interface CoreTableProps {
   data: any[];
@@ -36,6 +35,7 @@ interface CoreTableProps {
   rowsPerPage?: number;
   customTopContents?: ReactNode;
   onRowAction?: (key: Key) => void;
+  customRenderCell?: (item: any, columnKey: string) => ReactNode;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
@@ -45,7 +45,8 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     customTopContents,
     totalPage,
     currentPage,
-    onRowAction
+    onRowAction,
+    customRenderCell
   } = props;
 
   const pathname = usePathname();
@@ -87,39 +88,25 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     ) : null;
   }, [currentPage, totalPage]);
 
-  const renderCell = useCallback((item: any, columnKey: any) => {
+  const renderCell = useCallback((item: any, columnKey: string) => {
     const value = getNestedValue(item, columnKey.split('.'));
 
-    const type = isImagePath(value)
-      ? 'image'
-      : typeof value === 'boolean'
-      ? 'switch'
-      : columnKey.includes('id')
-      ? 'id'
-      : '';
+    const type = isImagePath(value) ? 'image' : isDate(value) ? 'date' : '';
 
     switch (type) {
-      case 'switch':
-        return (
-          <div className='w-full flex justify-center'>
-            <Switch size='sm' isSelected={value} />
-          </div>
-        );
+      case 'date':
+        return <div>{getKeyValue(value, columnKey)}</div>;
       case 'image':
         return (
-          <div className='w-10 h-10'>
+          <div className='w-10 h-10 mx-auto'>
             <CoreImage src={value} />
           </div>
         );
-      case 'id':
-        return (
-          <Snippet size='sm' variant='flat' hideSymbol>
-            {getKeyValue(value, columnKey)}
-          </Snippet>
-        );
       default:
         return (
-          <div className='line-clamp-2'>{getKeyValue(value, columnKey)}</div>
+          <div className='line-clamp-2'>
+            {getKeyValue(value, columnKey) || '--'}
+          </div>
         );
     }
   }, []);
@@ -154,15 +141,15 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
 
       <TableBody
         items={data ?? []}
-        emptyContent={null}
+        emptyContent={<CoreEmpty />}
         isLoading={isLoading}
         loadingContent={<Spinner />}
       >
         {item => (
-          <TableRow key={item.id || item.id}>
+          <TableRow key={item.id || item._id}>
             {columnKey => (
-              <TableCell className='text-xs'>
-                {renderCell(item, columnKey)}
+              <TableCell className='text-xs text-center'>
+                {renderCell(item, columnKey.toString())}
               </TableCell>
             )}
           </TableRow>

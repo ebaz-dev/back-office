@@ -1,7 +1,7 @@
 import { getFetch } from '@/lib/fetch';
 
 export const getOrders = async (id: string, page: string | number) =>
-  await getFetch(`/order/list?merchantId=${id}&page=${page}&limit=10`);
+  await getFetch(`/order/bo/list?page=${page}&limit=10`);
 
 export const getProducts = async (
   customerId?: string,
@@ -12,7 +12,7 @@ export const getProducts = async (
   id?: string
 ) =>
   await getFetch(
-    `/product/list?${customerId ? `customerId=${customerId}&` : ''}${
+    `/product/dashboard/list?${customerId ? `customerId=${customerId}&` : ''}${
       categoryId ? `categories=${categoryId}&` : ''
     }${brandId ? `brands=${brandId}&` : ''}${name ? `name=${name}&` : ''}${
       id ? `ids=${id}&` : ''

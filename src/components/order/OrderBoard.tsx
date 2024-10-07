@@ -13,6 +13,7 @@ import {
   useDisclosure
 } from '@nextui-org/react';
 import { tr } from '@/lib/utils';
+import OrderFilterForm from '@/components/order/OrderFilterForm';
 
 interface OrderBoardProps {
   orders: IOrder[];
@@ -33,11 +34,15 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
     <div className='h-full flex flex-col gap-4'>
       <div className='flex-1'>
         <CoreTable
-          columns={OrderColumns}
+          columns={OrderColumns()}
           data={orders}
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
+          customTopContents={<OrderFilterForm />}
+          customRenderCell={() => {
+            return <div>hello</div>;
+          }}
         />
       </div>
 
