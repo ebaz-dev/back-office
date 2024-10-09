@@ -15,19 +15,14 @@ const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
 
   const [imagesSrc, setImageSrc] = useState<any>([]);
 
-  const body = {
-    id: product.id,
-    images: imagesSrc
-  };
-
-  const updateImage = updateProductImagesAction.bind(null, body);
-
+  const updateImage = updateProductImagesAction.bind(null, {});
+  console.log(imagesSrc);
   const images = [...imagesSrc, ...product.images];
 
   return (
     <form className='flex flex-col gap-4' action={updateImage}>
       <div className='flex gap-4 flex-wrap'>
-        <CoreImageUploader setImage={setImageSrc} />
+        <CoreImageUploader setImages={setImageSrc} images={imagesSrc}/>
 
         {images.map((imageUrl: string, index: number) => {
           return (

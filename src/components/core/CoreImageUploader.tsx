@@ -2,26 +2,20 @@ import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { FunctionComponent } from 'react';
 
 interface CoreImageUploaderProps {
-  setImage: (imageUrl: any) => void;
+  setImages: (imageUrl: any) => void;
+  images: string[];
 }
 
 const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
-  setImage
+  setImages,
+  images
 }) => {
-  const onChange = (e: any) => {
-    for (const file of e.target.files) {
-      const reader = new FileReader();
+  const handleFileChange = (e: any) => {
+    const files = Array.from(e.target.files);
 
-      reader.readAsDataURL(file);
+    const previews = files.map((file: any) => URL.createObjectURL(file));
 
-      reader.onload = () => {
-        setImage((imgs: any) => [...imgs, reader.result]);
-      };
-
-      reader.onerror = () => {
-        console.log(reader.error);
-      };
-    }
+    setImages([...images, ...previews]);
   };
 
   return (
@@ -33,7 +27,7 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
         name='images'
         id='uploadFile1'
         className='hidden'
-        onChange={onChange}
+        onChange={handleFileChange}
       />
     </label>
   );
