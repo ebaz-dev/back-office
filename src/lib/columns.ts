@@ -17,12 +17,12 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: 'supplier.name',
-    name: '',
+    name: 'supplier',
     label: 'Нийлүүлэгч'
   },
   {
     uid: 'products.0.images.0',
-    name: '',
+    name: 'images',
     label: 'Захиалгын зураг'
   },
   {
@@ -47,12 +47,12 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: '7',
-    name: '',
+    name: 'total',
     label: 'Захиалгын дүн'
   },
   {
     uid: '8',
-    name: '',
+    name: 'payed',
     label: 'Төлөгдсөн дүн'
   },
   {
@@ -65,7 +65,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: '11',
-    name: '',
+    name: 'note',
     label: 'Тэмдэглэл'
   },
   {
@@ -84,12 +84,12 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: 'merchant.name',
-    name: '',
+    name: 'merchant',
     label: 'Харилцагчийн нэр'
   },
   {
     uid: '15',
-    name: '',
+    name: 'hot',
     label: 'Хот/аймаг',
     fieldType: 'select',
     options: [],
@@ -97,7 +97,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: '16',
-    name: '',
+    name: 'aiamg',
     label: 'Дүүрэг/сум',
     fieldType: 'select',
     options: [],
@@ -106,7 +106,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: '17',
     label: 'Хороо/Баг',
-    name: 'images',
+    name: 'horoo',
     fieldType: 'select',
     options: [],
     placeholder: 'Хороо/Баг'
@@ -119,7 +119,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: '101',
-    name: 'address',
+    name: 'bus',
     label: 'Бүсчлэл',
     placeholder: 'Бүсчлэл',
     fieldType: 'select',
@@ -134,7 +134,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: '102',
-    name: 'images',
+    name: 'eh',
     label: 'Захиалгын эх үүсвэр',
     placeholder: 'Захиалгын эх үүсвэр',
     fieldType: 'select',
@@ -142,35 +142,35 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   },
   {
     uid: '22',
-    name: 'images',
+    name: 'ht',
     label: 'Худалдааны төлөөлөгийн код',
     fieldType: 'file'
   },
   {
     uid: '23',
-    name: 'images',
+    name: 'tugeegch',
     label: 'Түгээгчийн код',
     fieldType: 'file'
   },
   {
     uid: '19',
-    name: 'images',
+    name: 'noat',
     label: 'НӨАТ'
   },
   {
     uid: '20',
-    name: 'images',
+    name: 'return',
     label: 'Буцаалт',
     fieldType: 'file'
   },
   {
     uid: '21',
-    name: 'images',
+    name: 'shuurhai',
     label: 'Шуурхай түгээлт'
   },
   {
     uid: '24',
-    name: 'images',
+    name: 'inventory',
     label: 'Агуулах',
     fieldType: 'file'
   }

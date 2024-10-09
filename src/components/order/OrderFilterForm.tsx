@@ -20,6 +20,8 @@ const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = props => {
     ref.current?.reset();
   };
 
+  const hiddenFields = ['supplier', 'images'];
+
   return (
     <form
       action={action}
@@ -29,7 +31,7 @@ const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = props => {
       <CoreFormFields
         fields={OrderColumns()}
         className='max-w-xs'
-        hideFields={true}
+        hideFields={hiddenFields}
       />
 
       <CoreSubmitButton

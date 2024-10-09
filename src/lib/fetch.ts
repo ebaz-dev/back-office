@@ -56,3 +56,24 @@ export async function loginFetch(username: string, password: string) {
 
   return response;
 }
+
+export async function fetchMultiple(
+  endpoint: string,
+  body: any,
+  method: string
+) {
+  const session = cookies().get('session')?.value || '';
+
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: session.replace(',', '; ')
+    },
+    body: JSON.stringify(body)
+  })
+    .then(res => res.json())
+    .catch(err => console.log(err));
+
+  return response;
+}

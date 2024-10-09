@@ -4,9 +4,10 @@ import { FunctionComponent } from 'react';
 
 interface CoreImageProps {
   src: string;
+  objectFit?: 'contain' | 'cover';
 }
 
-const CoreImage: FunctionComponent<CoreImageProps> = ({ src }) => {
+const CoreImage: FunctionComponent<CoreImageProps> = ({ src, objectFit }) => {
   return (
     <div className='w-full h-full relative'>
       <Image
@@ -16,7 +17,7 @@ const CoreImage: FunctionComponent<CoreImageProps> = ({ src }) => {
         src={src}
         sizes={NextImageSizes}
         style={{
-          objectFit: 'contain',
+          objectFit: objectFit || 'contain',
           objectPosition: 'center'
         }}
       />
