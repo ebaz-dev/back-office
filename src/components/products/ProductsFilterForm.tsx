@@ -21,6 +21,23 @@ const ProductsFilterForm: FunctionComponent<
     ref.current?.reset();
   };
 
+  const hiddenFields = [
+    'isActive',
+    'supplier',
+    'images',
+    'generalCategory',
+    'subCategory',
+    'generalCategory',
+    'finalCategory',
+    'stock',
+    'unit',
+    'price',
+    'availableStock',
+    'inCase',
+    'isAlcohol',
+    'cityTax'
+  ];
+
   return (
     <form
       action={action}
@@ -30,7 +47,7 @@ const ProductsFilterForm: FunctionComponent<
       <CoreFormFields
         fields={ProductsColumns()}
         className='max-w-xs'
-        hideFields={true}
+        hideFields={hiddenFields}
       />
 
       <CoreSubmitButton

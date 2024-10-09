@@ -9,7 +9,6 @@ import {
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
-import { tr } from '@/lib/utils';
 import { IProduct } from '@/lib/types';
 import { ProductsColumns } from '@/lib/columns';
 import { getProductAction } from '@/app/actions/products';
@@ -56,7 +55,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           {onClose => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
-                {tr('Бүтээгдэхүүний дэлгэрэнгүй')}
+                {selectedProduct?.name}
               </ModalHeader>
               <ModalBody className='pb-4'>
                 {!selectedProduct ? (
@@ -65,7 +64,6 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
                   <ProductsDetail product={selectedProduct} />
                 )}
               </ModalBody>
-              <ModalFooter></ModalFooter>
             </>
           )}
         </ModalContent>

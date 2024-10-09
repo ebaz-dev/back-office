@@ -1,11 +1,10 @@
 export interface IColumn {
   uid: string;
+  name: string;
   label: string;
   fieldType?: string;
-  name?: string;
   placeholder?: string;
   options?: IOption[];
-  isFilter?: boolean;
 }
 
 export interface IOption {

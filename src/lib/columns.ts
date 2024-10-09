@@ -3,109 +3,105 @@ import { IColumn, IProductsFieldProps } from '@/lib/types';
 export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'id',
-    label: 'Захиалгын дугаар',
     name: 'id',
+    label: 'Захиалгын дугаар',
     fieldType: 'input',
-    isFilter: true,
     placeholder: 'Захиалгын дугаар'
   },
   {
     uid: 'merchant.tradeShops.0._id',
-    label: 'Trade shop ID',
     name: 'tradeshopId',
+    label: 'Trade shop ID',
     fieldType: 'input',
-    isFilter: false,
     placeholder: 'Trade shop ID'
   },
   {
     uid: 'supplier.name',
+    name: '',
     label: 'Нийлүүлэгч'
   },
   {
     uid: 'products.0.images.0',
+    name: '',
     label: 'Захиалгын зураг'
   },
   {
     uid: 'status',
-    label: 'Захиалгын төлөв',
     name: 'status',
+    label: 'Захиалгын төлөв',
     fieldType: 'select',
-    isFilter: true,
     placeholder: 'Захиалгын төлөв',
     options: []
   },
   {
     uid: 'orderedAt',
-    label: 'Захиалсан өдөр',
     name: 'images',
-    fieldType: 'datepicker',
-    isFilter: true
+    label: 'Захиалсан өдөр',
+    fieldType: 'datepicker'
   },
   {
     uid: 'deliveryDate',
-    label: 'Хүргүүлэх өдөр ',
     name: 'images',
-    fieldType: 'datepicker',
-    isFilter: true
+    label: 'Хүргүүлэх өдөр ',
+    fieldType: 'datepicker'
   },
   {
     uid: '7',
+    name: '',
     label: 'Захиалгын дүн'
   },
   {
     uid: '8',
+    name: '',
     label: 'Төлөгдсөн дүн'
   },
   {
     uid: 'paymentMethod',
+    name: 'paymentMethod',
     label: 'Төлбөрийн хэлбэр',
     placeholder: 'Төлбөрийн хэлбэр',
-    name: 'paymentMethod',
     fieldType: 'select',
-    options: [],
-    isFilter: false
+    options: []
   },
   {
     uid: '11',
+    name: '',
     label: 'Тэмдэглэл'
   },
   {
     uid: 'channel',
-    label: 'Бизнесийн суваг',
     name: 'channel',
+    label: 'Бизнесийн суваг',
     fieldType: 'select',
-    options: [],
-    isFilter: false
+    options: []
   },
   {
     uid: 'merchant.phone',
-    label: 'Утасны дугаар',
     name: 'merchant.phone',
+    label: 'Утасны дугаар',
     fieldType: 'input',
-    placeholder: 'Утасны дугаар',
-    isFilter: false
+    placeholder: 'Утасны дугаар'
   },
   {
     uid: 'merchant.name',
+    name: '',
     label: 'Харилцагчийн нэр'
   },
   {
     uid: '15',
+    name: '',
     label: 'Хот/аймаг',
-    name: 'images',
     fieldType: 'select',
     options: [],
-    placeholder: 'Хот/аймаг',
-    isFilter: false
+    placeholder: 'Хот/аймаг'
   },
   {
     uid: '16',
+    name: '',
     label: 'Дүүрэг/сум',
-    name: 'images',
     fieldType: 'select',
     options: [],
-    placeholder: 'Дүүрэг/сум',
-    isFilter: false
+    placeholder: 'Дүүрэг/сум'
   },
   {
     uid: '17',
@@ -113,247 +109,241 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     name: 'images',
     fieldType: 'select',
     options: [],
-    placeholder: 'Хороо/Баг',
-    isFilter: false
+    placeholder: 'Хороо/Баг'
   },
   {
     uid: 'address',
-    label: 'Дэлгэрэнгүй хаяг',
     name: 'address',
-    fieldType: 'input',
-    isFilter: false
+    label: 'Дэлгэрэнгүй хаяг',
+    fieldType: 'input'
   },
   {
     uid: '101',
+    name: 'address',
     label: 'Бүсчлэл',
     placeholder: 'Бүсчлэл',
-    name: 'images',
     fieldType: 'select',
-    options: [],
-    isFilter: false
+    options: []
   },
   {
     uid: '10',
+    name: 'coupon',
     label: 'Купон',
     placeholder: 'Купон',
-    name: 'coupon',
-    fieldType: 'input',
-    isFilter: false
+    fieldType: 'input'
   },
   {
     uid: '102',
+    name: 'images',
     label: 'Захиалгын эх үүсвэр',
     placeholder: 'Захиалгын эх үүсвэр',
-    name: 'images',
     fieldType: 'select',
-    options: [],
-    isFilter: false
+    options: []
   },
   {
     uid: '22',
-    label: 'Худалдааны төлөөлөгийн код',
     name: 'images',
-    fieldType: 'file',
-    isFilter: false
+    label: 'Худалдааны төлөөлөгийн код',
+    fieldType: 'file'
   },
   {
     uid: '23',
-    label: 'Түгээгчийн код',
     name: 'images',
-    fieldType: 'file',
-    isFilter: false
+    label: 'Түгээгчийн код',
+    fieldType: 'file'
   },
   {
     uid: '19',
+    name: 'images',
     label: 'НӨАТ'
   },
   {
     uid: '20',
-    label: 'Буцаалт',
     name: 'images',
-    fieldType: 'file',
-    isFilter: false
+    label: 'Буцаалт',
+    fieldType: 'file'
   },
   {
     uid: '21',
+    name: 'images',
     label: 'Шуурхай түгээлт'
   },
   {
     uid: '24',
-    label: 'Агуулах',
     name: 'images',
-    fieldType: 'file',
-    isFilter: false
+    label: 'Агуулах',
+    fieldType: 'file'
   }
 ];
 
 export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'id',
-    label: 'Ебазаар бүтээгдэхүүний ID',
     name: 'id',
+    label: 'Ебазаар бүтээгдэхүүний ID',
     fieldType: 'input',
-    placeholder: 'Ебазаар бүтээгдэхүүний ID',
-    isFilter: true
+    placeholder: 'Ебазаар бүтээгдэхүүний ID'
   },
   {
     uid: 'isActive',
-    label: 'Active',
     name: 'isActive',
+    label: 'Төлөв',
     fieldType: 'select',
     placeholder: 'Active',
     options: [
       { value: 'true', label: 'Идэвхтэй' },
       { value: 'false', label: 'Идэвхгүй' }
-    ],
-    isFilter: false
+    ]
   },
   {
     uid: 'customer.name',
-    label: 'Нийлүүлэгч',
     name: 'supplier',
+    label: 'Нийлүүлэгч',
     fieldType: 'autocomplete',
     placeholder: 'Нийлүүлэгч',
     options: props?.supplierOptions || []
   },
   {
-    uid: 'name',
-    label: 'Бүтээгдэхүүний нэр',
-    name: 'name',
-    fieldType: 'input',
-    placeholder: 'Бүтээгдэхүүний нэр',
-    isFilter: true
+    uid: 'images.0',
+    name: 'images',
+    label: 'Зураг',
+    fieldType: 'file',
+    placeholder: 'Зураг'
   },
   {
-    uid: 'barCode',
-    label: 'Баркод',
-    name: 'barCode',
+    uid: 'name',
+    name: 'name',
+    label: 'Бүтээгдэхүүний нэр',
     fieldType: 'input',
-    placeholder: 'Баркод',
-    isFilter: true
+    placeholder: 'Бүтээгдэхүүний нэр'
+  },
+
+  {
+    uid: 'barCode',
+    name: 'barCode',
+    label: 'Баркод',
+    fieldType: 'input',
+    placeholder: 'Баркод'
   },
   {
     uid: 'sku',
-    label: 'Бүтээгдхүүний SKU',
     name: 'sku',
+    label: 'Бүтээгдхүүний SKU',
     fieldType: 'input',
-    placeholder: 'Бүтээгдхүүний SKU',
-    isFilter: true
-  },
-  {
-    uid: 'images.0',
-    label: 'Зураг',
-    name: 'images',
-    fieldType: 'file',
-    placeholder: 'Зураг',
-    isFilter: false
-  },
-  {
-    uid: 'brand.name',
-    label: 'Брэнд',
-    name: 'brand',
-    fieldType: 'autocomplete',
-    placeholder: 'Брэнд',
-    options: props?.brandOptions || [],
-    isFilter: true
-  },
-  {
-    uid: 'categories.2.name',
-    label: 'Ерөнхий ангилал',
-    name: 'generalCategory',
-    fieldType: 'autocomplete',
-    placeholder: 'Ерөнхий ангилал',
-    options: props?.generalCategories || [],
-    isFilter: false
-  },
-  {
-    uid: 'categories.1.name',
-    label: 'Дэд ангилал',
-    name: 'subCategory',
-    fieldType: 'autocomplete',
-    placeholder: 'Дэд ангилал',
-    options: props?.subCategories || [],
-    isFilter: false
-  },
-  {
-    uid: 'categories.0.name',
-    label: 'Эцсийн ангилал',
-    name: 'finalCategory',
-    fieldType: 'autocomplete',
-    placeholder: 'Эцсийн ангилал',
-    options: props?.finalCategories || [],
-    isFilter: false
+    placeholder: 'Бүтээгдхүүний SKU'
   },
   {
     uid: 'inventory.totalStock',
-    label: 'Үлдэгдэл',
     name: 'stock',
+    label: 'Үлдэгдэл',
     fieldType: 'input',
     placeholder: 'Үлдэгдэл'
   },
   {
     uid: '',
-    label: 'Үнэ',
     name: 'price',
+    label: 'Үнэ',
     fieldType: 'input',
     placeholder: 'Үнэ'
   },
   {
+    uid: 'brand.name',
+    name: 'brand',
+    label: 'Брэнд',
+    fieldType: 'autocomplete',
+    placeholder: 'Брэнд',
+    options: props?.brandOptions || []
+  },
+  {
+    uid: 'categories.2.name',
+    name: 'generalCategory',
+    label: 'Ерөнхий ангилал',
+    fieldType: 'autocomplete',
+    placeholder: 'Ерөнхий ангилал',
+    options: props?.generalCategories || []
+  },
+  {
+    uid: 'categories.1.name',
+    name: 'subCategory',
+    label: 'Дэд ангилал',
+    fieldType: 'autocomplete',
+    placeholder: 'Дэд ангилал',
+    options: props?.subCategories || []
+  },
+  {
+    uid: 'categories.0.name',
+    name: 'finalCategory',
+    label: 'Эцсийн ангилал',
+    fieldType: 'autocomplete',
+    placeholder: 'Эцсийн ангилал',
+    options: props?.finalCategories || []
+  },
+  {
+    uid: 'unit',
+    name: 'unit',
+    label: 'Хэмжих нэгж',
+    fieldType: 'select',
+    placeholder: 'Хэмжих нэгж',
+    options: []
+  },
+  {
     uid: 'inventory.availableStock',
-    label: 'Сагслах тоо',
     name: 'availableStock',
+    label: 'Сагслах тоо',
     fieldType: 'input',
     placeholder: 'Сагслах тоо'
   },
   {
     uid: 'inCase',
-    label: 'Хайрцаган дахь тоо',
     name: 'inCase',
+    label: 'Хайрцаган дахь тоо',
     fieldType: 'input',
     placeholder: 'Хайрцаган дахь тоо'
   },
   {
     uid: 'isAlcohol',
-    label: 'Алкохолны төрөл эсэх',
     name: 'isAlcohol',
+    label: 'Алкохолны төрөл эсэх',
     fieldType: 'select',
     placeholder: 'Алкохолны төрөл эсэх',
     options: [
       { value: 'true', label: 'Тийм' },
       { value: 'false', label: 'Үгүй' }
-    ],
-    isFilter: false
+    ]
   },
   {
     uid: 'cityTax',
-    label: 'Хотын татвар төлөх эсэх',
     name: 'cityTax',
+    label: 'Хотын татвар төлөх эсэх',
     fieldType: 'select',
     placeholder: 'Хотын татвар төлөх эсэх',
     options: [
       { value: 'true', label: 'Тийм' },
       { value: 'false', label: 'Үгүй' }
-    ],
-    isFilter: false
+    ]
   }
 ];
 
 export const CustomerColumns: IColumn[] = [
-  { uid: 'name', label: 'Харилцагчийн нэр' },
-  { uid: 'id1', label: 'Утасны дугаар' },
-  { uid: 'id2', label: 'Худалдааны цэгийн нэр' },
-  { uid: 'id3', label: 'Худалдааны цэгийн ерөнхий  байршил' },
-  { uid: 'id4', label: 'Худалдааны цэгийн байршил' },
-  { uid: 'id5', label: 'Худалдааны цэгийн газарзүйн координат' },
-  { uid: 'id6', label: 'Аж ахуйн нэгжийн төрөл' },
-  { uid: 'id7', label: 'Худалдааны цэгийн суваг' },
-  { uid: 'id8', label: 'Худалдааны цэгийн үндсэн ангилал' },
-  { uid: 'id9', label: 'Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо' },
-  { uid: 'id12', label: 'Хот/Аймаг' },
-  { uid: 'id13', label: 'Дүүрэг/Сум' },
-  { uid: 'id14', label: 'Хороо/Баг' },
-  { uid: 'id16', label: 'Дэлгэрэнгүй хаяг' },
-  { uid: 'id15', label: 'И-мэйл' },
-  { uid: 'id17', label: 'Тусгай зөвшөөрөл' },
-  { uid: 'id18', label: 'Хариуцсан ХТ код' }
+  { uid: 'name', name: '', label: 'Харилцагчийн нэр' },
+  { uid: 'id1', name: '', label: 'Утасны дугаар' },
+  { uid: 'id2', name: '', label: 'Худалдааны цэгийн нэр' },
+  { uid: 'id3', name: '', label: 'Худалдааны цэгийн ерөнхий  байршил' },
+  { uid: 'id4', name: '', label: 'Худалдааны цэгийн байршил' },
+  { uid: 'id5', name: '', label: 'Худалдааны цэгийн газарзүйн координат' },
+  { uid: 'id6', name: '', label: 'Аж ахуйн нэгжийн төрөл' },
+  { uid: 'id7', name: '', label: 'Худалдааны цэгийн суваг' },
+  { uid: 'id8', name: '', label: 'Худалдааны цэгийн үндсэн ангилал' },
+  {
+    uid: 'id9',
+    name: '',
+    label: 'Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо'
+  },
+  { uid: 'id12', name: '', label: 'Хот/Аймаг' },
+  { uid: 'id13', name: '', label: 'Дүүрэг/Сум' },
+  { uid: 'id14', name: '', label: 'Хороо/Баг' },
+  { uid: 'id16', name: '', label: 'Дэлгэрэнгүй хаяг' },
+  { uid: 'id15', name: '', label: 'И-мэйл' },
+  { uid: 'id17', name: '', label: 'Тусгай зөвшөөрөл' },
+  { uid: 'id18', name: '', label: 'Хариуцсан ХТ код' }
 ];

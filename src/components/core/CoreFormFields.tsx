@@ -13,16 +13,16 @@ interface CoreFormFieldsProps {
   fields: IColumn[];
   isClearable?: boolean;
   className?: string;
-  hideFields?: boolean;
+  hideFields?: string[];
 }
 
 const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
   const { fields, isClearable, className, hideFields } = props;
 
   return fields.map((field: IColumn, index: number) => {
-    const { name, fieldType, placeholder, label, options, isFilter } = field;
+    const { name, fieldType, placeholder, label, options } = field;
 
-    if (hideFields && !isFilter) {
+    if (hideFields && hideFields.includes(name)) {
       return null;
     }
 

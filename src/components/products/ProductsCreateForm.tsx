@@ -42,7 +42,10 @@ const ProductsCreateForm: FunctionComponent<
   return (
     <form action={action} className='flex flex-col gap-4'>
       <div className='w-full grid grid-cols-3 gap-4'>
-        <CoreFormFields fields={ProductsColumns(fieldOptions)} />
+        <CoreFormFields
+          fields={ProductsColumns(fieldOptions)}
+          hideFields={['id']}
+        />
       </div>
 
       <CoreSubmitButton text='Хадгалах' onPress={onClose} />
