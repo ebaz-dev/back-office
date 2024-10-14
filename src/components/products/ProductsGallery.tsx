@@ -47,7 +47,6 @@ const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
                       ? replaceMediaUrl(imageUrl)
                       : imageUrl
                   }
-                  objectFit='cover'
                 />
               </div>
 
