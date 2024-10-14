@@ -8,15 +8,7 @@ export async function filterProductsAction(state: any, formData: FormData) {
   redirect(`/products`);
 }
 
-export async function addProductImageAction(item: any) {
-  await fetcher(`/product/update/${item.id}`, 'PUT', {
-    images: item.images
-  });
-
-  revalidatePath('/products');
-}
-
-export async function deleteProductImageAction(item: any) {
+export async function updateProductImageAction(item: any) {
   await fetcher(`/product/update/${item.id}`, 'PUT', {
     images: item.images
   });
