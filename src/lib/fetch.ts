@@ -25,23 +25,11 @@ export async function loginFetch(username: string, password: string) {
   return response;
 }
 
-export async function getFetch(endpoint: string) {
-  const session = cookies().get('session')?.value || '';
-
-  const response = await fetch(`${API_URL}${endpoint}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Cookie: session.replace(',', '; ')
-    }
-  })
-    .then(res => res.json())
-    .catch(err => console.log(err));
-
-  return response;
-}
-
-export async function fetcher(endpoint: string, method: string, body: any) {
+export async function fetcher(
+  endpoint: string,
+  method?: 'GET' | 'POST' | 'PUT',
+  body?: any
+) {
   const session = cookies().get('session')?.value || '';
 
   const response = await fetch(`${API_URL}${endpoint}`, {
@@ -58,7 +46,7 @@ export async function fetcher(endpoint: string, method: string, body: any) {
   return response;
 }
 
-export async function imageFetch(formData: FormData) {
+export async function uploadImageFetcher(formData: FormData) {
   const response = await fetch(
     `${MEDIA_UPLOAD}?ebazaar_admin_token=qweqweq12312313&preset=product`,
     {

@@ -1,7 +1,7 @@
-import { getFetch } from '@/lib/fetch';
+import { fetcher } from '@/lib/fetch';
 
 export const getOrders = async (id: string, page: string | number) =>
-  await getFetch(`/order/bo/list?page=${page}&limit=10`);
+  await fetcher(`/order/bo/list?page=${page}&limit=10`);
 
 export const getProducts = async (
   customerId?: string,
@@ -11,7 +11,7 @@ export const getProducts = async (
   name?: string,
   id?: string
 ) =>
-  await getFetch(
+  await fetcher(
     `/product/dashboard/list?${customerId ? `customerId=${customerId}&` : ''}${
       categoryId ? `categories=${categoryId}&` : ''
     }${brandId ? `brands=${brandId}&` : ''}${name ? `name=${name}&` : ''}${
@@ -20,14 +20,14 @@ export const getProducts = async (
   );
 
 export const getProductCategories = async () =>
-  await getFetch(`/product/categories?limit=all`);
+  await fetcher(`/product/categories?limit=all`);
 
 export const getCustomers = async (
   type?: string,
   customerId?: string,
   page?: string | number
 ) =>
-  await getFetch(
+  await fetcher(
     `/customer/list?${customerId ? `customerId=${customerId}&` : ''}${
       type ? `type=${type}&` : ''
     }page=${page}&limit=10`

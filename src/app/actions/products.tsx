@@ -1,6 +1,6 @@
 'use server';
 
-import { getFetch, fetcher } from '@/lib/fetch';
+import { fetcher } from '@/lib/fetch';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -29,7 +29,7 @@ export async function createProductAction(state: any, formData: FormData) {}
 export async function importProductsAction(state: any, formData: FormData) {}
 
 export async function getProductAction(id: string) {
-  const response = await getFetch(`/product/${id}`);
+  const response = await fetcher(`/product/${id}`);
 
   return response;
 }
