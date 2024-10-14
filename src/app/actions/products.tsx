@@ -1,18 +1,27 @@
 'use server';
 
-import { fetchMultiple, getFetch } from '@/lib/fetch';
+import { getFetch, fetcher } from '@/lib/fetch';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function filterProductsAction(state: any, formData: FormData) {
   redirect(`/products`);
 }
 
-export async function updateProductImagesAction(body: any, formData: FormData) {
-  await fetchMultiple(
-    `/product/update/${body.id}`,
-    { images: body.images },
-    'PUT'
-  );
+export async function addProductImageAction(item: any) {
+  await fetcher(`/product/update/${item.id}`, 'PUT', {
+    images: item.images
+  });
+
+  revalidatePath('/products');
+}
+
+export async function deleteProductImageAction(item: any) {
+  await fetcher(`/product/update/${item.id}`, 'PUT', {
+    images: item.images
+  });
+
+  revalidatePath('/products');
 }
 
 export async function createProductAction(state: any, formData: FormData) {}

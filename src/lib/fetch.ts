@@ -1,38 +1,6 @@
 import { setCookie } from '@/app/actions/cookies';
-import { API_URL } from '@/config';
+import { API_URL, MEDIA_UPLOAD } from '@/config';
 import { cookies } from 'next/headers';
-
-export async function getFetch(endpoint: string) {
-  const session = cookies().get('session')?.value || '';
-
-  const response = await fetch(`${API_URL}${endpoint}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Cookie: session.replace(',', '; ')
-    }
-  })
-    .then(res => {
-      return res.json();
-    })
-    .catch(err => console.log(err));
-
-  return response;
-}
-
-export async function postFetch(endpoint: string, body: any) {
-  const response = await fetch(`${API_URL}${endpoint}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  })
-    .then(res => res.json())
-    .catch(err => console.log(err));
-
-  return response;
-}
 
 export async function loginFetch(username: string, password: string) {
   const response = await fetch(`${API_URL}/users/signIn`, {
@@ -57,11 +25,23 @@ export async function loginFetch(username: string, password: string) {
   return response;
 }
 
-export async function fetchMultiple(
-  endpoint: string,
-  body: any,
-  method: string
-) {
+export async function getFetch(endpoint: string) {
+  const session = cookies().get('session')?.value || '';
+
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: session.replace(',', '; ')
+    }
+  })
+    .then(res => res.json())
+    .catch(err => console.log(err));
+
+  return response;
+}
+
+export async function fetcher(endpoint: string, method: string, body: any) {
   const session = cookies().get('session')?.value || '';
 
   const response = await fetch(`${API_URL}${endpoint}`, {
@@ -72,6 +52,20 @@ export async function fetchMultiple(
     },
     body: JSON.stringify(body)
   })
+    .then(res => res.json())
+    .catch(err => console.log(err));
+
+  return response;
+}
+
+export async function imageFetch(formData: FormData) {
+  const response = await fetch(
+    `${MEDIA_UPLOAD}?ebazaar_admin_token=qweqweq12312313&preset=product`,
+    {
+      method: 'POST',
+      body: formData
+    }
+  )
     .then(res => res.json())
     .catch(err => console.log(err));
 

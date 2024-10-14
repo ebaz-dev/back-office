@@ -30,4 +30,6 @@ export function isDate(date: string) {
   return newDate !== 'Invalid Date';
 }
 
-export const replaceMediaUrl = (imageUrl: string) => {};
+export const replaceMediaUrl = (imageUrl: string) => {
+  return `${MEDIA_URL}/original/${imageUrl}`;
+};
