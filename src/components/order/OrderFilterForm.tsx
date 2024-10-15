@@ -1,11 +1,10 @@
 import { FunctionComponent, useRef } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
 import { useFormState } from 'react-dom';
-
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
-import { OrderColumns, ProductsColumns } from '@/lib/columns';
+import { OrderColumns } from '@/lib/columns';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { filterOrdersAction } from '@/app/actions/order';
 
@@ -16,7 +15,7 @@ const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = props => {
 
   const [state, action] = useFormState(filterOrdersAction, {} as any);
 
-  const clearAllFilter = () => {
+  const clearAllFilter = async () => {
     ref.current?.reset();
   };
 

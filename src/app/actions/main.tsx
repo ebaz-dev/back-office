@@ -21,3 +21,7 @@ export const removeSupplierAction = (pathname: string) => {
 export const onPageChangeAction = (pathname: string, page: number) => {
   redirect(`${pathname}?page=${page}`);
 };
+
+export const clearAllFilterAction = (pathname: string, supplierId: string) => {
+  redirect(`${pathname}?supplierId=${supplierId}`);
+};

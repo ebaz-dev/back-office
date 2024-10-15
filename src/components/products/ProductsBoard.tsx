@@ -5,7 +5,6 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
@@ -18,13 +17,14 @@ import ProductsDetail from '@/components/products/ProductsDetail';
 import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsBoardProps {
+  supplierId: string;
   products: IProduct[];
   totalPage: number;
   currentPage: number;
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { products, totalPage, currentPage } = props;
+  const { supplierId, products, totalPage, currentPage } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
@@ -46,7 +46,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
-          customTopContents={<ProductsFilterForm />}
+          customTopContents={<ProductsFilterForm supplierId={supplierId}/>}
         />
       </div>
 

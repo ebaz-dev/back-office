@@ -6,15 +6,16 @@ import { FunctionComponent } from 'react';
 interface ProductsPageProps {
   searchParams: {
     page: string;
-    categoryId: string;
-    brandId: string;
-    name: string;
     id: string;
+    sku: string;
+    name: string;
+    brand: string;
+    barCode: string;
   };
 }
 
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
-  searchParams: { page = 1, categoryId, brandId, name, id }
+  searchParams: { page = 1, id, sku, name, brand, barCode }
 }) => {
   const supplier: any = await getCookie('supplier');
 
@@ -23,16 +24,18 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
   const productsData = getProducts(
     supplierId,
     page,
-    categoryId,
-    brandId,
+    id,
+    sku,
     name,
-    id
+    brand,
+    barCode
   );
 
   const [products] = await Promise.all([productsData]);
 
   return (
     <ProductsBoard
+      supplierId={supplierId}
       products={products?.data || []}
       totalPage={products?.totalPages}
       currentPage={products?.currentPage}

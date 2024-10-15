@@ -4,19 +4,20 @@ export const getOrders = async (id: string, page: string | number) =>
   await fetcher(`/order/bo/list?page=${page}&limit=10`);
 
 export const getProducts = async (
-  customerId?: string,
+  supplierId?: string,
   page?: string | number,
-  categoryId?: string,
-  brandId?: string,
+  id?: string,
+  sku?: string,
   name?: string,
-  id?: string
+  brand?: string,
+  barCode?: string
 ) =>
   await fetcher(
-    `/product/dashboard/list?${customerId ? `customerId=${customerId}&` : ''}${
-      categoryId ? `categories=${categoryId}&` : ''
-    }${brandId ? `brands=${brandId}&` : ''}${name ? `name=${name}&` : ''}${
+    `/product/dashboard/list?${supplierId ? `customerId=${supplierId}&` : ''}${
+      brand ? `brands=${brand}&` : ''
+    }${name ? `name=${name}&` : ''}${sku ? `sku=${sku}&` : ''}${
       id ? `ids=${id}&` : ''
-    }page=${page}&limit=10`
+    }${barCode ? `barCode=${barCode}&` : ''}page=${page}&limit=10`
   );
 
 export const getProductCategories = async () =>

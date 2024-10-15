@@ -1,24 +1,28 @@
 import { FunctionComponent, useRef } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
-import { useFormState } from 'react-dom';
 import { filterProductsAction } from '@/app/actions/products';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
 import { ProductsColumns } from '@/lib/columns';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
+import { clearAllFilterAction } from '@/app/actions/main';
 
-interface ProductsFilterFormProps {}
+interface ProductsFilterFormProps {
+  supplierId: string;
+}
 
-const ProductsFilterForm: FunctionComponent<
-  ProductsFilterFormProps
-> = props => {
+const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
+  supplierId
+}) => {
   const ref = useRef<HTMLFormElement>(null);
 
-  const [state, action] = useFormState(filterProductsAction, {} as any);
+  const filterProducts = filterProductsAction.bind(null, supplierId);
 
-  const clearAllFilter = () => {
+  const clearAllFilter = async () => {
     ref.current?.reset();
+
+    await clearAllFilterAction('/products', supplierId);
   };
 
   const hiddenFields = [
@@ -40,7 +44,7 @@ const ProductsFilterForm: FunctionComponent<
 
   return (
     <form
-      action={action}
+      action={filterProducts}
       ref={ref}
       className='grid grid-cols-7 gap-2 items-end'
     >

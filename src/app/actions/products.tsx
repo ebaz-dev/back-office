@@ -4,8 +4,19 @@ import { fetcher } from '@/lib/fetch';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-export async function filterProductsAction(state: any, formData: FormData) {
-  redirect(`/products`);
+export async function filterProductsAction(
+  supplierId: string,
+  formData: FormData
+) {
+  const id = formData.get('id');
+  const name = formData.get('name');
+  const barCode = formData.get('barCode');
+  const sku = formData.get('sku');
+  const brand = formData.get('brand');
+
+  redirect(
+    `/products?supplierId=${supplierId}&id=${id}&name=${name}&barCode=${barCode}&sku=${sku}&brand=${brand}`
+  );
 }
 
 export async function updateProductImageAction(item: any) {

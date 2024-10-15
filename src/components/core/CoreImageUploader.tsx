@@ -27,7 +27,7 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
         }
       )
         .then(res => res.json())
-        .catch(error => console.log(error));
+        .catch(err => console.log(err));
 
       if (response && response.data) {
         const responseImages = response.data.map((item: { image: string }) =>
