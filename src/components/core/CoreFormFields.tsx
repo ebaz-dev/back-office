@@ -20,7 +20,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
   const { fields, isClearable, className, hideFields } = props;
 
   return fields.map((field: IColumn, index: number) => {
-    const { name, fieldType, placeholder, label, options } = field;
+    const { name, fieldType, placeholder, label, options, defaultValue } =
+      field;
 
     if (hideFields && hideFields.includes(name)) {
       return null;
@@ -74,6 +75,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
         <Select
           key={index}
           name={name}
+          defaultSelectedKeys={[`${defaultValue}`]}
           items={options}
           label={label}
           className={className}
@@ -99,6 +101,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
         key={index}
         type={fieldType}
         name={name}
+        defaultValue={defaultValue?.toString()}
         label={label}
         placeholder={placeholder}
         className={className}

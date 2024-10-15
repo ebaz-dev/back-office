@@ -21,7 +21,7 @@ const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
         classNames={{ cursor: 'w-full' }}
       >
         <Tab key='editInfo' title='Дэлгэрэнгүй мэдээлэл'>
-          <ProductsEditForm />
+          <ProductsEditForm product={product} />
         </Tab>
         <Tab key='photos' title='Бүтээгдэхүүний зурагнууд'>
           <ProductsGallery product={product} />

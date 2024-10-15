@@ -1,4 +1,4 @@
-import { IColumn, IProductsFieldProps } from '@/lib/types';
+import { IColumn, IProduct, IProductsFieldProps } from '@/lib/types';
 
 export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
@@ -176,10 +176,14 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   }
 ];
 
-export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
+export const ProductsColumns = (
+  props?: IProductsFieldProps,
+  product?: IProduct
+): IColumn[] => [
   {
     uid: 'id',
     name: 'id',
+    defaultValue: product?.id,
     label: 'Ебазаар бүтээгдэхүүний ID',
     fieldType: 'input',
     placeholder: 'Ебазаар бүтээгдэхүүний ID'
@@ -187,6 +191,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'isActive',
     name: 'isActive',
+    defaultValue: product?.isActive.toString(),
     label: 'Төлөв',
     fieldType: 'select',
     placeholder: 'Active',
@@ -198,6 +203,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'customer.name',
     name: 'supplier',
+    defaultValue: '',
     label: 'Нийлүүлэгч',
     fieldType: 'autocomplete',
     placeholder: 'Нийлүүлэгч',
@@ -213,6 +219,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'name',
     name: 'name',
+    defaultValue: product?.name,
     label: 'Бүтээгдэхүүний нэр',
     fieldType: 'input',
     placeholder: 'Бүтээгдэхүүний нэр'
@@ -221,6 +228,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'barCode',
     name: 'barCode',
+    defaultValue: product?.barCode,
     label: 'Баркод',
     fieldType: 'input',
     placeholder: 'Баркод'
@@ -228,6 +236,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'sku',
     name: 'sku',
+    defaultValue: product?.sku,
     label: 'Бүтээгдхүүний SKU',
     fieldType: 'input',
     placeholder: 'Бүтээгдхүүний SKU'
@@ -235,6 +244,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'inventory.totalStock',
     name: 'stock',
+    defaultValue: product?.inventory.totalStock,
     label: 'Үлдэгдэл',
     fieldType: 'input',
     placeholder: 'Үлдэгдэл'
@@ -242,6 +252,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: '',
     name: 'price',
+    defaultValue: '',
     label: 'Үнэ',
     fieldType: 'input',
     placeholder: 'Үнэ'
@@ -249,6 +260,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'brand.name',
     name: 'brand',
+    defaultValue: '',
     label: 'Брэнд',
     fieldType: 'select',
     placeholder: 'Брэнд',
@@ -257,6 +269,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'categories.2.name',
     name: 'generalCategory',
+    defaultValue: '',
     label: 'Ерөнхий ангилал',
     fieldType: 'autocomplete',
     placeholder: 'Ерөнхий ангилал',
@@ -265,6 +278,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'categories.1.name',
     name: 'subCategory',
+    defaultValue: '',
     label: 'Дэд ангилал',
     fieldType: 'autocomplete',
     placeholder: 'Дэд ангилал',
@@ -273,6 +287,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'categories.0.name',
     name: 'finalCategory',
+    defaultValue: '',
     label: 'Эцсийн ангилал',
     fieldType: 'autocomplete',
     placeholder: 'Эцсийн ангилал',
@@ -281,6 +296,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'unit',
     name: 'unit',
+    defaultValue: '',
     label: 'Хэмжих нэгж',
     fieldType: 'select',
     placeholder: 'Хэмжих нэгж',
@@ -289,6 +305,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'inventory.availableStock',
     name: 'availableStock',
+    defaultValue: product?.inventory.availableStock,
     label: 'Сагслах тоо',
     fieldType: 'input',
     placeholder: 'Сагслах тоо'
@@ -296,6 +313,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'inCase',
     name: 'inCase',
+    defaultValue: product?.inCase,
     label: 'Хайрцаган дахь тоо',
     fieldType: 'input',
     placeholder: 'Хайрцаган дахь тоо'
@@ -303,6 +321,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'isAlcohol',
     name: 'isAlcohol',
+    defaultValue: '',
     label: 'Алкохолны төрөл эсэх',
     fieldType: 'select',
     placeholder: 'Алкохолны төрөл эсэх',
@@ -314,6 +333,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
     uid: 'cityTax',
     name: 'cityTax',
+    defaultValue: '',
     label: 'Хотын татвар төлөх эсэх',
     fieldType: 'select',
     placeholder: 'Хотын татвар төлөх эсэх',
