@@ -7,13 +7,16 @@ import { Button } from '@nextui-org/react';
 import { ProductsColumns } from '@/lib/columns';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { clearAllFilterAction } from '@/app/actions/main';
+import { IBrand, IOption } from '@/lib/types';
 
 interface ProductsFilterFormProps {
   supplierId: string;
+  brands: IBrand[];
 }
 
 const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
-  supplierId
+  supplierId,
+  brands
 }) => {
   const ref = useRef<HTMLFormElement>(null);
 
@@ -42,6 +45,10 @@ const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
     'cityTax'
   ];
 
+  const brandOptions: IOption[] = brands.map(brand => {
+    return { value: brand.id, label: brand.name };
+  });
+
   return (
     <form
       action={filterProducts}
@@ -49,7 +56,7 @@ const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
       className='grid grid-cols-7 gap-2 items-end'
     >
       <CoreFormFields
-        fields={ProductsColumns()}
+        fields={ProductsColumns({ brandOptions })}
         className='max-w-xs'
         hideFields={hiddenFields}
       />

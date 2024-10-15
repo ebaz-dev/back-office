@@ -126,9 +126,9 @@ export interface IOrder {
 }
 
 export interface IProductsFieldProps {
-  supplierOptions: IOption[];
-  brandOptions: IOption[];
-  generalCategories: IOption[];
-  subCategories: IOption[];
-  finalCategories: IOption[];
+  supplierOptions?: IOption[];
+  brandOptions?: IOption[];
+  generalCategories?: IOption[];
+  subCategories?: IOption[];
+  finalCategories?: IOption[];
 }

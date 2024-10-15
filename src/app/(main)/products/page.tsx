@@ -1,6 +1,6 @@
 import { getCookie } from '@/app/actions/cookies';
 import ProductsBoard from '@/components/products/ProductsBoard';
-import { getProducts } from '@/lib/requests';
+import { getProductBrands, getProducts } from '@/lib/requests';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
@@ -31,11 +31,17 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
     barCode
   );
 
-  const [products] = await Promise.all([productsData]);
+  const productsBrandsData = getProductBrands(supplierId);
+
+  const [products, brands] = await Promise.all([
+    productsData,
+    productsBrandsData
+  ]);
 
   return (
     <ProductsBoard
       supplierId={supplierId}
+      brands={brands?.data || []}
       products={products?.data || []}
       totalPage={products?.totalPages}
       currentPage={products?.currentPage}

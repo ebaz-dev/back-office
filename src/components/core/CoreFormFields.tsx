@@ -46,6 +46,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           key={index}
           label={label}
           name={name}
+          allowsCustomValue
           defaultItems={options}
           placeholder={placeholder}
           isClearable={isClearable}

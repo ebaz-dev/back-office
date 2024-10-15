@@ -250,7 +250,7 @@ export const ProductsColumns = (props?: IProductsFieldProps): IColumn[] => [
     uid: 'brand.name',
     name: 'brand',
     label: 'Брэнд',
-    fieldType: 'autocomplete',
+    fieldType: 'select',
     placeholder: 'Брэнд',
     options: props?.brandOptions || []
   },

@@ -8,7 +8,7 @@ import {
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
-import { IProduct } from '@/lib/types';
+import { IBrand, IProduct } from '@/lib/types';
 import { ProductsColumns } from '@/lib/columns';
 import { getProductAction } from '@/app/actions/products';
 import CoreTable from '@/components/core/CoreTable';
@@ -18,13 +18,14 @@ import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsBoardProps {
   supplierId: string;
+  brands: IBrand[];
   products: IProduct[];
   totalPage: number;
   currentPage: number;
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { supplierId, products, totalPage, currentPage } = props;
+  const { supplierId, products, totalPage, currentPage, brands } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
@@ -46,7 +47,9 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
-          customTopContents={<ProductsFilterForm supplierId={supplierId}/>}
+          customTopContents={
+            <ProductsFilterForm supplierId={supplierId} brands={brands} />
+          }
         />
       </div>
 

@@ -20,6 +20,9 @@ export const getProducts = async (
     }${barCode ? `barCode=${barCode}&` : ''}page=${page}&limit=10`
   );
 
+export const getProductBrands = async (supplierId: string) =>
+  await fetcher(`/product/brands?customerId=${supplierId}&limit=all`);
+
 export const getProductCategories = async () =>
   await fetcher(`/product/categories?limit=all`);
 
