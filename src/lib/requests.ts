@@ -1,7 +1,11 @@
 import { fetcher } from '@/lib/fetch';
 
-export const getOrders = async (id: string, page: string | number) =>
-  await fetcher(`/order/bo/list?page=${page}&limit=10`);
+export const getOrders = async (supplierId: string, page: string | number) =>
+  await fetcher(
+    `/order/bo/list?${
+      supplierId ? `supplierId=${supplierId}&` : ''
+    }page=${page}&limit=10`
+  );
 
 export const getProducts = async (
   supplierId?: string,
