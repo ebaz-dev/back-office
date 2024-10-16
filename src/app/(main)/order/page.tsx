@@ -22,6 +22,7 @@ const OrderPage: FunctionComponent<OrderPageProps> = async ({
 
   return (
     <OrderBoard
+      supplierId={supplierId}
       currentPage={orders?.currentPage}
       totalPage={orders?.totalPages}
       orders={orders?.data ?? []}

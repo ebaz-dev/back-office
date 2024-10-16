@@ -7,23 +7,30 @@ import { Button } from '@nextui-org/react';
 import { OrderColumns } from '@/lib/columns';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { filterOrdersAction } from '@/app/actions/order';
+import { clearAllFilterAction } from '@/app/actions/main';
 
-interface OrderFilterFormProps {}
+interface OrderFilterFormProps {
+  supplierId: string;
+}
 
-const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = props => {
+const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = ({
+  supplierId
+}) => {
   const ref = useRef<HTMLFormElement>(null);
 
-  const [state, action] = useFormState(filterOrdersAction, {} as any);
+  const filterOrders = filterOrdersAction.bind(null, supplierId);
 
   const clearAllFilter = async () => {
     ref.current?.reset();
+
+    await clearAllFilterAction('/order', supplierId);
   };
 
   const hiddenFields = ['supplier', 'images'];
 
   return (
     <form
-      action={action}
+      action={filterOrders}
       ref={ref}
       className='grid grid-cols-7 gap-2 items-end'
     >
