@@ -18,8 +18,8 @@ export const removeSupplierAction = (pathname: string) => {
   deleteCookie('supplier'), redirect(pathname);
 };
 
-export const onPageChangeAction = (pathname: string, page: number) => {
-  redirect(`${pathname}?page=${page}`);
+export const onPageChangeAction = (url: string) => {
+  redirect(url);
 };
 
 export const clearAllFilterAction = (pathname: string, supplierId: string) => {

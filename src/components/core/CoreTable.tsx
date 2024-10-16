@@ -22,7 +22,7 @@ import {
   useMemo,
   useState
 } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { onPageChangeAction } from '@/app/actions/main';
 import CoreEmpty from '@/components/core/CoreEmpty';
 import CoreImage from '@/components/core/CoreImage';
@@ -50,6 +50,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
   } = props;
 
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -60,7 +61,13 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
   }, [data]);
 
   const onPageChange = (value: number) => {
-    setIsLoading(true), onPageChangeAction(pathname, value);
+    const currentParams = new URLSearchParams(
+      Array.from(searchParams.entries())
+    );
+
+    currentParams.set('page', value.toString());
+
+    setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
   };
 
   const topContent = useMemo(() => {

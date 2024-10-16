@@ -10,7 +10,6 @@ import {
 } from '@nextui-org/react';
 import { IBrand, IProduct } from '@/lib/types';
 import { ProductsColumns } from '@/lib/columns';
-import { getProductAction } from '@/app/actions/products';
 import CoreTable from '@/components/core/CoreTable';
 import CoreLoading from '@/components/core/CoreLoading';
 import ProductsDetail from '@/components/products/ProductsDetail';
@@ -33,7 +32,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   const onRowAction = async (key: Key) => {
     onOpen();
 
-    const product = await getProductAction(key.toString());
+    const product: any = products.find(item => item.id === key);
 
     setSelectedProduct(product);
   };

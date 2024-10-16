@@ -15,7 +15,7 @@ export async function filterProductsAction(
   const brand = formData.get('brand');
 
   redirect(
-    `/products?supplierId=${supplierId}&id=${id}&name=${name}&barCode=${barCode}&sku=${sku}&brand=${brand}`
+    `/products?supplierId=${supplierId}&id=${id}&name=${name}&barCode=${barCode}&sku=${sku}&brand=${brand}&page=1`
   );
 }
 
@@ -30,9 +30,3 @@ export async function updateProductImageAction(item: any) {
 export async function createProductAction(state: any, formData: FormData) {}
 
 export async function importProductsAction(state: any, formData: FormData) {}
-
-export async function getProductAction(id: string) {
-  const response = await fetcher(`/product/${id}`);
-
-  return response;
-}

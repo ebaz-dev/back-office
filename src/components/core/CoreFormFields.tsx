@@ -75,8 +75,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
         <Select
           key={index}
           name={name}
-          defaultSelectedKeys={[`${defaultValue}`]}
           items={options}
+          defaultSelectedKeys={defaultValue ? [defaultValue.toString()] : ''}
           label={label}
           className={className}
           labelPlacement='outside'
