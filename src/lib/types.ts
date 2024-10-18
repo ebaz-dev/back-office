@@ -2,6 +2,7 @@ export interface IColumn {
   uid: string;
   name: string;
   label: string;
+  description?: string;
   defaultValue?: string | number;
   fieldType?: string;
   placeholder?: string;

@@ -10,7 +10,6 @@ import {
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
-import { useFormState } from 'react-dom';
 import { importProductsAction } from '@/app/actions/products';
 import { DocumentPlusIcon } from '@heroicons/react/24/outline';
 
@@ -18,7 +17,6 @@ interface ProductsImportProps {}
 
 const ProductsImport: FunctionComponent<ProductsImportProps> = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [state, action] = useFormState(importProductsAction, undefined);
 
   const onPress = () => {
     onOpen();
@@ -42,7 +40,10 @@ const ProductsImport: FunctionComponent<ProductsImportProps> = () => {
                 {tr('Масс импорт')}
               </ModalHeader>
               <ModalBody className='pb-4'>
-                <form action={action} className='flex-col flex gap-4'>
+                <form
+                  action={importProductsAction}
+                  className='flex-col flex gap-4'
+                >
                   <Input
                     type='file'
                     variant='bordered'

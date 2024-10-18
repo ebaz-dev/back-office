@@ -2,8 +2,8 @@ import { IColumn, IProduct, IProductsFieldProps } from '@/lib/types';
 
 export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
-    uid: 'id',
-    name: 'id',
+    uid: 'orderNo',
+    name: 'orderNo',
     label: 'Захиалгын дугаар',
     fieldType: 'input',
     placeholder: 'Захиалгын дугаар'
@@ -181,40 +181,20 @@ export const ProductsColumns = (
   product?: IProduct
 ): IColumn[] => [
   {
+    uid: 'images.0',
+    name: 'images',
+    label: 'Зураг',
+    fieldType: 'file',
+    placeholder: 'Зураг',
+    description: 'Олон зураг сонгож болно'
+  },
+  {
     uid: 'id',
     name: 'id',
     defaultValue: product?.id,
     label: 'Ебазаар бүтээгдэхүүний ID',
     fieldType: 'input',
     placeholder: 'Ебазаар бүтээгдэхүүний ID'
-  },
-  {
-    uid: 'isActive',
-    name: 'isActive',
-    defaultValue: product?.isActive.toString(),
-    label: 'Төлөв',
-    fieldType: 'select',
-    placeholder: 'Active',
-    options: [
-      { value: 'true', label: 'Идэвхтэй' },
-      { value: 'false', label: 'Идэвхгүй' }
-    ]
-  },
-  {
-    uid: 'customer.name',
-    name: 'supplier',
-    defaultValue: '',
-    label: 'Нийлүүлэгч',
-    fieldType: 'autocomplete',
-    placeholder: 'Нийлүүлэгч',
-    options: props?.supplierOptions || []
-  },
-  {
-    uid: 'images.0',
-    name: 'images',
-    label: 'Зураг',
-    fieldType: 'file',
-    placeholder: 'Зураг'
   },
   {
     uid: 'name',
@@ -224,14 +204,13 @@ export const ProductsColumns = (
     fieldType: 'input',
     placeholder: 'Бүтээгдэхүүний нэр'
   },
-
   {
     uid: 'barCode',
     name: 'barCode',
     defaultValue: product?.barCode,
-    label: 'Баркод',
+    label: 'Бүтээгдэхүүний баркод',
     fieldType: 'input',
-    placeholder: 'Баркод'
+    placeholder: 'Бүтээгдэхүүний баркод'
   },
   {
     uid: 'sku',
@@ -256,6 +235,27 @@ export const ProductsColumns = (
     label: 'Үнэ',
     fieldType: 'input',
     placeholder: 'Үнэ'
+  },
+  {
+    uid: 'isActive',
+    name: 'isActive',
+    defaultValue: product?.isActive.toString(),
+    label: 'Төлөв',
+    fieldType: 'select',
+    placeholder: 'Active',
+    options: [
+      { value: 'true', label: 'Идэвхтэй' },
+      { value: 'false', label: 'Идэвхгүй' }
+    ]
+  },
+  {
+    uid: 'customer.name',
+    name: 'supplier',
+    defaultValue: '',
+    label: 'Нийлүүлэгч',
+    fieldType: 'autocomplete',
+    placeholder: 'Нийлүүлэгч',
+    options: props?.supplierOptions || []
   },
   {
     uid: 'brand.name',

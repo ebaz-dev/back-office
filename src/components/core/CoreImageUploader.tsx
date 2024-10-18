@@ -1,16 +1,18 @@
 import { MEDIA_UPLOAD } from '@/config';
-import { replaceMediaUrl } from '@/lib/utils';
+import { cn, replaceMediaUrl } from '@/lib/utils';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { FunctionComponent } from 'react';
 
 interface CoreImageUploaderProps {
   images: any[];
   setImages: (image: any) => void;
+  className?: string;
 }
 
 const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
   images,
-  setImages
+  setImages,
+  className
 }) => {
   const handleFileChange = async (e: any) => {
     const files = Array.from(e.target.files);
@@ -40,8 +42,13 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
   };
 
   return (
-    <label className='w-40 h-40 flex items-center justify-center border border-dashed border-default rounded-md hover:border-primary cursor-pointer'>
-      <PlusCircleIcon className='w-10 h-10 text-default' />
+    <label
+      className={cn(
+        'w-40 h-40 flex items-center justify-center border border-dashed border-default rounded-md hover:border-primary cursor-pointer',
+        className
+      )}
+    >
+      <PlusCircleIcon className='w-6 h-6 text-default' />
 
       <input
         type='file'

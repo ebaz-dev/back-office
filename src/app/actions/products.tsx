@@ -29,4 +29,4 @@ export async function updateProductImageAction(item: any) {
 
 export async function createProductAction(state: any, formData: FormData) {}
 
-export async function importProductsAction(state: any, formData: FormData) {}
+export async function importProductsAction(formData: FormData) {}

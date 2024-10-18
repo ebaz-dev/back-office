@@ -32,7 +32,7 @@ const ProductsCreate: FunctionComponent<ProductsCreateProps> = () => {
         {tr('Нэг бүтээгдэхүүн бүртгэх')}
       </Button>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='4xl'>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
         <ModalContent>
           {onClose => (
             <>
