@@ -3,7 +3,6 @@ import { IProduct } from '@/lib/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import CoreImageUploader from '@/components/core/CoreImageUploader';
 import { updateProductImageAction } from '@/app/actions/products';
-import CoreImageList from '@/components/core/CoreImageList';
 
 interface ProductsGalleryProps {
   product: IProduct;
@@ -21,11 +20,7 @@ const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
 
   return (
     <form className='flex flex-col gap-4' action={addImage}>
-      <div className='flex gap-4 flex-wrap'>
-        <CoreImageUploader images={images} setImages={setImages} />
-
-        <CoreImageList images={images} />
-      </div>
+      <CoreImageUploader images={images} setImages={setImages} />
 
       <CoreSubmitButton text='Хадгалах' />
     </form>

@@ -1,7 +1,9 @@
-import { MEDIA_UPLOAD } from '@/config';
+import { uploadImageAction } from '@/app/actions/main';
 import { cn, replaceMediaUrl } from '@/lib/utils';
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
-import { FunctionComponent } from 'react';
+import { PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { FunctionComponent, useState } from 'react';
+import CoreImage from './CoreImage';
+import { Button } from '@nextui-org/react';
 
 interface CoreImageUploaderProps {
   images: any[];
@@ -14,6 +16,12 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
   setImages,
   className
 }) => {
+  const [showXButton, setShowXButton] = useState<number>(1000);
+
+  const deleteImage = (index: number) => {
+    images.splice(index, 1);
+  };
+
   const handleFileChange = async (e: any) => {
     const files = Array.from(e.target.files);
 
@@ -21,15 +29,7 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
       const formData = new FormData();
       files.forEach((file: any) => formData.append('files', file));
 
-      const response: any = await fetch(
-        `${MEDIA_UPLOAD}?ebazaar_admin_token=qweqweq12312313&preset=product`,
-        {
-          method: 'POST',
-          body: formData
-        }
-      )
-        .then(res => res.json())
-        .catch(err => console.log(err));
+      const response = await uploadImageAction(formData);
 
       if (response && response.data) {
         const responseImages = response.data.map((item: { image: string }) =>
@@ -42,22 +42,60 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
   };
 
   return (
-    <label
-      className={cn(
-        'w-40 h-40 flex items-center justify-center border border-dashed border-default rounded-md hover:border-primary cursor-pointer',
-        className
-      )}
-    >
-      <PlusCircleIcon className='w-6 h-6 text-default' />
+    <div className='flex gap-4 flex-wrap'>
+      <label
+        className={cn(
+          'w-40 h-40 flex items-center justify-center border border-dashed border-default rounded-md hover:border-primary cursor-pointer',
+          className
+        )}
+      >
+        <PlusCircleIcon className='w-6 h-6 text-default' />
 
-      <input
-        type='file'
-        name='images'
-        className='hidden'
-        multiple
-        onChange={handleFileChange}
-      />
-    </label>
+        <input
+          type='file'
+          name='images'
+          className='hidden'
+          multiple
+          onChange={handleFileChange}
+        />
+      </label>
+
+      {images.map((imageUrl: string, index: number) => {
+        return (
+          <div
+            key={index}
+            className='relative hover:outline outline-primary rounded-md'
+            onMouseEnter={() => setShowXButton(index)}
+            onMouseLeave={() => setShowXButton(1000)}
+          >
+            <div
+              className={cn('w-40 h-40 rounded-md overflow-hidden ', className)}
+            >
+              <CoreImage
+                src={
+                  !imageUrl.includes('https')
+                    ? replaceMediaUrl(imageUrl)
+                    : imageUrl
+                }
+              />
+            </div>
+
+            <Button
+              isIconOnly
+              className={`absolute -top-2 -right-2 z-20 ${
+                index === showXButton ? 'flex' : 'hidden'
+              }`}
+              radius='full'
+              size='sm'
+              color='danger'
+              onPress={() => deleteImage(index)}
+            >
+              <XMarkIcon className='w-4 h-4' />
+            </Button>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

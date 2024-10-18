@@ -5,7 +5,6 @@ import { IOption, IProductsFieldProps } from '@/lib/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { ProductsColumns } from '@/lib/columns';
 import CoreImageUploader from '@/components/core/CoreImageUploader';
-import CoreImageList from '@/components/core/CoreImageList';
 
 interface ProductsCreateFormProps {
   onClose: () => void;
@@ -37,15 +36,11 @@ const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
 
   return (
     <form action={createProduct} className='flex flex-col gap-4'>
-      <div className='flex gap-4 flex-wrap w-full overflow-x'>
-        <CoreImageUploader
-          images={images}
-          setImages={setImages}
-          className='w-20 h-20'
-        />
-
-        <CoreImageList images={images} className='w-20 h-20' />
-      </div>
+      <CoreImageUploader
+        images={images}
+        setImages={setImages}
+        className='w-20 h-20'
+      />
 
       <div className='w-full grid grid-cols-3 gap-4'>
         <CoreFormFields
