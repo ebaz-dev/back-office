@@ -1,9 +1,9 @@
 import { uploadImageAction } from '@/app/actions/main';
 import { cn, replaceMediaUrl } from '@/lib/utils';
 import { PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { FunctionComponent, useState } from 'react';
-import CoreImage from './CoreImage';
-import { Button } from '@nextui-org/react';
+import { FunctionComponent, useState, useTransition } from 'react';
+import CoreImage from '@/components/core/CoreImage';
+import { Button, Spinner } from '@nextui-org/react';
 
 interface CoreImageUploaderProps {
   images: any[];
@@ -17,6 +17,7 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
   className
 }) => {
   const [showXButton, setShowXButton] = useState<number>(1000);
+  const [isPending, startTransition] = useTransition();
 
   const deleteImage = (index: number) => {
     images.splice(index, 1);
@@ -26,18 +27,20 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
     const files = Array.from(e.target.files);
 
     if (files.length > 0) {
-      const formData = new FormData();
-      files.forEach((file: any) => formData.append('files', file));
+      startTransition(async () => {
+        const formData = new FormData();
+        files.forEach((file: any) => formData.append('files', file));
 
-      const response = await uploadImageAction(formData);
+        const response = await uploadImageAction(formData);
 
-      if (response && response.data) {
-        const responseImages = response.data.map((item: { image: string }) =>
-          replaceMediaUrl(item.image)
-        );
+        if (response && response.data) {
+          const responseImages = response.data.map((item: { image: string }) =>
+            replaceMediaUrl(item.image)
+          );
 
-        setImages([...images, ...responseImages]);
-      }
+          setImages([...images, ...responseImages]);
+        }
+      });
     }
   };
 
@@ -69,7 +72,10 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
             onMouseLeave={() => setShowXButton(1000)}
           >
             <div
-              className={cn('w-40 h-40 rounded-md overflow-hidden ', className)}
+              className={cn(
+                'w-40 h-40 rounded-md overflow-hidden flex items-center justify-center',
+                className
+              )}
             >
               <CoreImage
                 src={
@@ -95,6 +101,17 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
           </div>
         );
       })}
+
+      {isPending && (
+        <div
+          className={cn(
+            'w-40 h-40 rounded-md overflow-hidden flex items-center justify-center',
+            className
+          )}
+        >
+          <Spinner size='sm' />
+        </div>
+      )}
     </div>
   );
 };
