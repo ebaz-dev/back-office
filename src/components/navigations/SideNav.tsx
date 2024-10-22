@@ -52,15 +52,15 @@ const SideNav: FunctionComponent<SideNavProps> = props => {
 
         <div className='flex-1 w-full flex-col flex gap-2'>
           {MenuList.map((menu, index: number) => {
-            const isActive = pathname.startsWith(menu.url);
+            const isActive = pathname.startsWith(menu.pathname);
 
             return (
               <Button
                 key={index}
                 as={Link}
-                href={`${menu.url}?supplierId=${
+                href={`${menu.pathname}?supplierId=${
                   chosenSupplier ? chosenSupplier.id : ''
-                }`}
+                }&page=1&limit=10`}
                 color={isActive ? 'primary' : 'default'}
                 size='sm'
                 fullWidth

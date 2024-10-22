@@ -18,7 +18,7 @@ const NavProvider: FunctionComponent<NavProviderProps> = props => {
 
   return (
     <div className='flex h-screen'>
-      <div className={`${isOpen ? 'w-60' : 'w-20'}`}>
+      <div className={isOpen ? 'w-60' : 'w-20'}>
         <SideNav
           isOpen={isOpen}
           setIsOpen={setIsOpen}
