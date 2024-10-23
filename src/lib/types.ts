@@ -75,6 +75,7 @@ export interface IProduct {
     cost: number;
   };
   id: string;
+  customer: ICustomer;
 }
 
 export interface IBrand {

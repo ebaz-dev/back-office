@@ -64,9 +64,9 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           key={index}
           label={label}
           name={name}
-          allowsCustomValue
           defaultItems={options}
           placeholder={placeholder}
+          defaultInputValue={defaultValue?.toString()}
           isClearable={isClearable}
           className={className}
           labelPlacement='outside'
@@ -79,7 +79,10 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           }}
         >
           {option => (
-            <AutocompleteItem key={option.value}>
+            <AutocompleteItem
+              key={option.value}
+              textValue={option.value.toString()}
+            >
               {option.label}
             </AutocompleteItem>
           )}

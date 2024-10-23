@@ -252,6 +252,26 @@ export const ProductsColumns = (
     isEditable: true
   },
   {
+    uid: 'inCase',
+    name: 'inCase',
+    defaultValue: product?.inCase,
+    label: 'Хайрцаган дахь тоо',
+    fieldType: 'input',
+    placeholder: 'Хайрцаган дахь тоо',
+    isCreatable: true,
+    isEditable: true
+  },
+  {
+    uid: 'inventory.availableStock',
+    name: 'availableStock',
+    defaultValue: product?.inventory.availableStock,
+    label: 'Сагслах тоо',
+    fieldType: 'input',
+    placeholder: 'Сагслах тоо',
+    isCreatable: true,
+    isEditable: true
+  },
+  {
     uid: 'inventory.totalStock',
     name: 'stock',
     defaultValue: product?.inventory.totalStock,
@@ -271,38 +291,26 @@ export const ProductsColumns = (
     isCreatable: true
   },
   {
-    uid: 'isActive',
-    name: 'isActive',
-    defaultValue: product?.isActive.toString(),
-    label: 'Төлөв',
-    fieldType: 'select',
-    placeholder: 'Active',
-    options: [
-      { value: 'true', label: 'Идэвхтэй' },
-      { value: 'false', label: 'Идэвхгүй' }
-    ],
-    isCreatable: true,
-    isEditable: true
-  },
-  {
     uid: 'customer.name',
     name: 'supplier',
-    defaultValue: '',
+    defaultValue: product?.customer.name,
     label: 'Нийлүүлэгч',
     fieldType: 'autocomplete',
     placeholder: 'Нийлүүлэгч',
     options: props?.supplierOptions || [],
-    isCreatable: true
+    isCreatable: true,
+    isEditable: true
   },
   {
     uid: 'brand.name',
     name: 'brand',
     defaultValue: '',
     label: 'Брэнд',
-    fieldType: 'select',
+    fieldType: 'autocomplete',
     placeholder: 'Брэнд',
     options: props?.brandOptions || [],
-    isCreatable: true
+    isCreatable: true,
+    isFilterable: true
   },
   {
     uid: 'categories.2.name',
@@ -335,6 +343,20 @@ export const ProductsColumns = (
     isCreatable: true
   },
   {
+    uid: 'isActive',
+    name: 'isActive',
+    defaultValue: product?.isActive.toString(),
+    label: 'Төлөв',
+    fieldType: 'select',
+    placeholder: 'Төлөв',
+    options: [
+      { value: 'true', label: 'Идэвхтэй' },
+      { value: 'false', label: 'Идэвхгүй' }
+    ],
+    isCreatable: true,
+    isEditable: true
+  },
+  {
     uid: 'unit',
     name: 'unit',
     defaultValue: '',
@@ -343,26 +365,6 @@ export const ProductsColumns = (
     placeholder: 'Хэмжих нэгж',
     options: [],
     isCreatable: true
-  },
-  {
-    uid: 'inventory.availableStock',
-    name: 'availableStock',
-    defaultValue: product?.inventory.availableStock,
-    label: 'Сагслах тоо',
-    fieldType: 'input',
-    placeholder: 'Сагслах тоо',
-    isCreatable: true,
-    isEditable: true
-  },
-  {
-    uid: 'inCase',
-    name: 'inCase',
-    defaultValue: product?.inCase,
-    label: 'Хайрцаган дахь тоо',
-    fieldType: 'input',
-    placeholder: 'Хайрцаган дахь тоо',
-    isCreatable: true,
-    isEditable: true
   },
   {
     uid: 'isAlcohol',

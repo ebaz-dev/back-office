@@ -18,14 +18,10 @@ export async function createProductAction(
     ])
   );
 
-  const reqOptions = {
+  await fetcher(`/product/create/`, 'POST', {
     ...fieldOptions,
     images: state.images
-  };
-
-  const response = await fetcher(`/product/create/`, 'POST', reqOptions);
-
-  console.log(response, reqOptions);
+  });
 }
 
 export async function updateProductAction(formData: FormData) {
@@ -37,7 +33,8 @@ export async function filterProductsAction(formData: FormData) {
     ids: formData.get('id'),
     name: formData.get('name'),
     barCode: formData.get('barCode'),
-    sku: formData.get('sku')
+    sku: formData.get('sku'),
+    brands: formData.get('brand')
   };
 
   const currentParams = convertObjectToParam(rawFormData);
