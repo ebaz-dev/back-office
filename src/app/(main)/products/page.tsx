@@ -1,6 +1,7 @@
 import { getCookie } from '@/app/actions/cookies';
 import ProductsBoard from '@/components/products/ProductsBoard';
 import { getProductBrands, getProducts } from '@/lib/requests';
+import { convertObjectToParam } from '@/lib/utils';
 import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
@@ -9,27 +10,23 @@ interface ProductsPageProps {
     id: string;
     sku: string;
     name: string;
-    brand: string;
     barCode: string;
   };
 }
 
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
-  searchParams: { page = 1, id, sku, name, brand, barCode }
+  searchParams
 }) => {
   const supplier: any = await getCookie('supplier');
 
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 
-  const productsData = getProducts(
-    supplierId,
-    page,
-    id,
-    sku,
-    name,
-    brand,
-    barCode
-  );
+  const currentParams = convertObjectToParam({
+    ...searchParams,
+    customerId: supplierId
+  });
+
+  const productsData = getProducts(currentParams);
 
   const productsBrandsData = getProductBrands(supplierId);
 
@@ -40,7 +37,6 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
 
   return (
     <ProductsBoard
-      supplierId={supplierId}
       brands={brands?.data || []}
       products={products?.data || []}
       totalPage={products?.totalPages}

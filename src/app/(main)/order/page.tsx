@@ -10,7 +10,7 @@ interface OrderPageProps {
 }
 
 const OrderPage: FunctionComponent<OrderPageProps> = async ({
-  searchParams: { page = 1 }
+  searchParams: { page }
 }) => {
   const supplier: any = await getCookie('supplier');
 
@@ -22,7 +22,6 @@ const OrderPage: FunctionComponent<OrderPageProps> = async ({
 
   return (
     <OrderBoard
-      supplierId={supplierId}
       currentPage={orders?.currentPage}
       totalPage={orders?.totalPages}
       orders={orders?.data ?? []}

@@ -13,11 +13,11 @@ interface CoreFormFieldsProps {
   fields: IColumn[];
   isClearable?: boolean;
   className?: string;
-  hideFields?: string[];
+  type?: 'create' | 'filter' | 'edit';
 }
 
 const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
-  const { fields, isClearable, className, hideFields } = props;
+  const { fields, isClearable, className, type } = props;
 
   return fields.map((field: IColumn, index: number) => {
     const {
@@ -27,10 +27,20 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
       label,
       options,
       defaultValue,
-      description
+      isFilterable,
+      isCreatable,
+      isEditable
     } = field;
 
-    if (hideFields && hideFields.includes(name)) {
+    if (!isFilterable && type === 'filter') {
+      return null;
+    }
+
+    if (!isCreatable && type === 'create') {
+      return null;
+    }
+
+    if (!isEditable && type === 'edit') {
       return null;
     }
 

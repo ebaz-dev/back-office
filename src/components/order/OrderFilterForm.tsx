@@ -8,35 +8,27 @@ import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { filterOrdersAction } from '@/app/actions/order';
 import { clearAllFilterAction } from '@/app/actions/main';
 
-interface OrderFilterFormProps {
-  supplierId: string;
-}
+interface OrderFilterFormProps {}
 
-const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = ({
-  supplierId
-}) => {
+const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = ({}) => {
   const ref = useRef<HTMLFormElement>(null);
-
-  const filterOrders = filterOrdersAction.bind(null, supplierId);
 
   const clearAllFilter = async () => {
     ref.current?.reset();
 
-    await clearAllFilterAction('/order', supplierId);
+    await clearAllFilterAction('/order');
   };
-
-  const hiddenFields = ['supplier', 'images'];
 
   return (
     <form
-      action={filterOrders}
+      action={filterOrdersAction}
       ref={ref}
       className='grid grid-cols-7 gap-2 items-end'
     >
       <CoreFormFields
+        type='filter'
         fields={OrderColumns()}
         className='max-w-xs'
-        hideFields={hiddenFields}
       />
 
       <CoreSubmitButton

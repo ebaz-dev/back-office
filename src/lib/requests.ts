@@ -7,22 +7,8 @@ export const getOrders = async (supplierId: string, page: string | number) =>
     }page=${page}&limit=10`
   );
 
-export const getProducts = async (
-  supplierId?: string,
-  page?: string | number,
-  id?: string,
-  sku?: string,
-  name?: string,
-  brand?: string,
-  barCode?: string
-) =>
-  await fetcher(
-    `/product/dashboard/list?${supplierId ? `customerId=${supplierId}&` : ''}${
-      brand ? `brands=${brand}&` : ''
-    }${name ? `name=${name}&` : ''}${sku ? `sku=${sku}&` : ''}${
-      id ? `ids=${id}&` : ''
-    }${barCode ? `barCode=${barCode}&` : ''}page=${page}&limit=10`
-  );
+export const getProducts = async (currentParams: string) =>
+  await fetcher(`/product/dashboard/list?${currentParams}&page=1&limit=10`);
 
 export const getProductBrands = async (supplierId: string) =>
   await fetcher(`/product/brands?customerId=${supplierId}&limit=all`);

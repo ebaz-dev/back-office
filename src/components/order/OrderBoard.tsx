@@ -19,11 +19,10 @@ interface OrderBoardProps {
   orders: IOrder[];
   currentPage: number;
   totalPage: number;
-  supplierId: string;
 }
 
 const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
-  const { orders, totalPage, currentPage, supplierId } = props;
+  const { orders, totalPage, currentPage } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -40,7 +39,7 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
-          customTopContents={<OrderFilterForm supplierId={supplierId} />}
+          customTopContents={<OrderFilterForm />}
           customRenderCell={() => {
             return <div>hello</div>;
           }}

@@ -16,7 +16,6 @@ import ProductsDetail from '@/components/products/ProductsDetail';
 import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsBoardProps {
-  supplierId: string;
   brands: IBrand[];
   products: IProduct[];
   totalPage: number;
@@ -24,7 +23,7 @@ interface ProductsBoardProps {
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { supplierId, products, totalPage, currentPage, brands } = props;
+  const { products, totalPage, currentPage, brands } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
@@ -46,9 +45,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           totalPage={totalPage}
           currentPage={currentPage}
           onRowAction={onRowAction}
-          customTopContents={
-            <ProductsFilterForm supplierId={supplierId} brands={brands} />
-          }
+          customTopContents={<ProductsFilterForm brands={brands} />}
         />
       </div>
 

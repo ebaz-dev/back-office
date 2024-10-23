@@ -7,6 +7,9 @@ export interface IColumn {
   fieldType?: string;
   placeholder?: string;
   options?: IOption[];
+  isFilterable?: boolean;
+  isCreatable?: boolean;
+  isEditable?: boolean;
 }
 
 export interface IOption {

@@ -10,40 +10,19 @@ import { clearAllFilterAction } from '@/app/actions/main';
 import { IBrand, IOption } from '@/lib/types';
 
 interface ProductsFilterFormProps {
-  supplierId: string;
   brands: IBrand[];
 }
 
 const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
-  supplierId,
   brands
 }) => {
   const ref = useRef<HTMLFormElement>(null);
 
-  const filterProducts = filterProductsAction.bind(null, supplierId);
-
   const clearAllFilter = async () => {
     ref.current?.reset();
 
-    await clearAllFilterAction('/products', supplierId);
+    await clearAllFilterAction('/products');
   };
-
-  const hiddenFields = [
-    'isActive',
-    'supplier',
-    'images',
-    'generalCategory',
-    'subCategory',
-    'generalCategory',
-    'finalCategory',
-    'stock',
-    'unit',
-    'price',
-    'availableStock',
-    'inCase',
-    'isAlcohol',
-    'cityTax'
-  ];
 
   const brandOptions: IOption[] = brands.map(brand => {
     return { value: brand.id, label: brand.name };
@@ -51,14 +30,14 @@ const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
 
   return (
     <form
-      action={filterProducts}
+      action={filterProductsAction}
       ref={ref}
       className='grid grid-cols-7 gap-2 items-end'
     >
       <CoreFormFields
+        type='filter'
         fields={ProductsColumns({ brandOptions })}
         className='max-w-xs'
-        hideFields={hiddenFields}
       />
 
       <CoreSubmitButton

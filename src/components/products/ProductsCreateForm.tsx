@@ -43,10 +43,7 @@ const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
       />
 
       <div className='w-full grid grid-cols-3 gap-4'>
-        <CoreFormFields
-          fields={ProductsColumns(fieldOptions)}
-          hideFields={['id', 'images']}
-        />
+        <CoreFormFields fields={ProductsColumns(fieldOptions)} type='create' />
       </div>
 
       <CoreSubmitButton text='Хадгалах' onPress={onClose} />

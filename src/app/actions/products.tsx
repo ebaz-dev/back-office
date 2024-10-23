@@ -2,32 +2,10 @@
 
 import { ProductsColumns } from '@/lib/columns';
 import { fetcher } from '@/lib/fetch';
-import { IColumn, IProduct } from '@/lib/types';
+import { IColumn } from '@/lib/types';
+import { convertObjectToParam } from '@/lib/utils';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
-export async function filterProductsAction(
-  supplierId: string,
-  formData: FormData
-) {
-  const id = formData.get('id');
-  const name = formData.get('name');
-  const barCode = formData.get('barCode');
-  const sku = formData.get('sku');
-  const brand = formData.get('brand');
-
-  redirect(
-    `/products?supplierId=${supplierId}&id=${id}&name=${name}&barCode=${barCode}&sku=${sku}&brand=${brand}&page=1`
-  );
-}
-
-export async function updateProductImageAction(item: any) {
-  await fetcher(`/product/update/${item.id}`, 'PUT', {
-    images: item.images
-  });
-
-  revalidatePath('/products');
-}
 
 export async function createProductAction(
   state: { images: string[] },
@@ -48,6 +26,31 @@ export async function createProductAction(
   const response = await fetcher(`/product/create/`, 'POST', reqOptions);
 
   console.log(response, reqOptions);
+}
+
+export async function updateProductAction(formData: FormData) {
+  console.log(formData);
+}
+
+export async function filterProductsAction(formData: FormData) {
+  const rawFormData: any = {
+    ids: formData.get('id'),
+    name: formData.get('name'),
+    barCode: formData.get('barCode'),
+    sku: formData.get('sku')
+  };
+
+  const currentParams = convertObjectToParam(rawFormData);
+
+  redirect(`/products?${currentParams}`);
+}
+
+export async function updateProductImageAction(item: any) {
+  await fetcher(`/product/update/${item.id}`, 'PUT', {
+    images: item.images
+  });
+
+  revalidatePath('/products');
 }
 
 export async function importProductsAction(formData: FormData) {}

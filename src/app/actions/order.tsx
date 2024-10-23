@@ -2,6 +2,6 @@
 
 import { redirect } from 'next/navigation';
 
-export async function filterOrdersAction(state: any, formData: FormData) {
+export async function filterOrdersAction(formData: FormData) {
   redirect(`/order`);
 }

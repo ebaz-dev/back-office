@@ -30,6 +30,11 @@ export function isDate(date: string) {
   return newDate !== 'Invalid Date';
 }
 
-export const replaceMediaUrl = (imageUrl: string) => {
-  return `${MEDIA_URL}/original/${imageUrl}`;
-};
+export const replaceMediaUrl = (imageUrl: string) =>
+  `${MEDIA_URL}/original/${imageUrl}`;
+
+export const removeEmptyValuesFromObject = (object: any): any =>
+  Object.fromEntries(Object.entries(object).filter(([_, value]) => value));
+
+export const convertObjectToParam = (object: any): string =>
+  new URLSearchParams(removeEmptyValuesFromObject(object)).toString();
