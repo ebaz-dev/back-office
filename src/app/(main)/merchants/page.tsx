@@ -12,7 +12,7 @@ interface MerchantsPageProps {
 const MerchantsPage: FunctionComponent<MerchantsPageProps> = async ({
   searchParams: { page }
 }) => {
-  const supplier: any = await getCookie('supplier');
+  const supplier = await getCookie('supplier');
 
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 

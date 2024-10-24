@@ -13,7 +13,7 @@ const protectedRoutes = [
   '/settings'
 ];
 
-const publicRoutes = ['/login', '/'];
+const publicRoutes = ['/login'];
 
 async function middleware(req: NextRequest) {
   const session: any = await auth();
@@ -22,7 +22,7 @@ async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  if (isProtectedRoute && !session) {
+  if ((isProtectedRoute && !session) || path === '/') {
     return NextResponse.redirect(new URL('/login', req.nextUrl));
   }
 

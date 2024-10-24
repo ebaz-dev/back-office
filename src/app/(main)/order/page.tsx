@@ -1,22 +1,29 @@
 import { getCookie } from '@/app/actions/cookies';
 import OrderBoard from '@/components/order/OrderBoard';
 import { getOrders } from '@/lib/requests';
+import { convertObjectToParam } from '@/lib/utils';
 import { FunctionComponent } from 'react';
 
 interface OrderPageProps {
   searchParams: {
     page: string;
+    orderNo: string;
   };
 }
 
 const OrderPage: FunctionComponent<OrderPageProps> = async ({
-  searchParams: { page }
+  searchParams
 }) => {
-  const supplier: any = await getCookie('supplier');
+  const supplier = await getCookie('supplier');
 
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 
-  const ordersData = getOrders(supplierId, page);
+  const currentParams = convertObjectToParam({
+    ...searchParams,
+    supplierId: supplierId
+  });
+
+  const ordersData = getOrders(currentParams);
 
   const [orders] = await Promise.all([ordersData]);
 

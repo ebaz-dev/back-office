@@ -17,7 +17,7 @@ interface ProductsPageProps {
 const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
   searchParams
 }) => {
-  const supplier: any = await getCookie('supplier');
+  const supplier = await getCookie('supplier');
 
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 
