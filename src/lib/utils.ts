@@ -38,3 +38,15 @@ export const removeEmptyValuesFromObject = (object: any): any =>
 
 export const convertObjectToParam = (object: any): string =>
   new URLSearchParams(removeEmptyValuesFromObject(object)).toString();
+
+export const replaceText = (text: string) => {
+  if (text === 'created') return 'Үүсгэсэн';
+
+  if (text === 'cancelled') return 'Цуцалсан';
+
+  if (text === 'confirmed') return 'Баталгаажуулсан';
+
+  if (text === 'delivered') return 'Хүргэсэн';
+
+  return text;
+};

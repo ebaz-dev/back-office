@@ -1,6 +1,8 @@
 import CoreGroupImages from '@/components/core/CoreGroupImages';
 import { IColumn, IProductsFieldProps } from '@/lib/types';
+import { Chip } from '@nextui-org/react';
 import moment from 'moment';
+import { replaceText } from '@/lib/utils';
 
 export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
@@ -42,7 +44,26 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'select',
     placeholder: 'Захиалгын төлөв',
     isFilterable: true,
-    options: []
+    options: [],
+    customCell: (customValue: any) => {
+      return (
+        <Chip
+          color={
+            customValue === 'confirmed'
+              ? 'warning'
+              : customValue === 'cancelled'
+              ? 'danger'
+              : customValue === 'delivered'
+              ? 'success'
+              : 'default'
+          }
+          size='sm'
+          className='text-white'
+        >
+          {replaceText(customValue)}
+        </Chip>
+      );
+    }
   },
   {
     uid: 'orderedAt',
