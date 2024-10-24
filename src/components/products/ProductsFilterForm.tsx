@@ -4,7 +4,7 @@ import { filterProductsAction } from '@/app/actions/products';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
-import { ProductsColumns } from '@/lib/columns';
+import { ProductsColumns } from '@/lib/columns/products';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { clearAllFilterAction } from '@/app/actions/main';
 import { IBrand, IOption } from '@/lib/types';

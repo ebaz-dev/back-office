@@ -3,7 +3,7 @@ import CoreFormFields from '@/components/core/CoreFormFields';
 import { createProductAction } from '@/app/actions/products';
 import { IOption, IProductsFieldProps } from '@/lib/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
-import { ProductsColumns } from '@/lib/columns';
+import { ProductsColumns } from '@/lib/columns/products';
 import CoreImageUploader from '@/components/core/CoreImageUploader';
 
 interface ProductsCreateFormProps {

@@ -9,11 +9,11 @@ import {
   useDisclosure
 } from '@nextui-org/react';
 import { IBrand, IProduct } from '@/lib/types';
-import { ProductsColumns } from '@/lib/columns';
 import CoreTable from '@/components/core/CoreTable';
 import CoreLoading from '@/components/core/CoreLoading';
 import ProductsDetail from '@/components/products/ProductsDetail';
 import ProductsFilterForm from '@/components/products/ProductsFilterForm';
+import { ProductsColumns } from '@/lib/columns/products';
 
 interface ProductsBoardProps {
   brands: IBrand[];

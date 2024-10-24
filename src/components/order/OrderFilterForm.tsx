@@ -3,7 +3,7 @@ import CoreFormFields from '@/components/core/CoreFormFields';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
-import { OrderColumns } from '@/lib/columns';
+import { OrderColumns } from '@/lib/columns/orders';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { filterOrdersAction } from '@/app/actions/order';
 import { clearAllFilterAction } from '@/app/actions/main';

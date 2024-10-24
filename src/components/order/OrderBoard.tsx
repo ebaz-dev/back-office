@@ -2,7 +2,7 @@
 
 import { FunctionComponent, Key } from 'react';
 import CoreTable from '@/components/core/CoreTable';
-import { OrderColumns } from '@/lib/columns';
+import { OrderColumns } from '@/lib/columns/orders';
 import { IOrder } from '@/lib/types';
 import {
   Modal,
@@ -40,9 +40,6 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
           currentPage={currentPage}
           onRowAction={onRowAction}
           customTopContents={<OrderFilterForm />}
-          customRenderCell={() => {
-            return <div>hello</div>;
-          }}
         />
       </div>
 

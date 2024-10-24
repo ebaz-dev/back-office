@@ -1,6 +1,6 @@
 'use server';
 
-import { ProductsColumns } from '@/lib/columns';
+import { ProductsColumns } from '@/lib/columns/products';
 import { fetcher } from '@/lib/fetch';
 import { IColumn } from '@/lib/types';
 import { convertObjectToParam } from '@/lib/utils';

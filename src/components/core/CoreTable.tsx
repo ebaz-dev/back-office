@@ -1,7 +1,6 @@
 'use client';
 
 import { IColumn } from '@/lib/types';
-import { getNestedValue, isDate, isImagePath } from '@/lib/utils';
 import {
   getKeyValue,
   Pagination,
@@ -25,7 +24,7 @@ import {
 import { usePathname, useSearchParams } from 'next/navigation';
 import { onPageChangeAction } from '@/app/actions/main';
 import CoreEmpty from '@/components/core/CoreEmpty';
-import CoreImage from '@/components/core/CoreImage';
+import { getNestedValue } from '@/lib/utils';
 
 interface CoreTableProps {
   data: any[];
@@ -35,7 +34,6 @@ interface CoreTableProps {
   rowsPerPage?: number;
   customTopContents?: ReactNode;
   onRowAction?: (key: Key) => void;
-  customRenderCell?: (item: any, columnKey: string) => ReactNode;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps> = props => {
@@ -45,8 +43,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     customTopContents,
     totalPage,
     currentPage,
-    onRowAction,
-    customRenderCell
+    onRowAction
   } = props;
 
   const pathname = usePathname();
@@ -96,26 +93,15 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
   }, [currentPage, totalPage]);
 
   const renderCell = useCallback((item: any, columnKey: string) => {
-    const value = getNestedValue(item, columnKey.split('.'));
+    const filtered = columns.find(col => col.uid === columnKey);
 
-    const type = isImagePath(value) ? 'image' : isDate(value) ? 'date' : '';
+    const cellValue = getKeyValue(
+      getNestedValue(item, columnKey.split('.')),
+      columnKey
+    );
 
-    switch (type) {
-      case 'date':
-        return <div>{getKeyValue(value, columnKey)}</div>;
-      case 'image':
-        return (
-          <div className='w-10 h-10 mx-auto'>
-            <CoreImage src={value} />
-          </div>
-        );
-      default:
-        return (
-          <div className='line-clamp-2'>
-            {getKeyValue(value, columnKey) || '--'}
-          </div>
-        );
-    }
+    if (filtered && filtered.customCell) return filtered.customCell(cellValue);
+    else return <div className='line-clamp-2'>{cellValue || '--'}</div>;
   }, []);
 
   return (

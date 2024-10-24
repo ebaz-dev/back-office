@@ -10,6 +10,7 @@ export interface IColumn {
   isFilterable?: boolean;
   isCreatable?: boolean;
   isEditable?: boolean;
+  customCell?: any;
 }
 
 export interface IOption {

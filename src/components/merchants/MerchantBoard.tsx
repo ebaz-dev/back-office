@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import CoreTable from '@/components/core/CoreTable';
-import { CustomerColumns } from '@/lib/columns';
+import { CustomerColumns } from '@/lib/columns/customers';
 import { ICustomer } from '@/lib/types';
 
 interface MerchantBoardProps {
