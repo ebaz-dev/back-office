@@ -100,8 +100,11 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
       columnKey
     );
 
-    if (filtered && filtered.customCell) return filtered.customCell(cellValue);
-    else return <div className='line-clamp-2'>{cellValue || '--'}</div>;
+    if (filtered && filtered.customCell) {
+      return filtered.customCell(cellValue);
+    }
+
+    return <div className='line-clamp-2'>{cellValue || '--'}</div>;
   }, []);
 
   return (

@@ -1,5 +1,6 @@
 import CoreGroupImages from '@/components/core/CoreGroupImages';
 import { IColumn, IProductsFieldProps } from '@/lib/types';
+import moment from 'moment';
 
 export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
   {
@@ -49,7 +50,9 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     label: 'Захиалсан өдөр',
     placeholder: 'Захиалсан өдөр',
     fieldType: 'datepicker',
-    isFilterable: true
+    isFilterable: true,
+    customCell: (customValue: any) =>
+      moment(customValue).format('HH:MM:ss DD/MM/YYYY')
   },
   {
     uid: 'deliveryDate',
@@ -57,7 +60,8 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     label: 'Хүргүүлэх өдөр',
     placeholder: 'Хүргүүлэх өдөр',
     fieldType: 'datepicker',
-    isFilterable: true
+    isFilterable: true,
+    customCell: (customValue: any) => moment(customValue).format('DD/MM/YYYY')
   },
   {
     uid: '7',
@@ -80,6 +84,19 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     options: []
   },
   {
+    uid: 'merchant.phone',
+    name: 'merchant.phone',
+    label: 'Утасны дугаар',
+    fieldType: 'input',
+    placeholder: 'Утасны дугаар'
+  },
+  {
+    uid: 'merchant.name',
+    name: 'merchant',
+    label: 'Харилцагчийн нэр',
+    placeholder: 'Харилцагчийн нэр'
+  },
+  {
     uid: '11',
     name: 'note',
     label: 'Тэмдэглэл',
@@ -93,19 +110,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'select',
     options: []
   },
-  {
-    uid: 'merchant.phone',
-    name: 'merchant.phone',
-    label: 'Утасны дугаар',
-    fieldType: 'input',
-    placeholder: 'Утасны дугаар'
-  },
-  {
-    uid: 'merchant.name',
-    name: 'merchant',
-    label: 'Харилцагчийн нэр',
-    placeholder: 'Харилцагчийн нэр'
-  },
+
   {
     uid: '15',
     name: 'city',
