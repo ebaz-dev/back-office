@@ -43,7 +43,6 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     label: 'Захиалгын төлөв',
     fieldType: 'select',
     placeholder: 'Захиалгын төлөв',
-    isFilterable: true,
     options: [],
     customCell: (customValue: any) => {
       return (
