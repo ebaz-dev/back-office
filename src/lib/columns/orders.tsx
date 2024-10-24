@@ -50,12 +50,12 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
         <Chip
           color={
             customValue === 'confirmed'
-              ? 'warning'
+              ? 'success'
               : customValue === 'cancelled'
               ? 'danger'
               : customValue === 'delivered'
-              ? 'success'
-              : 'default'
+              ? 'secondary'
+              : 'warning'
           }
           size='sm'
           className='text-white'
