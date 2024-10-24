@@ -40,7 +40,9 @@ export const convertObjectToParam = (object: any): string =>
   new URLSearchParams(removeEmptyValuesFromObject(object)).toString();
 
 export const replaceText = (text: string) => {
-  if (text === 'created') return 'Хүлээгдэж буй';
+  if (text === 'created') return 'Үүсгэсэн';
+
+  if (text === 'pending') return 'Хүлээгдэж буй';
 
   if (text === 'cancelled') return 'Цуцалсан';
 

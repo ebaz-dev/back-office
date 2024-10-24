@@ -47,6 +47,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     customCell: (customValue: any) => {
       return (
         <Chip
+          variant='shadow'
           color={
             customValue === 'confirmed'
               ? 'success'
@@ -54,7 +55,9 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
               ? 'danger'
               : customValue === 'delivered'
               ? 'secondary'
-              : 'warning'
+              : customValue === 'pending'
+              ? 'warning'
+              : 'default'
           }
           size='sm'
           className='text-white'
