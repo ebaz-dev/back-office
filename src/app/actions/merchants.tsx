@@ -5,7 +5,8 @@ import { redirect } from 'next/navigation';
 
 export async function filterMerchantAction(formData: FormData) {
   const rawFormData = {
-    name: formData.get('name')
+    name: formData.get('name'),
+    phone: formData.get('phone')
   };
 
   const currentParams = convertObjectToParam(rawFormData);
