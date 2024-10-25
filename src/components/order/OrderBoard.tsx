@@ -66,6 +66,7 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
                   <OrderDetail order={selectedOrder} />
                 )}
               </ModalBody>
+              <ModalFooter></ModalFooter>
             </>
           )}
         </ModalContent>
