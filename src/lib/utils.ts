@@ -14,33 +14,40 @@ export const formatUnit = (value: string | number, unit: string) => {
   return value ? `${value.toLocaleString()} ${unit}` : `0 ${unit}`;
 };
 
-export const getNestedValue = (obj: any, pathArray: string[]) => {
-  return pathArray.reduce((acc, key) => acc?.[key], obj);
+export const getNestedValue = <T>(
+  obj: T,
+  pathArray: string[]
+): T | undefined | unknown => {
+  return pathArray.reduce<unknown | undefined>((acc, key) => {
+    if (typeof acc === 'object' && acc !== null && key in acc) {
+      return (acc as Record<string, unknown>)[key];
+    }
+    return undefined;
+  }, obj);
 };
-
-export function isImagePath(str: string) {
-  const imageExtensions = /\.(jpg|jpeg|png|gif|bmp|svg)$/i;
-
-  return imageExtensions.test(str);
-}
-
-export function isDate(date: string) {
-  const newDate: string = new Date(date).toString();
-
-  return newDate !== 'Invalid Date';
-}
 
 export const replaceMediaUrl = (imageUrl: string) =>
   `${MEDIA_URL}/original/${imageUrl}`;
 
-export const removeEmptyValuesFromObject = (object: any): any =>
-  Object.fromEntries(Object.entries(object).filter(([_, value]) => value));
+export const removeEmptyValuesFromObject = (object: Record<string, unknown>) =>
+  Object.fromEntries(
+    Object.entries(object).filter(
+      ([, value]) => value !== null && value !== undefined && value !== ''
+    )
+  );
 
-export const convertObjectToParam = (object: any): string =>
-  new URLSearchParams(removeEmptyValuesFromObject(object)).toString();
+export const convertObjectToParam = (object: Record<string, unknown>): string =>
+  new URLSearchParams(
+    Object.entries(removeEmptyValuesFromObject(object)).map(([key, value]) => [
+      key,
+      String(value)
+    ])
+  ).toString();
 
 export const replaceText = (text: string) => {
-  if (text === 'created') return 'Хүлээгдэж буй';
+  if (text === 'created') return 'Үүсгэсэн';
+
+  if (text === 'pending') return 'Хүлээгдэж буй';
 
   if (text === 'cancelled') return 'Цуцалсан';
 

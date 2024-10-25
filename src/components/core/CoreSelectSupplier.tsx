@@ -2,6 +2,7 @@ import { chooseSupplierAction, removeSupplierAction } from '@/app/actions/main';
 import { ICustomer } from '@/lib/types';
 import { tr } from '@/lib/utils';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 import { FunctionComponent, Key } from 'react';
 
 interface CoreSelectSupplierProps {
@@ -14,16 +15,18 @@ const CoreSelectSupplier: FunctionComponent<
 > = props => {
   const { suppliers, chosenSupplier } = props;
 
+  const pathname = usePathname();
+
   const onSelectionChange = (key: Key | null) => {
     const findSupplier = suppliers.find(supplier => supplier.id === key);
 
     if (findSupplier && key) {
-      chooseSupplierAction(findSupplier);
+      chooseSupplierAction(findSupplier, pathname);
     }
   };
 
   const onClear = () => {
-    removeSupplierAction();
+    removeSupplierAction(pathname);
   };
 
   return (

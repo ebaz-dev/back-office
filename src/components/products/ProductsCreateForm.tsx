@@ -13,7 +13,7 @@ interface ProductsCreateFormProps {
 const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
   onClose
 }) => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<string[]>([]);
   const createProduct = createProductAction.bind(null, { images });
 
   const supplierOptions: IOption[] = [{ value: '123123', label: 'supplier 1' }];

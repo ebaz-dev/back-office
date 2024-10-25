@@ -9,9 +9,9 @@ interface MainLayoutProps {
 }
 
 const MainLayout: FunctionComponent<MainLayoutProps> = async ({ children }) => {
-  const chosenSupplier: any = await getCookie('supplier');
+  const chosenSupplier = await getCookie('supplier');
 
-  const suppliers = await getCustomers('supplier');
+  const suppliers = await getCustomers('type=supplier');
 
   return (
     <NextAuthProvider>

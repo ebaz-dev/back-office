@@ -5,12 +5,16 @@ import { uploadImageFetcher } from '@/lib/fetch';
 import { ICustomer } from '@/lib/types';
 import { redirect } from 'next/navigation';
 
-export const chooseSupplierAction = (supplier: ICustomer) => {
+export const chooseSupplierAction = (supplier: ICustomer, pathname: string) => {
   setCookie('supplier', JSON.stringify(supplier));
+
+  redirect(pathname);
 };
 
-export const removeSupplierAction = () => {
+export const removeSupplierAction = (pathname: string) => {
   deleteCookie('supplier');
+
+  redirect(pathname);
 };
 
 export const onPageChangeAction = (url: string) => {

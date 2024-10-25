@@ -1,4 +1,4 @@
-import type { NextAuthConfig } from 'next-auth';
+import type { NextAuthConfig, User } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
 export default {
@@ -8,10 +8,10 @@ export default {
       credentials: {},
 
       async authorize(credentials) {
-        const { userId } = credentials as any;
+        const { userId } = credentials as { userId: string };
 
-        const user: any = {
-          userId
+        const user: User = {
+          id: userId
         };
 
         return user;
@@ -20,26 +20,24 @@ export default {
   ],
 
   callbacks: {
-    async signIn({ user }: any) {
-      if (user && user.userId) {
+    async signIn({ user }) {
+      if (user && user.id) {
         return true;
       }
 
       return false;
     },
 
-    async jwt({ token, user }: any) {
+    async jwt({ token, user }) {
       if (user) {
-        token.userId = user.userId;
+        token.id = user.id;
       }
 
       return token;
     },
 
-    async session({ session, token }: any) {
-      session.token = token.userId;
-
-      return session;
+    async session({ session, token }) {
+      return { ...session, token: token.id };
     }
   }
 } satisfies NextAuthConfig;

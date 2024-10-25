@@ -13,9 +13,9 @@ export const ProductsColumns = (
     placeholder: 'Зураг',
     description: 'Олон зураг сонгож болно',
     isCreatable: false,
-    customCell: (customValue: any) => {
-      return <CoreGroupImages images={customValue} />;
-    }
+    customCell: (customValue: string[]) => (
+      <CoreGroupImages images={customValue} />
+    )
   },
   {
     uid: 'id',

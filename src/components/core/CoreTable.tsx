@@ -13,7 +13,6 @@ import {
   TableRow
 } from '@nextui-org/react';
 import {
-  FunctionComponent,
   Key,
   ReactNode,
   useCallback,
@@ -26,8 +25,12 @@ import { onPageChangeAction } from '@/app/actions/main';
 import CoreEmpty from '@/components/core/CoreEmpty';
 import { getNestedValue } from '@/lib/utils';
 
-interface CoreTableProps {
-  data: any[];
+interface Item {
+  id: string;
+}
+
+interface CoreTableProps<T extends Item> {
+  data: T[];
   columns: IColumn[];
   totalPage: number;
   currentPage: number;
@@ -36,7 +39,7 @@ interface CoreTableProps {
   onRowAction?: (key: Key) => void;
 }
 
-const CoreTable: FunctionComponent<CoreTableProps> = props => {
+const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
   const {
     columns,
     data,
@@ -57,15 +60,18 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     setIsLoading(false);
   }, [data]);
 
-  const onPageChange = (value: number) => {
-    const currentParams = new URLSearchParams(
-      Array.from(searchParams.entries())
-    );
+  const onPageChange = useCallback(
+    (value: number) => {
+      const currentParams = new URLSearchParams(
+        Array.from(searchParams.entries())
+      );
 
-    currentParams.set('page', value.toString());
+      currentParams.set('page', value.toString());
 
-    setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
-  };
+      setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
+    },
+    [searchParams, setIsLoading, pathname]
+  );
 
   const topContent = useMemo(() => {
     return (
@@ -90,22 +96,25 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         />
       </div>
     ) : null;
-  }, [currentPage, totalPage]);
+  }, [currentPage, totalPage, onPageChange]);
 
-  const renderCell = useCallback((item: any, columnKey: string) => {
-    const filtered = columns.find(col => col.uid === columnKey);
+  const renderCell = useCallback(
+    (item: T, columnKey: string) => {
+      const filtered = columns.find(col => col.uid === columnKey);
 
-    const cellValue = getKeyValue(
-      getNestedValue(item, columnKey.split('.')),
-      columnKey
-    );
+      const cellValue = getKeyValue(
+        getNestedValue(item, columnKey.split('.')),
+        columnKey
+      );
 
-    if (filtered && filtered.customCell) {
-      return filtered.customCell(cellValue);
-    }
+      if (filtered && filtered.customCell) {
+        return filtered.customCell(cellValue);
+      }
 
-    return <div className='line-clamp-2'>{cellValue || '--'}</div>;
-  }, []);
+      return <div className='line-clamp-2'>{cellValue || '--'}</div>;
+    },
+    [columns]
+  );
 
   return (
     <Table
@@ -142,7 +151,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         loadingContent={<Spinner />}
       >
         {item => (
-          <TableRow key={item.id || item._id}>
+          <TableRow key={item.id}>
             {columnKey => (
               <TableCell className='text-xs text-center'>
                 {renderCell(item, columnKey.toString())}

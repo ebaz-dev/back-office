@@ -1,6 +1,7 @@
 import { getCookie } from '@/app/actions/cookies';
 import MerchantBoard from '@/components/merchants/MerchantBoard';
 import { getCustomers } from '@/lib/requests';
+import { convertObjectToParam } from '@/lib/utils';
 import { FunctionComponent } from 'react';
 
 interface MerchantsPageProps {
@@ -10,13 +11,19 @@ interface MerchantsPageProps {
 }
 
 const MerchantsPage: FunctionComponent<MerchantsPageProps> = async ({
-  searchParams: { page }
+  searchParams
 }) => {
-  const supplier: any = await getCookie('supplier');
+  const supplier = await getCookie('supplier');
 
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 
-  const merchantsData = getCustomers('merchant', supplierId, page);
+  const currentParams = convertObjectToParam({
+    ...searchParams,
+    type: 'merchant',
+    supplierId: supplierId
+  });
+
+  const merchantsData = getCustomers(currentParams);
 
   const [merchants] = await Promise.all([merchantsData]);
 

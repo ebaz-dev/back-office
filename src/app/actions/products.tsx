@@ -29,7 +29,7 @@ export async function updateProductAction(formData: FormData) {
 }
 
 export async function filterProductsAction(formData: FormData) {
-  const rawFormData: any = {
+  const rawFormData = {
     ids: formData.get('id'),
     name: formData.get('name'),
     barCode: formData.get('barCode'),
@@ -42,7 +42,10 @@ export async function filterProductsAction(formData: FormData) {
   redirect(`/products?${currentParams}`);
 }
 
-export async function updateProductImageAction(item: any) {
+export async function updateProductImageAction(item: {
+  id: string;
+  images: string[];
+}) {
   await fetcher(`/product/update/${item.id}`, 'PUT', {
     images: item.images
   });
@@ -50,4 +53,6 @@ export async function updateProductImageAction(item: any) {
   revalidatePath('/products');
 }
 
-export async function importProductsAction(formData: FormData) {}
+export async function importProductsAction(formData: FormData) {
+  console.log(formData);
+}
