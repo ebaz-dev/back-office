@@ -33,7 +33,7 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
     if (files.length > 0) {
       startTransition(async () => {
         const formData = new FormData();
-        files.forEach((file: any) => formData.append('files', file));
+        files.forEach((file: File) => formData.append('files', file));
 
         const response = await uploadImageAction(formData);
 

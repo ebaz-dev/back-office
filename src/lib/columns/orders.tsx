@@ -1,10 +1,10 @@
 import CoreGroupImages from '@/components/core/CoreGroupImages';
-import { IColumn, IProductsFieldProps } from '@/lib/types';
+import { IColumn, IProduct } from '@/lib/types';
 import { Chip } from '@nextui-org/react';
 import moment from 'moment';
 import { replaceText } from '@/lib/utils';
 
-export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
+export const OrderColumns = (): IColumn[] => [
   {
     uid: 'orderNo',
     name: 'orderNo',
@@ -29,10 +29,10 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     uid: 'products',
     name: 'images',
     label: 'Захиалгын зураг',
-    customCell: (customValue: any) => {
-      let images: string[] = [];
+    customCell: (customValue: IProduct[]) => {
+      const images: string[] = [];
 
-      customValue.map((product: any) => images.push(product.images));
+      customValue.map((product: IProduct) => images.push(...product.images));
 
       return <CoreGroupImages images={images} />;
     }
@@ -44,25 +44,27 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     fieldType: 'select',
     placeholder: 'Захиалгын төлөв',
     options: [],
-    customCell: (customValue: any) => {
+    customCell: customValue => {
+      const value = customValue.toString();
+
       return (
         <Chip
           variant='shadow'
           color={
-            customValue === 'confirmed'
+            value === 'confirmed'
               ? 'success'
-              : customValue === 'cancelled'
+              : value === 'cancelled'
               ? 'danger'
-              : customValue === 'delivered'
+              : value === 'delivered'
               ? 'secondary'
-              : customValue === 'pending'
+              : value === 'pending'
               ? 'warning'
               : 'default'
           }
           size='sm'
           className='text-white'
         >
-          {replaceText(customValue)}
+          {replaceText(value)}
         </Chip>
       );
     }
@@ -74,8 +76,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     placeholder: 'Захиалсан өдөр',
     fieldType: 'datepicker',
     isFilterable: true,
-    customCell: (customValue: any) =>
-      moment(customValue).format('HH:MM:ss DD/MM/YYYY')
+    customCell: customValue => moment(customValue).format('HH:MM:ss DD/MM/YYYY')
   },
   {
     uid: 'deliveryDate',
@@ -84,7 +85,7 @@ export const OrderColumns = (props?: IProductsFieldProps): IColumn[] => [
     placeholder: 'Хүргүүлэх өдөр',
     fieldType: 'datepicker',
     isFilterable: true,
-    customCell: (customValue: any) => moment(customValue).format('DD/MM/YYYY')
+    customCell: customValue => moment(customValue).format('DD/MM/YYYY')
   },
   {
     uid: '7',

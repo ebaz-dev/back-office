@@ -26,12 +26,14 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
   const { orders, totalPage, currentPage } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedOrder, setSelectedOrder] = useState<IOrder | null>(null);
+  const [selectedOrder, setSelectedOrder] = useState<IOrder | undefined>(
+    undefined
+  );
 
   const onRowAction = async (key: Key) => {
     onOpen();
 
-    const order: any = orders.find(item => item.id === key);
+    const order: IOrder | undefined = orders.find(item => item.id === key);
 
     setSelectedOrder(order);
   };
@@ -51,7 +53,7 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='4xl'>
         <ModalContent>
-          {onClose => (
+          {() => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
                 {tr('Захиалгын дэлгэрэнгүй')}

@@ -10,7 +10,7 @@ export interface IColumn {
   isFilterable?: boolean;
   isCreatable?: boolean;
   isEditable?: boolean;
-  customCell?: any;
+  customCell?: (customValue: Record<string, unknown>) => React.ReactNode;
 }
 
 export interface IOption {

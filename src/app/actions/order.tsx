@@ -4,7 +4,7 @@ import { convertObjectToParam } from '@/lib/utils';
 import { redirect } from 'next/navigation';
 
 export async function filterOrdersAction(formData: FormData) {
-  const rawFormData: any = {
+  const rawFormData = {
     orderNo: formData.get('orderNo')
   };
 

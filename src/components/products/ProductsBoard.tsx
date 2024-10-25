@@ -26,12 +26,16 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   const { products, totalPage, currentPage, brands } = props;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(
+    undefined
+  );
 
   const onRowAction = async (key: Key) => {
     onOpen();
 
-    const product: any = products.find(item => item.id === key);
+    const product: IProduct | undefined = products.find(
+      item => item.id === key
+    );
 
     setSelectedProduct(product);
   };
@@ -51,7 +55,7 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
         <ModalContent>
-          {onClose => (
+          {() => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
                 {selectedProduct?.name}
