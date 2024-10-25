@@ -2,13 +2,24 @@ import { IColumn } from '@/lib/types';
 import moment from 'moment';
 
 export const CustomerColumns = (): IColumn[] => [
-  { uid: 'userId', name: 'userId', label: 'Харилцагчийн нэр' },
-  { uid: 'phone', name: 'phone', label: 'Утасны дугаар' },
+  {
+    uid: 'userId',
+    name: 'userId',
+    label: 'Харилцагчийн нэр',
+    placeholder: 'Харилцагчийн нэр'
+  },
   {
     uid: 'name',
     name: 'name',
     label: 'Худалдааны цэгийн нэр',
     placeholder: 'Худалдааны цэгийн нэр',
+    isFilterable: true
+  },
+  {
+    uid: 'phone',
+    name: 'phone',
+    label: 'Утасны дугаар',
+    placeholder: 'Утасны дугаар',
     isFilterable: true
   },
   { uid: 'id6', name: '', label: 'Аж ахуйн нэгжийн төрөл' },
