@@ -10,6 +10,7 @@ export interface IColumn {
   isFilterable?: boolean;
   isCreatable?: boolean;
   isEditable?: boolean;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   customCell?: (customValue: any) => React.ReactNode;
 }
 
