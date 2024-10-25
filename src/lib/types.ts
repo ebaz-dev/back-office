@@ -10,7 +10,7 @@ export interface IColumn {
   isFilterable?: boolean;
   isCreatable?: boolean;
   isEditable?: boolean;
-  customCell?: (customValue: any) => React.ReactNode;
+  customCell?: (customValue: any) => JSX.Element;
 }
 
 export interface IOption {

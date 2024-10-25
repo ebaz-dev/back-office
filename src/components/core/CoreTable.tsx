@@ -13,7 +13,6 @@ import {
   TableRow
 } from '@nextui-org/react';
 import {
-  FunctionComponent,
   Key,
   ReactNode,
   useCallback,
@@ -26,8 +25,12 @@ import { onPageChangeAction } from '@/app/actions/main';
 import CoreEmpty from '@/components/core/CoreEmpty';
 import { getNestedValue } from '@/lib/utils';
 
-interface CoreTableProps {
-  data: any[];
+interface Item {
+  id: string;
+}
+
+interface CoreTableProps<T extends Item> {
+  data: T[];
   columns: IColumn[];
   totalPage: number;
   currentPage: number;
@@ -36,7 +39,7 @@ interface CoreTableProps {
   onRowAction?: (key: Key) => void;
 }
 
-const CoreTable: FunctionComponent<CoreTableProps> = props => {
+const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
   const {
     columns,
     data,
@@ -148,7 +151,7 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         loadingContent={<Spinner />}
       >
         {item => (
-          <TableRow key={item.id || item._id}>
+          <TableRow key={item.id}>
             {columnKey => (
               <TableCell className='text-xs text-center'>
                 {renderCell(item, columnKey.toString())}
