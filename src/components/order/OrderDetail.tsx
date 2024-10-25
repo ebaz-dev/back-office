@@ -1,5 +1,6 @@
 import { IOrder, IProduct } from '@/lib/types';
 import { FunctionComponent } from 'react';
+import OrderedProduct from '@/components/order/OrderedProduct';
 
 interface OrderDetailProps {
   order: IOrder;
@@ -7,9 +8,9 @@ interface OrderDetailProps {
 
 const OrderDetail: FunctionComponent<OrderDetailProps> = ({ order }) => {
   return (
-    <div>
+    <div className='grid grid-cols-4 gap-4'>
       {order.products.map((product: IProduct, index: number) => {
-        return <div key={index}>{product.name}</div>;
+        return <OrderedProduct key={index} product={product} />;
       })}
     </div>
   );
