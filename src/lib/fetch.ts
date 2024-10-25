@@ -2,6 +2,36 @@ import { setCookie } from '@/app/actions/cookies';
 import { API_URL, MEDIA_UPLOAD } from '@/config';
 import { cookies } from 'next/headers';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export async function fetcher<T>(
+  endpoint: string,
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET',
+  body?: T
+): Promise<any> {
+  const session = cookies().get('session')?.value || '';
+
+  const options: RequestInit = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: session.replace(',', '; ')
+    },
+    ...(body && { body: JSON.stringify(body) })
+  };
+
+  try {
+    const response = await fetch(`${API_URL}${endpoint}`, options);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function loginFetch(username: string, password: string) {
   const response = await fetch(`${API_URL}/users/signIn`, {
     method: 'POST',
@@ -20,27 +50,6 @@ export async function loginFetch(username: string, password: string) {
 
       return res.json();
     })
-    .catch(err => console.log(err));
-
-  return response;
-}
-
-export async function fetcher(
-  endpoint: string,
-  method?: 'GET' | 'POST' | 'PUT',
-  body?: any
-) {
-  const session = cookies().get('session')?.value || '';
-
-  const response = await fetch(`${API_URL}${endpoint}`, {
-    method: method,
-    headers: {
-      'Content-Type': 'application/json',
-      Cookie: session.replace(',', '; ')
-    },
-    body: JSON.stringify(body)
-  })
-    .then(res => res.json())
     .catch(err => console.log(err));
 
   return response;

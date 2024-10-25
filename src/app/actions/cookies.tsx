@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export async function setCookie(name: string, value: any) {
   cookies().set(name, value);
 }
