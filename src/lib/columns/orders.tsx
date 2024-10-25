@@ -45,26 +45,24 @@ export const OrderColumns = (): IColumn[] => [
     placeholder: 'Захиалгын төлөв',
     options: [],
     customCell: customValue => {
-      const value = customValue.toString();
-
       return (
         <Chip
           variant='shadow'
           color={
-            value === 'confirmed'
+            customValue === 'confirmed'
               ? 'success'
-              : value === 'cancelled'
+              : customValue === 'cancelled'
               ? 'danger'
-              : value === 'delivered'
+              : customValue === 'delivered'
               ? 'secondary'
-              : value === 'pending'
+              : customValue === 'pending'
               ? 'warning'
               : 'default'
           }
           size='sm'
           className='text-white'
         >
-          {replaceText(value)}
+          {replaceText(customValue)}
         </Chip>
       );
     }
