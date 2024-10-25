@@ -1,7 +1,10 @@
+'use client';
+
 import { FunctionComponent } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { CustomerColumns } from '@/lib/columns/customers';
 import { ICustomer } from '@/lib/types';
+import MerchantFilterForm from '@/components/merchants/MerchantFilterForm';
 
 interface MerchantBoardProps {
   merchants: ICustomer[];
@@ -17,9 +20,10 @@ const MerchantBoard: FunctionComponent<MerchantBoardProps> = props => {
       <div className='flex-1'>
         <CoreTable
           data={merchants}
-          columns={CustomerColumns}
+          columns={CustomerColumns()}
           totalPage={totalPage}
           currentPage={currentPage}
+          customTopContents={<MerchantFilterForm />}
         />
       </div>
     </div>

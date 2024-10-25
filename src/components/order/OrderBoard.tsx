@@ -8,6 +8,7 @@ import {
   Modal,
   ModalBody,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
@@ -65,6 +66,7 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
                   <OrderDetail order={selectedOrder} />
                 )}
               </ModalBody>
+              <ModalFooter></ModalFooter>
             </>
           )}
         </ModalContent>

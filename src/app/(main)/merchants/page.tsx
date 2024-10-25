@@ -7,6 +7,8 @@ import { FunctionComponent } from 'react';
 interface MerchantsPageProps {
   searchParams: {
     page: string;
+    name: string;
+    phone: string;
   };
 }
 

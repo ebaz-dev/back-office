@@ -1,25 +1,41 @@
 import { IColumn } from '@/lib/types';
+import moment from 'moment';
 
-export const CustomerColumns: IColumn[] = [
-  { uid: 'name', name: '', label: 'Харилцагчийн нэр' },
-  { uid: 'id1', name: '', label: 'Утасны дугаар' },
-  { uid: 'id2', name: '', label: 'Худалдааны цэгийн нэр' },
-  { uid: 'id3', name: '', label: 'Худалдааны цэгийн ерөнхий  байршил' },
-  { uid: 'id4', name: '', label: 'Худалдааны цэгийн байршил' },
-  { uid: 'id5', name: '', label: 'Худалдааны цэгийн газарзүйн координат' },
+export const CustomerColumns = (): IColumn[] => [
+  {
+    uid: 'userId',
+    name: 'userId',
+    label: 'Харилцагчийн нэр',
+    placeholder: 'Харилцагчийн нэр'
+  },
+  {
+    uid: 'name',
+    name: 'name',
+    label: 'Худалдааны цэгийн нэр',
+    placeholder: 'Худалдааны цэгийн нэр',
+    isFilterable: true
+  },
+  {
+    uid: 'phone',
+    name: 'phone',
+    label: 'Утасны дугаар',
+    placeholder: 'Утасны дугаар',
+    isFilterable: true
+  },
   { uid: 'id6', name: '', label: 'Аж ахуйн нэгжийн төрөл' },
   { uid: 'id7', name: '', label: 'Худалдааны цэгийн суваг' },
   { uid: 'id8', name: '', label: 'Худалдааны цэгийн үндсэн ангилал' },
   {
-    uid: 'id9',
-    name: '',
-    label: 'Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо'
+    uid: 'businessStartDate',
+    name: 'businessStartDate',
+    label: 'Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо',
+    customCell: customValue => moment(customValue).format('DD/MM/YYYY')
   },
-  { uid: 'id12', name: '', label: 'Хот/Аймаг' },
-  { uid: 'id13', name: '', label: 'Дүүрэг/Сум' },
-  { uid: 'id14', name: '', label: 'Хороо/Баг' },
-  { uid: 'id16', name: '', label: 'Дэлгэрэнгүй хаяг' },
-  { uid: 'id15', name: '', label: 'И-мэйл' },
+  { uid: 'cityId', name: 'cityId', label: 'Хот/Аймаг' },
+  { uid: 'districtId', name: 'districtId', label: 'Дүүрэг/Сум' },
+  { uid: 'subDistrictId', name: 'subDistrictId', label: 'Хороо/Баг' },
+  { uid: 'address', name: 'address', label: 'Дэлгэрэнгүй хаяг' },
+  { uid: 'email', name: 'email', label: 'И-мэйл' },
   { uid: 'id17', name: '', label: 'Тусгай зөвшөөрөл' },
   { uid: 'id18', name: '', label: 'Хариуцсан ХТ код' }
 ];
