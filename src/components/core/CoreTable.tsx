@@ -57,15 +57,18 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
     setIsLoading(false);
   }, [data]);
 
-  const onPageChange = (value: number) => {
-    const currentParams = new URLSearchParams(
-      Array.from(searchParams.entries())
-    );
+  const onPageChange = useCallback(
+    (value: number) => {
+      const currentParams = new URLSearchParams(
+        Array.from(searchParams.entries())
+      );
 
-    currentParams.set('page', value.toString());
+      currentParams.set('page', value.toString());
 
-    setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
-  };
+      setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
+    },
+    [searchParams, setIsLoading, pathname]
+  );
 
   const topContent = useMemo(() => {
     return (
@@ -90,22 +93,25 @@ const CoreTable: FunctionComponent<CoreTableProps> = props => {
         />
       </div>
     ) : null;
-  }, [currentPage, totalPage]);
+  }, [currentPage, totalPage, onPageChange]);
 
-  const renderCell = useCallback((item: any, columnKey: string) => {
-    const filtered = columns.find(col => col.uid === columnKey);
+  const renderCell = useCallback(
+    (item: any, columnKey: string) => {
+      const filtered = columns.find(col => col.uid === columnKey);
 
-    const cellValue = getKeyValue(
-      getNestedValue(item, columnKey.split('.')),
-      columnKey
-    );
+      const cellValue = getKeyValue(
+        getNestedValue(item, columnKey.split('.')),
+        columnKey
+      );
 
-    if (filtered && filtered.customCell) {
-      return filtered.customCell(cellValue);
-    }
+      if (filtered && filtered.customCell) {
+        return filtered.customCell(cellValue);
+      }
 
-    return <div className='line-clamp-2'>{cellValue || '--'}</div>;
-  }, []);
+      return <div className='line-clamp-2'>{cellValue || '--'}</div>;
+    },
+    [columns]
+  );
 
   return (
     <Table

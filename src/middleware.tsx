@@ -16,7 +16,7 @@ const protectedRoutes = [
 const publicRoutes = ['/login'];
 
 async function middleware(req: NextRequest) {
-  const session: any = await auth();
+  const session = await auth();
 
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);

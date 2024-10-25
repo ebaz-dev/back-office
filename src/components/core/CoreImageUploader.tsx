@@ -6,8 +6,8 @@ import CoreImage from '@/components/core/CoreImage';
 import { Button, Spinner } from '@nextui-org/react';
 
 interface CoreImageUploaderProps {
-  images: any[];
-  setImages: (image: any) => void;
+  images: string[];
+  setImages: (images: string[]) => void;
   className?: string;
 }
 
@@ -23,7 +23,11 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
     images.splice(index, 1);
   };
 
-  const handleFileChange = async (e: any) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
+
     const files = Array.from(e.target.files);
 
     if (files.length > 0) {
