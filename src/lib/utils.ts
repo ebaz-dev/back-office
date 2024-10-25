@@ -14,14 +14,8 @@ export const formatUnit = (value: string | number, unit: string) => {
   return value ? `${value.toLocaleString()} ${unit}` : `0 ${unit}`;
 };
 
-export function isResponseChecker(
-  response: Record<string, unknown> | { error: string }
-): response is Record<string, unknown> {
-  return (response as Record<string, unknown>).data !== undefined;
-}
-
 export const getNestedValue = <T>(
-  obj: Record<string, unknown>,
+  obj: T,
   pathArray: string[]
 ): T | undefined | unknown => {
   return pathArray.reduce<unknown | undefined>((acc, key) => {

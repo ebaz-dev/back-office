@@ -99,7 +99,7 @@ const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
   }, [currentPage, totalPage, onPageChange]);
 
   const renderCell = useCallback(
-    (item: any, columnKey: string) => {
+    (item: T, columnKey: string) => {
       const filtered = columns.find(col => col.uid === columnKey);
 
       const cellValue = getKeyValue(
