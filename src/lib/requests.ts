@@ -7,7 +7,7 @@ export const getProducts = async (currentParams: string) =>
   await fetcher(`/product/dashboard/list?${currentParams}&limit=10`);
 
 export const getCustomers = async (currentParams: string) =>
-  await fetcher(`/customer/list?${currentParams}&limit=10`);
+  await fetcher(`/customer/bo/list?${currentParams}&limit=10`);
 
 export const getProductBrands = async (supplierId: string) =>
   await fetcher(`/product/brands?customerId=${supplierId}&limit=all`);
