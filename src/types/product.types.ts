@@ -1,53 +1,5 @@
-export interface IColumn {
-  uid: string;
-  name: string;
-  label: string;
-  description?: string;
-  defaultValue?: string | number;
-  fieldType?: string;
-  placeholder?: string;
-  options?: IOption[];
-  isFilterable?: boolean;
-  isCreatable?: boolean;
-  isEditable?: boolean;
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  customCell?: (customValue: any) => React.ReactNode;
-}
-
-export interface IOption {
-  value: string | number;
-  label: string;
-}
-
-export interface ICustomer {
-  id: string;
-  parentId: string;
-  name: string;
-  regNo: string;
-  userId: string;
-  address: string;
-  phone: string;
-  type: string;
-  bankAccounts: [];
-  createdAt: Date | string;
-  updatedAt: Date | string;
-  version: number;
-}
-
-export interface IFormField {
-  type: string;
-  name: string;
-  label?: string;
-  placeholder?: string;
-  options?: IOption[];
-}
-
-export interface IProductAttribute {
-  attributeId: string;
-  name: string;
-  slug: string;
-  value: string;
-}
+import { ICustomer } from "@/types/customer.types";
+import { IOption } from "@/types/table.types";
 
 export interface IProduct {
   name: string;
@@ -79,6 +31,14 @@ export interface IProduct {
   id: string;
   customer: ICustomer;
   price: number;
+}
+
+
+export interface IProductAttribute {
+  attributeId: string;
+  name: string;
+  slug: string;
+  value: string;
 }
 
 export interface IBrand {
@@ -116,21 +76,6 @@ export interface IInventory {
   totalStock: number;
   reservedStock: number;
   availableStock: number;
-  id: string;
-}
-
-export interface IOrder {
-  status: string;
-  supplierId: string;
-  merchantId: string;
-  userId: string;
-  cartId: string;
-  products: IProduct[];
-  orderedAt: Date | string;
-  deliveryDate: Date | string;
-  createdAt: Date | string;
-  updatedAt: Date | string;
-  version: number;
   id: string;
 }
 

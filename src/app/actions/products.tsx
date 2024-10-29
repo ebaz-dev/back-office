@@ -2,7 +2,7 @@
 
 import { ProductsColumns } from '@/lib/columns/products';
 import { fetcher } from '@/lib/fetch';
-import { IColumn } from '@/lib/types';
+import { IColumn } from '@/types/table.types';
 import { convertObjectToParam } from '@/lib/utils';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
