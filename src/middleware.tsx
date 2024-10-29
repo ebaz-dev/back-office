@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { auth } from '@/config/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export default auth(middleware);
