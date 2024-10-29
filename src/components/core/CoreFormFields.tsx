@@ -1,4 +1,4 @@
-import { IColumn } from '@/lib/types';
+import { IColumn } from '@/types/table.types';
 import {
   Autocomplete,
   AutocompleteItem,

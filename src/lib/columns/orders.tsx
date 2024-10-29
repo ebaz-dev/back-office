@@ -1,5 +1,5 @@
 import CoreGroupImages from '@/components/core/CoreGroupImages';
-import { IColumn, IProduct } from '@/lib/types';
+import { IColumn, IProduct } from '@/types';
 import { Chip } from '@nextui-org/react';
 import moment from 'moment';
 import { replaceText } from '@/lib/utils';

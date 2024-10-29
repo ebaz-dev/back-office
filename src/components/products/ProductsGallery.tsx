@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { IProduct } from '@/lib/types';
+import { IProduct } from '@/types/product.types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import CoreImageUploader from '@/components/core/CoreImageUploader';
 import { updateProductImageAction } from '@/app/actions/products';

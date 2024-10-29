@@ -1,5 +1,5 @@
 import CoreGroupImages from '@/components/core/CoreGroupImages';
-import { IColumn, IProduct, IProductsFieldProps } from '@/lib/types';
+import { IColumn, IProduct, IProductsFieldProps } from '@/types';
 
 export const ProductsColumns = (
   props?: IProductsFieldProps,

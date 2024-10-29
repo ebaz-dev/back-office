@@ -1,4 +1,4 @@
-import { IProduct } from '@/lib/types';
+import { IProduct } from '@/types/product.types';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from '@nextui-org/react';
 import ProductsEditForm from '@/components/products/ProductsEditForm';

@@ -1,4 +1,4 @@
-import { IProduct } from '@/lib/types';
+import { IProduct } from '@/types/product.types';
 import { Card, CardBody, CardFooter } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import CoreImage from '@/components/core/CoreImage';

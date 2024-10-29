@@ -8,7 +8,7 @@ import {
   ModalHeader,
   useDisclosure
 } from '@nextui-org/react';
-import { IBrand, IProduct } from '@/lib/types';
+import { IBrand, IProduct } from '@/types/product.types';
 import CoreTable from '@/components/core/CoreTable';
 import CoreLoading from '@/components/core/CoreLoading';
 import ProductsDetail from '@/components/products/ProductsDetail';

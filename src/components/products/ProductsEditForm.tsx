@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { ProductsColumns } from '@/lib/columns/products';
 import CoreFormFields from '@/components/core/CoreFormFields';
-import { IProduct } from '@/lib/types';
+import { IProduct } from '@/types/product.types';
 import { updateProductAction } from '@/app/actions/products';
 
 interface ProductsEditFormProps {

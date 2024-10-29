@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import CoreThemeSwitcher from '@/components/core/CoreThemeSwitcher';
 import CoreUserDropDown from '@/components/core/CoreUserDropDown';
 import CoreSelectSupplier from '@/components/core/CoreSelectSupplier';
-import { ICustomer } from '@/lib/types';
+import { ICustomer } from '@/types/customer.types';
 import { usePathname } from 'next/navigation';
 import ProductsCreate from '@/components/products/ProductsCreate';
 import ProductsImport from '@/components/products/ProductsImport';
