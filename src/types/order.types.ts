@@ -1,12 +1,4 @@
 import { IProduct } from "@/types/product.types";
-import { FilterType } from "@/types/data-provider.types";
-export interface OrderSearchParams extends OrderFilterParams {
-  page?: number;
-  limit?: number;
-  sortBy?: string;
-  sortOrder?: string;
-  filter?: FilterType | FilterType[];
-}
 
 export interface OrderFilterParams {
   orderNo?: string;

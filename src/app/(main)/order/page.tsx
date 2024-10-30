@@ -1,14 +1,13 @@
-import { getOrders } from '@/services/orders.service';
-import OrderBoard from '@/components/order/OrderBoard';
-import { OrderSearchParams } from '@/types';
+import { getOrders } from "@/services/orders.service";
+import OrderBoard from "@/components/order/OrderBoard";
+import { SearchParamsType } from "@/types/common.types";
+import { OrderFilterParams } from "@/types";
 
 interface OrderPageProps {
-  searchParams: OrderSearchParams
+  searchParams: SearchParamsType & OrderFilterParams;
 }
 
-export default async function OrderPage({
-  searchParams
-}: OrderPageProps) {
+export default async function OrderPage({ searchParams }: OrderPageProps) {
   const page = searchParams?.page || 1;
   const orders = await getOrders(searchParams);
 
