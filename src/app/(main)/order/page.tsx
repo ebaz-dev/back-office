@@ -1,10 +1,9 @@
 import { getOrders } from "@/services/orders.service";
 import OrderBoard from "@/components/order/OrderBoard";
-import { SearchParamsType } from "@/types/common.types";
-import { OrderFilterParams } from "@/types";
+import { OrderSearchParams } from "@/types/order.types";
 
 interface OrderPageProps {
-  searchParams: SearchParamsType & OrderFilterParams;
+  searchParams: OrderSearchParams;
 }
 
 export default async function OrderPage({ searchParams }: OrderPageProps) {

@@ -1,17 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-export type GetListParamsProps = {
-  page?: number;
-  limit?: number;
-  sortBy?: string;
-  sortOrder?: string;
-  filter?: FilterType | FilterType[];
-};
-
-export type GetListProps = {
-  resource: string;
-  params: GetListParamsProps;
-};
+import { QueryParamsType } from '@/types/common.types';
 
 export type FilterType = {
   field?: string;
@@ -19,13 +7,8 @@ export type FilterType = {
 };
 
 export type GetListParamsType = {
-  page?: number;
-  limit?: number;
-  sortBy?: string;
-  sortOrder?: string;
-  filter?: FilterType | FilterType[];
   [key: string]: any;
-};
+} & QueryParamsType;
 
 export type GetOneParamsType = {
   id: number;
