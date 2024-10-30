@@ -3,6 +3,7 @@
 import {
   getKeyValue,
   Pagination,
+  SortDescriptor,
   Spinner,
   Table,
   TableBody,
@@ -13,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { useCallback, useEffect, useState } from "react";
 import CoreEmpty from "../CoreEmpty";
-import { onPageChangeAction } from "@/app/actions/main";
+import { onQueryParamChangeAction } from "@/app/actions/main";
 import { useMemo } from "react";
 import { getNestedValue } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
@@ -35,6 +36,7 @@ const List = <T extends { id: string | number }>({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentParams = new URLSearchParams(Array.from(searchParams.entries()));
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({});
 
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,7 +49,8 @@ const List = <T extends { id: string | number }>({
   const onPageChange = useCallback(
     (value: number) => {
       currentParams.set("page", value.toString());
-      setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
+      setIsLoading(true),
+        onQueryParamChangeAction(`${pathname}?${currentParams}`);
     },
     [searchParams, setIsLoading, pathname]
   );
@@ -91,6 +94,16 @@ const List = <T extends { id: string | number }>({
     [columns]
   );
 
+  const onSortChange = useCallback((sort: any) => {
+    const { column, direction } = sort;
+
+    currentParams.set("sortBy", column);
+    currentParams.set("sortOrder", direction);
+
+    setSortDescriptor(sort);
+    onQueryParamChangeAction(`${pathname}?${currentParams}`);
+  }, []);
+
   return (
     <div className="h-full flex flex-col gap-4">
       <div className="flex-1">
@@ -102,6 +115,8 @@ const List = <T extends { id: string | number }>({
           bottomContentPlacement="outside"
           selectionMode={isClient ? "multiple" : "none"}
           selectionBehavior="toggle"
+          sortDescriptor={sortDescriptor}
+          onSortChange={(sort) => onSortChange(sort)}
           isHeaderSticky
           // onRowAction={onRowAction}
           classNames={
@@ -118,7 +133,12 @@ const List = <T extends { id: string | number }>({
           <TableHeader>
             <TableHeader columns={columns}>
               {(column) => (
-                <TableColumn key={column.uid}>{column.label}</TableColumn>
+                <TableColumn
+                  key={column.uid}
+                  allowsSorting={column.allowSorting}
+                >
+                  {column.label}
+                </TableColumn>
               )}
             </TableHeader>
           </TableHeader>

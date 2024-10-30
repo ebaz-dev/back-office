@@ -27,3 +27,8 @@ export const clearAllFilterAction = (pathname: string) => {
 
 export const uploadImageAction = async (formData: FormData) =>
   await uploadImageFetcher(formData);
+
+export const onQueryParamChangeAction = (url: string) => {
+  redirect(url);
+};
+

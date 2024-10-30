@@ -13,6 +13,7 @@ export const MERCHANT_COLUMNS: IColumn[] = [
     label: "Худалдааны цэгийн нэр",
     placeholder: "Худалдааны цэгийн нэр",
     isFilterable: true,
+    allowSorting: true,
   },
   {
     uid: "phone",
