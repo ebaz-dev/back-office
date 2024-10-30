@@ -45,4 +45,5 @@ export type ApiResponse<T> = {
   headers: Headers;
   total: number;
   totalPages: number;
+  currentPage: number;
 };

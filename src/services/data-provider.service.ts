@@ -38,7 +38,8 @@ async function processResponse<T>(response: Response): Promise<ApiResponse<T>> {
     status: response.status,
     headers: response.headers,
     total: data?.total || 0,
-    totalPages: data?.totalPages || 0
+    totalPages: data?.totalPages || 0,
+    currentPage: data?.currentPage || 0,
   };
 }
 
