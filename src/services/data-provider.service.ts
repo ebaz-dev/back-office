@@ -66,7 +66,7 @@ async function request<T>(
 // Data provider functions
 const dataProvider = {
   async getList<T>(resource: string, params?: GetListParamsType): Promise<ApiResponse<T>> {
-    const { page, limit = 10, sortBy, sortOrder, filter, ...rest } = params || {};
+    const { page = 1, limit = 10, filter, ...rest } = params || {};
 
     // Process filters
     const processedFilter = filter ? (
@@ -79,12 +79,10 @@ const dataProvider = {
     ) : {};
 
     const queryParams = {
-      sortBy,
-      sortOrder,
       page,
       limit,
       ...processedFilter,
-      ...rest
+      ...rest,
     };
 
     return request<T>(resource, 'GET', { params: queryParams });

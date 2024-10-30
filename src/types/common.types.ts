@@ -1,6 +1,6 @@
-import { FilterType } from "./data-provider.types";
+import { FilterType } from '@/types/data-provider.types';
 
-export interface SearchParamsType {
+export type QueryParamsType = {
   page?: number;
   limit?: number;
   sortBy?: string;

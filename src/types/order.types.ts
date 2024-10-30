@@ -1,4 +1,9 @@
 import { IProduct } from "@/types/product.types";
+import { QueryParamsType } from '@/types/common.types';
+
+export interface OrderSearchParams extends QueryParamsType {
+
+}
 
 export interface OrderFilterParams {
   orderNo?: string;
