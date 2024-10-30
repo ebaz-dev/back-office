@@ -1,9 +1,9 @@
 "use server";
 
-import { signIn, signOut } from "@/config/auth";
-import { LoginFormSchema, LoginFormState } from "@/lib/definitions";
-import { loginFetch } from "@/lib/fetch";
-import { deleteCookie } from "@/app/actions/cookies";
+import { signIn, signOut } from '@/config/auth';
+import { LoginFormSchema, LoginFormState } from '@/lib/definitions';
+import { loginFetch } from '@/services/auth.service';
+import { deleteCookie } from '@/app/actions/cookies';
 
 export async function loginAction(state: LoginFormState, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
