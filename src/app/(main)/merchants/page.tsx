@@ -1,41 +1,25 @@
-import { getCookie } from '@/app/actions/cookies';
-import MerchantBoard from '@/components/merchants/MerchantBoard';
-import { getCustomers } from '@/lib/requests';
-import { convertObjectToParam } from '@/lib/utils';
-import { FunctionComponent } from 'react';
+import List from "@/components/core/List";
+import { MERCHANT_COLUMNS } from "@/constants/columns/merchant";
+import { SearchParamsType } from "@/types/common.types";
+import { getMerchants } from "@/services/merchant.service";
 
-interface MerchantsPageProps {
-  searchParams: {
-    page: string;
-    name: string;
-    phone: string;
-  };
+interface MerchantListProps {
+  searchParams: SearchParamsType;
 }
 
-const MerchantsPage: FunctionComponent<MerchantsPageProps> = async ({
-  searchParams
-}) => {
-  const supplier = await getCookie('supplier');
-
-  const supplierId = supplier ? JSON.parse(supplier).id : '';
-
-  const currentParams = convertObjectToParam({
-    ...searchParams,
-    type: 'merchant',
-    supplierId: supplierId
-  });
-
-  const merchantsData = getCustomers(currentParams);
-
-  const [merchants] = await Promise.all([merchantsData]);
+export default async function MerchantList({
+  searchParams,
+}: MerchantListProps) {
+  /* -----------------DATA FETCH SETION START--------------------- */
+  const merchants = await getMerchants(searchParams);
+  /* -----------------DATA FETCH SETION END--------------------- */
 
   return (
-    <MerchantBoard
-      merchants={merchants?.data ?? []}
+    <List
+      data={merchants?.data}
+      columns={MERCHANT_COLUMNS}
+      totalPages={merchants?.totalPages}
       currentPage={merchants?.currentPage}
-      totalPage={merchants?.totalPages}
     />
   );
-};
-
-export default MerchantsPage;
+}
