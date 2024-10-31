@@ -12,7 +12,7 @@ export async function getProducts(searchParams: OrderSearchParams): Promise<ApiR
     supplierId,
   };
 
-  return dataProvider.getList<IProduct[]>('/product/dashboard/list', params);
+  return dataProvider.getList<IProduct[]>('/product/bo', params);
 }
 
 export async function getProductBrands(): Promise<ApiResponse<IBrand[]>> {
@@ -23,10 +23,6 @@ export async function getProductBrands(): Promise<ApiResponse<IBrand[]>> {
 }
 
 export async function getProduct<IProduct>(id: number) {
-  const params = {
-    ids: [id]
-  };
-
-  const res = await dataProvider.getList<IProduct[]>('/product/dashboard/list', params);
-  return res.data[0];
+  const res = await dataProvider.getOne<IProduct>(`/product/bo`, { id });
+  return res.data;
 }

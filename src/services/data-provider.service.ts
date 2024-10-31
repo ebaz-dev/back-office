@@ -32,8 +32,9 @@ async function processResponse<T>(response: Response): Promise<ApiResponse<T>> {
   }
 
   const data = await response.json();
+
   return {
-    data: data?.data || [],
+    data: data?.data || data || [],
     ok: response.ok,
     status: response.status,
     headers: response.headers,

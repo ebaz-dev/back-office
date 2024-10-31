@@ -13,7 +13,7 @@ interface CoreFormFieldsProps {
   fields: IColumn[];
   isClearable?: boolean;
   className?: string;
-  type?: 'create' | 'filter' | 'edit';
+  type?: 'create' | 'filter' | 'edit' | 'show';
 }
 
 const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
@@ -42,6 +42,27 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
 
     if (!isEditable && type === 'edit') {
       return null;
+    }
+
+    if (type === 'show') {
+      return (
+        <Input
+          key={index}
+          type='text'
+          name={name}
+          defaultValue={defaultValue?.toString() || '-'}
+          label={label}
+          disableAnimation
+          isReadOnly
+          className={className}
+          size='md'
+          labelPlacement='outside'
+          variant='bordered'
+          classNames={{
+            label: 'text-xs'
+          }}
+        />
+      );
     }
 
     if (fieldType === 'datepicker') {

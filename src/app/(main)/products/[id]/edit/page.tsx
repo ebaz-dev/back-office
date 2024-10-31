@@ -14,7 +14,7 @@ async function ProductEditPage({ params }: ProductPageProps) {
 
   return (
     <CoreContainer title={product.name}>
-      <ProductsDetail product={product} />
+      <ProductsDetail product={product} type='edit' />
     </CoreContainer>
   );
 }
