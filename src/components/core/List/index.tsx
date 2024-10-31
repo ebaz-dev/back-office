@@ -94,11 +94,11 @@ const List = <T extends { id: string | number }>({
     [columns]
   );
 
-  const onSortChange = useCallback((sort: any) => {
+  const onSortChange = useCallback((sort: SortDescriptor) => {
     const { column, direction } = sort;
 
-    currentParams.set("sortBy", column);
-    currentParams.set("sortOrder", direction);
+    currentParams.set("sortBy", column as string);
+    currentParams.set("sortOrder", direction as string);
 
     setSortDescriptor(sort);
     onQueryParamChangeAction(`${pathname}?${currentParams}`);
