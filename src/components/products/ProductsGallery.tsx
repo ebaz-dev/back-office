@@ -8,10 +8,11 @@ import { updateProductImageAction } from '@/app/actions/products';
 
 interface ProductsGalleryProps {
   product: IProduct;
+  type?: 'edit' | 'show';
 }
 
 const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
-  const { product } = props;
+  const { product, type = 'show' } = props;
 
   const [images, setImages] = useState(product.images);
 
@@ -23,7 +24,7 @@ const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
   return (
     <form className='flex flex-col gap-4' action={addImage}>
       <CoreImageUploader images={images} setImages={setImages} />
-      <CoreSubmitButton text='Хадгалах' />
+      {type === 'edit' && <CoreSubmitButton text='Хадгалах' />}
     </form>
   );
 };

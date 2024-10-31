@@ -8,10 +8,11 @@ import ProductsGallery from '@/components/products/ProductsGallery';
 
 interface ProductsDetailProps {
   product: IProduct;
+  type?: 'edit' | 'show';
 }
 
 const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
-  const { product } = props;
+  const { product, type = 'show' } = props;
 
   return (
     <Tabs
@@ -22,12 +23,15 @@ const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
       classNames={{
         tabList: "gap-6",
         cursor: "w-full",
-        panel: "h-[calc(100vh-120px)]",
+        panel: "h-[calc(80vh-120px)]",
         tab: "max-w-fit px-8",
       }}
     >
       <Tab key='editInfo' title='Дэлгэрэнгүй мэдээлэл'>
-        <ProductsEditForm product={product} />
+        <ProductsEditForm
+          product={product}
+          type={type}
+        />
       </Tab>
       <Tab key='photos' title='Бүтээгдэхүүний зурагнууд'>
         <ProductsGallery product={product} />

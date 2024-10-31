@@ -7,10 +7,12 @@ import { updateProductAction } from '@/app/actions/products';
 
 interface ProductsEditFormProps {
   product: IProduct;
+  type: 'edit' | 'show';
 }
 
 const ProductsEditForm: FunctionComponent<ProductsEditFormProps> = ({
-  product
+  product,
+  type
 }) => {
   return (
     <form className='flex flex-col gap-4' action={updateProductAction}>
@@ -18,11 +20,10 @@ const ProductsEditForm: FunctionComponent<ProductsEditFormProps> = ({
         <CoreFormFields
           fields={ProductsColumns({}, product)}
           className='max-w-xs'
-          type='edit'
+          type={type}
         />
       </div>
-
-      <CoreSubmitButton text='Хадгалах' className='w-full' />
+      {type === 'edit' && <CoreSubmitButton text='Хадгалах' className='w-full' />}
     </form>
   );
 };

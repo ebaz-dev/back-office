@@ -12,13 +12,12 @@ interface ProductPageProps {
 
 async function ProductPage({ params }: ProductPageProps) {
   const product = await getProduct<IProduct>(params.id);
-
   return (
     <CoreContainer
       title={product.name}
       headerContent={<CoreActions />}
     >
-      <ProductsDetail product={product} />
+      <ProductsDetail product={product} type='show' />
     </CoreContainer>
   );
 }
