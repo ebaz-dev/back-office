@@ -10,9 +10,8 @@ interface MerchantListProps {
 export default async function MerchantList({
   searchParams,
 }: MerchantListProps) {
-  /* -----------------DATA FETCH SETION START--------------------- */
+
   const merchants = await getMerchants(searchParams);
-  /* -----------------DATA FETCH SETION END--------------------- */
 
   return (
     <List

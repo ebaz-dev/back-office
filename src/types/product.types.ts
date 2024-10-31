@@ -1,5 +1,13 @@
 import { ICustomer } from "@/types/customer.types";
 import { IOption } from "@/types/table.types";
+import { SearchParamsType } from "@/types/common.types";
+
+export interface ProductSearchParams extends SearchParamsType {
+  id: string;
+  sku: string;
+  name: string;
+  barCode: string;
+}
 
 export interface IProduct {
   name: string;

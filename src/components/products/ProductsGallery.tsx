@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent, useState } from 'react';
 import { IProduct } from '@/types/product.types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
@@ -21,7 +23,6 @@ const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
   return (
     <form className='flex flex-col gap-4' action={addImage}>
       <CoreImageUploader images={images} setImages={setImages} />
-
       <CoreSubmitButton text='Хадгалах' />
     </form>
   );
