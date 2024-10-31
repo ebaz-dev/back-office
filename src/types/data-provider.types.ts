@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { QueryParamsType } from '@/types/common.types';
+import { SearchParamsType } from '@/types/common.types';
 
 export type FilterType = {
   field?: string;
@@ -8,7 +8,7 @@ export type FilterType = {
 
 export type GetListParamsType = {
   [key: string]: any;
-} & QueryParamsType;
+} & SearchParamsType;
 
 export type GetOneParamsType = {
   id: number;
