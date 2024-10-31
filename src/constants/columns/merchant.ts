@@ -1,4 +1,7 @@
+"use client";
+
 import { IColumn } from "@/types";
+import moment from "moment";
 
 export const MERCHANT_COLUMNS: IColumn[] = [
   {
@@ -29,7 +32,7 @@ export const MERCHANT_COLUMNS: IColumn[] = [
     uid: "businessStartDate",
     name: "businessStartDate",
     label: "Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо",
-    // customCell: (customValue) => moment(customValue).format("DD/MM/YYYY"),
+    customCell: (customValue: any) => moment(customValue).format("DD/MM/YYYY"),
   },
   { uid: "cityId", name: "cityId", label: "Хот/Аймаг" },
   { uid: "districtId", name: "districtId", label: "Дүүрэг/Сум" },
