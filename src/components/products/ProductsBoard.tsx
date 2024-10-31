@@ -1,17 +1,9 @@
 'use client';
 
-import { FunctionComponent, Key, useState } from 'react';
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  useDisclosure
-} from '@nextui-org/react';
+import { FunctionComponent, Key } from 'react';
+import { useRouter } from 'next/navigation';
 import { IBrand, IProduct } from '@/types/product.types';
 import CoreTable from '@/components/core/CoreTable';
-import CoreLoading from '@/components/core/CoreLoading';
-import ProductsDetail from '@/components/products/ProductsDetail';
 import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 import { ProductsColumns } from '@/lib/columns/products';
 
@@ -25,19 +17,13 @@ interface ProductsBoardProps {
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   const { products, totalPage, currentPage, brands } = props;
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(
-    undefined
-  );
-
+  const router = useRouter();
   const onRowAction = async (key: Key) => {
-    onOpen();
-
     const product: IProduct | undefined = products.find(
       item => item.id === key
     );
 
-    setSelectedProduct(product);
+    router.push(`/products/${product?.id}`);
   };
 
   return (
@@ -52,25 +38,6 @@ const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
           customTopContents={<ProductsFilterForm brands={brands} />}
         />
       </div>
-
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
-        <ModalContent>
-          {() => (
-            <>
-              <ModalHeader className='flex flex-col gap-1'>
-                {selectedProduct?.name}
-              </ModalHeader>
-              <ModalBody className='pb-4'>
-                {!selectedProduct ? (
-                  <CoreLoading />
-                ) : (
-                  <ProductsDetail product={selectedProduct} />
-                )}
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
     </div>
   );
 };

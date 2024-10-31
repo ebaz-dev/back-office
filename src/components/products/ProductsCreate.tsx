@@ -12,14 +12,15 @@ import {
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import ProductsCreateForm from '@/components/products/ProductsCreateForm';
+import { useRouter } from 'next/navigation';
 
 interface ProductsCreateProps {}
 
 const ProductsCreate: FunctionComponent<ProductsCreateProps> = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const router = useRouter();
   const onPress = () => {
-    onOpen();
+    router.push('/products/create');
   };
 
   return (
