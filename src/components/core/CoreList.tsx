@@ -2,7 +2,6 @@
 
 import {
   getKeyValue,
-  Pagination,
   SortDescriptor,
   Spinner,
   Table,
@@ -13,17 +12,17 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import { useCallback, useEffect, useState } from "react";
-import CoreEmpty from "../CoreEmpty";
+import CoreEmpty from "./CoreEmpty";
 import { onQueryParamChangeAction } from "@/app/actions/main";
 import { useMemo } from "react";
 import { addOptionsToColumns, getNestedValue } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { IColumn } from "@/types";
-import ListFilter from "@/components/core/ListFilter";
-import CorePagination from "../CorePagination";
+import { FilterOptionsType, IColumn } from "@/types";
+import CoreListFilter from "@/components/core/CoreListFilter";
+import CorePagination from "./CorePagination";
 
-const List = <T extends { id: string | number }>({
+const CoreList = <T extends { id: string | number }>({
   data,
   columns,
   totalPages,
@@ -34,7 +33,7 @@ const List = <T extends { id: string | number }>({
   columns: IColumn[];
   totalPages: number;
   currentPage: number;
-  filterOptions: any;
+  filterOptions: FilterOptionsType;
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -60,7 +59,7 @@ const List = <T extends { id: string | number }>({
 
   const topContent = useMemo(
     () => (
-      <ListFilter
+      <CoreListFilter
         columns={
           filterOptions ? addOptionsToColumns(columns, filterOptions) : columns
         }
@@ -167,4 +166,4 @@ const List = <T extends { id: string | number }>({
   );
 };
 
-export default List;
+export default CoreList;

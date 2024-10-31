@@ -38,7 +38,7 @@ export const MERCHANT_COLUMNS: IColumn[] = [
     uid: "businessStartDate",
     name: "businessStartDate",
     label: "Худалдааны цэгийн үйл ажиллагаа эхлүүлсэн огноо",
-    customCell: (customValue: any) => moment(customValue).format("DD/MM/YYYY"),
+    customCell: (customValue: string) => moment(customValue).format("DD/MM/YYYY"),
   },
   { uid: "cityId", name: "cityId", label: "Хот/Аймаг" },
   { uid: "districtId", name: "districtId", label: "Дүүрэг/Сум" },

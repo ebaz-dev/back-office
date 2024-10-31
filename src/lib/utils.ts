@@ -1,5 +1,5 @@
 import { MEDIA_URL } from '@/config';
-import { IColumn } from '@/types';
+import { FilterOptionsType, IColumn } from '@/types';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -59,7 +59,7 @@ export const replaceText = (text: string) => {
   return text;
 };
 
-export const addOptionsToColumns = (columns: IColumn[], options: any) => {
+export const addOptionsToColumns = (columns: IColumn[], options: FilterOptionsType) => {
   const updatedColumns = columns.map((column) => {
     // If column name matches an options key, add those options to the column
     if (column.name && options[column.name]) {

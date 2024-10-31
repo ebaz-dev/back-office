@@ -43,7 +43,7 @@ const CoreBreadcrumb: FunctionComponent<CoreBreadcrumbProps> = () => {
       <BreadcrumbItem>
         <Link href="/" className="hover:text-gray-900">Home</Link>
       </BreadcrumbItem>
-      {breadcrumbs.map((breadcrumb, index) => (
+      {breadcrumbs.map((breadcrumb) => (
         <BreadcrumbItem key={breadcrumb.path}>
           <Link href={breadcrumb.path} className="hover:text-gray-900">
             {breadcrumb.label}

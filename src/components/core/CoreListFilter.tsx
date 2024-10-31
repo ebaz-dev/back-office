@@ -8,12 +8,12 @@ import { clearAllFilterAction } from "@/app/actions/main";
 import { IColumn } from "@/types";
 import filterAction from "@/app/actions/filter";
 
-interface ListFilterProps {
+interface CoreListFilterProps {
   columns: IColumn[];
   pathname: string;
 }
 
-export default function ListFilter({ columns, pathname }: ListFilterProps) {
+const CoreListFilter = ({ columns, pathname }: CoreListFilterProps) => {
   const ref = useRef<HTMLFormElement>(null);
   const tColumns = columns.filter((column) => column.isFilterable);
 
@@ -47,4 +47,6 @@ export default function ListFilter({ columns, pathname }: ListFilterProps) {
       </Button>
     </form>
   );
-}
+};
+
+export default CoreListFilter;

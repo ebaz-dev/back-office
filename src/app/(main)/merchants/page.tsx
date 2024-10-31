@@ -1,4 +1,4 @@
-import List from "@/components/core/List";
+import CoreList from "@/components/core/CoreList";
 import { SearchParamsType } from "@/types/common.types";
 import { getMerchants } from "@/services/merchant.service";
 import { MERCHANT_COLUMNS } from "@/constants/columns/merchant";
@@ -25,7 +25,7 @@ export default async function MerchantList({
   /* dummy options end */
 
   return (
-    <List
+    <CoreList
       data={merchants?.data}
       columns={MERCHANT_COLUMNS}
       totalPages={merchants?.totalPages}

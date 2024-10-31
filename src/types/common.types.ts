@@ -1,4 +1,4 @@
-import { FilterType } from '@/types/data-provider.types';
+import { FilterType } from "@/types/data-provider.types";
 
 export type SearchParamsType = {
   page?: number;
@@ -6,4 +6,8 @@ export type SearchParamsType = {
   sortBy?: string;
   sortOrder?: string;
   filter?: FilterType | FilterType[];
-}
+};
+
+export type FilterOptionsType = {
+  [key: string]: { value: string; label: string }[];
+};
