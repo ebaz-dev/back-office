@@ -6,10 +6,7 @@ interface ProductsPageProps {
   searchParams: ProductSearchParams;
 }
 
-const ProductsPage = async ({
-  searchParams
-}: ProductsPageProps) => {
-
+const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
   const productsData = getProducts(searchParams);
   const productsBrandsData = getProductBrands();
 
