@@ -16,22 +16,25 @@ import { useCallback, useEffect, useState } from "react";
 import CoreEmpty from "../CoreEmpty";
 import { onQueryParamChangeAction } from "@/app/actions/main";
 import { useMemo } from "react";
-import { getNestedValue } from "@/lib/utils";
+import { addOptionsToColumns, getNestedValue } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { IColumn } from "@/types";
 import ListFilter from "@/components/core/ListFilter";
+import CorePagination from "../CorePagination";
 
 const List = <T extends { id: string | number }>({
   data,
   columns,
   totalPages,
   currentPage,
+  filterOptions,
 }: {
   data: T[];
   columns: IColumn[];
   totalPages: number;
   currentPage: number;
+  filterOptions: any;
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -49,47 +52,46 @@ const List = <T extends { id: string | number }>({
   const onPageChange = useCallback(
     (value: number) => {
       currentParams.set("page", value.toString());
-      setIsLoading(true),
-        onQueryParamChangeAction(`${pathname}?${currentParams}`);
+      setIsLoading(true);
+      onQueryParamChangeAction(`${pathname}?${currentParams}`);
     },
-    [searchParams, setIsLoading, pathname]
+    [currentParams, setIsLoading, pathname]
   );
 
-  const topContent = useMemo(() => {
-    return <ListFilter columns={columns} pathname={pathname} />;
-  }, [columns]);
+  const topContent = useMemo(
+    () => (
+      <ListFilter
+        columns={
+          filterOptions ? addOptionsToColumns(columns, filterOptions) : columns
+        }
+        pathname={pathname}
+      />
+    ),
+    [columns]
+  );
 
   const bottomContent = useMemo(() => {
     return totalPages > 0 ? (
-      <div className="py-2 px-2 flex justify-center items-center">
-        <Pagination
-          isCompact
-          showControls
-          showShadow
-          color="primary"
-          page={currentPage}
-          total={totalPages}
-          onChange={onPageChange}
-          classNames={{ wrapper: "shadow-md" }}
-        />
-      </div>
+      <CorePagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+      />
     ) : null;
   }, [currentPage, totalPages, onPageChange]);
 
   const renderCell = useCallback(
     (item: T, columnKey: string) => {
       const filtered = columns.find((col) => col.uid === columnKey);
-
       const cellValue = getKeyValue(
         getNestedValue(item, columnKey.split(".")),
         columnKey
       );
-
-      if (filtered && filtered.customCell) {
-        return filtered.customCell(cellValue);
-      }
-
-      return <div className="line-clamp-2">{cellValue || "--"}</div>;
+      return filtered && filtered.customCell ? (
+        filtered.customCell(cellValue)
+      ) : (
+        <div className="line-clamp-2">{cellValue || "--"}</div>
+      );
     },
     [columns]
   );

@@ -25,7 +25,13 @@ export const MERCHANT_COLUMNS: IColumn[] = [
     placeholder: "Утасны дугаар",
     isFilterable: true,
   },
-  { uid: "id6", name: "", label: "Аж ахуйн нэгжийн төрөл" },
+  {
+    uid: "optionTest",
+    name: "optionTest",
+    fieldType: "select",
+    label: "Аж ахуйн нэгжийн төрөл",
+    isFilterable: true,
+  },
   { uid: "id7", name: "", label: "Худалдааны цэгийн суваг" },
   { uid: "id8", name: "", label: "Худалдааны цэгийн үндсэн ангилал" },
   {
