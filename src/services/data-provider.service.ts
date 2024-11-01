@@ -67,22 +67,13 @@ async function request<T>(
 // Data provider functions
 const dataProvider = {
   async getList<T>(resource: string, params?: GetListParamsType): Promise<ApiResponse<T>> {
-    const { page = 1, limit = 10, filter, ...rest } = params || {};
-
-    // Process filters
-    const processedFilter = filter ? (
-      Array.isArray(filter)
-        ? filter.reduce((acc, { field, val }) => ({
-          ...acc,
-          [`filter[${field}]`]: val,
-        }), {})
-        : { [`filter[${filter.field}]`]: filter.val }
-    ) : {};
+    const { page = 1, limit = 10, sortOrder, ...rest } = params || {};
+    const customSortOrder = sortOrder === 'ascending' ? 'asc' : 'desc';
 
     const queryParams = {
       page,
       limit,
-      ...processedFilter,
+      sortOrder: customSortOrder,
       ...rest,
     };
 

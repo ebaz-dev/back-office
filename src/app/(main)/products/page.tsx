@@ -17,8 +17,8 @@ const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
 
   return (
     <ProductsBoard
-      brands={brands?.data || []}
       products={products?.data || []}
+      brands={brands?.data || []}
       totalPage={products?.totalPages}
       currentPage={products?.currentPage || 1}
     />

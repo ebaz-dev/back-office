@@ -13,9 +13,10 @@ export const ProductsColumns = (
       placeholder: 'Зураг',
       description: 'Олон зураг сонгож болно',
       isCreatable: false,
+      allowSorting: true,
       customCell: (customValue: string[]) => (
         <CoreGroupImages images={customValue} />
-      )
+      ),
     },
     {
       uid: 'id',
@@ -25,7 +26,8 @@ export const ProductsColumns = (
       fieldType: 'input',
       placeholder: 'Ебазаар бүтээгдэхүүний ID',
       isFilterable: true,
-      isEditable: true
+      isEditable: true,
+      allowSorting: true,
     },
     {
       uid: 'name',
@@ -36,7 +38,8 @@ export const ProductsColumns = (
       placeholder: 'Бүтээгдэхүүний нэр',
       isFilterable: true,
       isCreatable: true,
-      isEditable: true
+      isEditable: true,
+      allowSorting: true,
     },
     {
       uid: 'barCode',
@@ -58,7 +61,8 @@ export const ProductsColumns = (
       placeholder: 'Бүтээгдхүүний SKU',
       isFilterable: true,
       isCreatable: true,
-      isEditable: true
+      isEditable: true,
+      allowSorting: true,
     },
     {
       uid: 'inCase',
@@ -111,7 +115,7 @@ export const ProductsColumns = (
       isEditable: true
     },
     {
-      uid: 'brand.name',
+      uid: 'brands.name',
       name: 'brands',
       defaultValue: '',
       label: 'Брэнд',

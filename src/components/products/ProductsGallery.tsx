@@ -23,7 +23,7 @@ const ProductsGallery: FunctionComponent<ProductsGalleryProps> = props => {
 
   return (
     <form className='flex flex-col gap-4' action={addImage}>
-      <CoreImageUploader images={images} setImages={setImages} />
+      <CoreImageUploader images={images} setImages={setImages} type={type} />
       {type === 'edit' && <CoreSubmitButton text='Хадгалах' />}
     </form>
   );
