@@ -34,7 +34,10 @@ const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
         />
       </Tab>
       <Tab key='photos' title='Бүтээгдэхүүний зурагнууд'>
-        <ProductsGallery product={product} />
+        <ProductsGallery
+          product={product}
+          type={type}
+        />
       </Tab>
     </Tabs>
   );

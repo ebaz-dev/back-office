@@ -34,7 +34,7 @@ const NavProvider: FunctionComponent<NavProviderProps> = props => {
         </div>
 
         <div className='p-4'>
-          <div className='px-4 flex items-center bg-white rounded-lg'>
+          <div className='px-4 flex items-center bg-background rounded-lg'>
             <CoreBackButton />
             <CoreBreadcrumb />
           </div>

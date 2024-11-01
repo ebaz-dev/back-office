@@ -11,12 +11,12 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { useCallback, useEffect, useState } from "react";
+import { Key, useCallback, useEffect, useState } from "react";
 import CoreEmpty from "./CoreEmpty";
 import { onQueryParamChangeAction } from "@/app/actions/main";
 import { useMemo } from "react";
 import { addOptionsToColumns, getNestedValue } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { FilterOptionsType, IColumn } from "@/types";
 import CoreListFilter from "@/components/core/CoreListFilter";
@@ -28,17 +28,21 @@ const CoreList = <T extends { id: string | number }>({
   totalPages,
   currentPage,
   filterOptions,
+  onRowAction,
 }: {
   data: T[];
   columns: IColumn[];
   totalPages: number;
   currentPage: number;
   filterOptions: FilterOptionsType;
+  onRowAction?: (key: Key) => void;
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentParams = new URLSearchParams(Array.from(searchParams.entries()));
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({});
+
+  const router = useRouter();
 
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -105,6 +109,15 @@ const CoreList = <T extends { id: string | number }>({
     onQueryParamChangeAction(`${pathname}?${currentParams}`);
   }, []);
 
+  const onDefaultRowAction = (key: Key) => {
+
+    if (onRowAction) {
+      onRowAction(key);
+    }
+
+    router.push(`${pathname}/${key}`);
+  }
+
   return (
     <div className="h-full flex flex-col gap-4">
       <div className="flex-1">
@@ -119,15 +132,15 @@ const CoreList = <T extends { id: string | number }>({
           sortDescriptor={sortDescriptor}
           onSortChange={(sort) => onSortChange(sort)}
           isHeaderSticky
-          // onRowAction={onRowAction}
+          onRowAction={onDefaultRowAction}
           classNames={
             data.length === 0
               ? {
-                  base: "h-full",
-                  table: "h-full",
-                  tbody: "h-full",
-                  wrapper: "h-full",
-                }
+                base: "h-full",
+                table: "h-full",
+                tbody: "h-full",
+                wrapper: "h-full",
+              }
               : {}
           }
         >
