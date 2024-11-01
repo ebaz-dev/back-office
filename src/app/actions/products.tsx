@@ -1,37 +1,36 @@
-'use server';
+"use server";
 
-import { fetcher } from '@/lib/fetch';
-import { convertObjectToParam } from '@/lib/utils';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { ProductCreateFormSchema } from '@/utils/definitions/products';
-import { getCookie } from './cookies';
-import { createProduct, updateProduct } from '@/services/products.service';
+import { fetcher } from "@/lib/fetch";
+import { convertObjectToParam } from "@/lib/utils";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { ProductCreateFormSchema } from "@/utils/definitions/products";
+import { getCookie } from "./cookies";
+import { createProduct, updateProduct } from "@/services/products.service";
 
 export async function createProductAction(prevState: any, formData: FormData) {
-
   // Validate form using Zod
   const validatedFields = ProductCreateFormSchema.safeParse({
-    name: formData.get('name'),
-    barCode: formData.get('barCode'),
-    sku: formData.get('sku'),
-    categoryId: formData.get('categoryId'),
-    brandId: formData.get('brandId'),
-    description: formData.get('description'),
-    price: Number(formData.get('price')),
-    cost: Number(formData.get('cost')),
-    inCase: Number(formData.get('inCase')),
-    priority: Number(formData.get('priority')),
-    isActive: formData.get('isActive') === "true",
-    isAlcohol: formData.get('isAlcohol') === "true",
-    cityTax: formData.get('cityTax') === "true",
+    name: formData.get("name"),
+    barCode: formData.get("barCode"),
+    sku: formData.get("sku"),
+    categoryId: formData.get("categoryId"),
+    brandId: formData.get("brandId"),
+    description: formData.get("description"),
+    price: Number(formData.get("price")),
+    cost: Number(formData.get("cost")),
+    inCase: Number(formData.get("inCase")),
+    priority: Number(formData.get("priority")),
+    isActive: formData.get("isActive") === "true",
+    isAlcohol: formData.get("isAlcohol") === "true",
+    cityTax: formData.get("cityTax") === "true",
   });
 
   // If form validation fails, return errors
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Product.',
+      message: "Missing Fields. Failed to Create Product.",
     };
   }
 
@@ -46,7 +45,7 @@ export async function createProductAction(prevState: any, formData: FormData) {
   const body = {
     prices: {
       price,
-      cost
+      cost,
     },
     customerId: supplierId,
     ...rest,
@@ -64,54 +63,60 @@ export async function createProductAction(prevState: any, formData: FormData) {
   // }
 
   return {
-    message: 'Product Created Successfully!',
+    message: "Product Created Successfully!",
     errors: {},
   };
 }
-
-export async function updateProductAction(formData: FormData) {
+export async function updateProductAction(
+  formData: FormData,
+  productId: number
+) {
   // Validate form using Zod
   const validatedFields = ProductCreateFormSchema.safeParse({
-    name: formData.get('name'),
-    barCode: formData.get('barCode'),
-    sku: formData.get('sku'),
-    categoryId: formData.get('categoryId'),
-    brandId: formData.get('brandId'),
-    description: formData.get('description'),
-    price: Number(formData.get('price')),
-    cost: Number(formData.get('cost')),
-    inCase: Number(formData.get('inCase')),
-    priority: Number(formData.get('priority')),
-    isActive: formData.get('isActive') === "true",
-    isAlcohol: formData.get('isAlcohol') === "true",
-    cityTax: formData.get('cityTax') === "true",
+    name: formData.get("name"),
+    barCode: formData.get("barCode"),
+    sku: formData.get("sku"),
+    categoryId: formData.get("categoryId"),
+    brandId: formData.get("brandId"),
+    description: formData.get("description"),
+    price: Number(formData.get("price")),
+    cost: Number(formData.get("cost")),
+    inCase: Number(formData.get("inCase")),
+    priority: Number(formData.get("priority")),
+    isActive: formData.get("isActive") === "true",
+    isAlcohol: formData.get("isAlcohol") === "true",
+    cityTax: formData.get("cityTax") === "true",
   });
 
   // If form validation fails, return errors
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Update Product.',
+      message: "Missing Fields. Failed to Update Product.",
     };
   }
 
   const data = validatedFields.data;
 
-  const res = await updateProduct(state.id, data);
+  const res = await updateProduct(productId, data);
+
+  console.log("=====UPDATE RES======")
+  console.log(res)
+  console.log("=====UPDATE RES END======")
 
   return {
-    message: 'Product Updated Successfully!',
+    message: "Product Updated Successfully!",
     errors: {},
   };
 }
 
 export async function filterProductsAction(formData: FormData) {
   const rawFormData = {
-    ids: formData.get('id'),
-    name: formData.get('name'),
-    barCode: formData.get('barCode'),
-    sku: formData.get('sku'),
-    brands: formData.get('brand')
+    ids: formData.get("id"),
+    name: formData.get("name"),
+    barCode: formData.get("barCode"),
+    sku: formData.get("sku"),
+    brands: formData.get("brand"),
   };
 
   const currentParams = convertObjectToParam(rawFormData);
@@ -123,11 +128,11 @@ export async function updateProductImageAction(item: {
   id: string;
   images: string[];
 }) {
-  await fetcher(`/product/update/${item.id}`, 'PUT', {
-    images: item.images
+  await fetcher(`/product/update/${item.id}`, "PUT", {
+    images: item.images,
   });
 
-  revalidatePath('/products');
+  revalidatePath("/products");
 }
 
 export async function importProductsAction(formData: FormData) {
