@@ -19,7 +19,7 @@ const CoreContainer: FunctionComponent<CoreContainerProps> = ({
   footerContent
 }) => {
   return (
-    <div className={cn('w-full h-[calc(100vh-140px)] bg-white rounded-lg', className)}>
+    <div className={cn('w-full h-[calc(100vh-140px)] bg-background rounded-lg', className)}>
       {/* Header Section */}
       {(title || headerContent) && (
         <div className="flex items-center justify-between p-4 border-b">

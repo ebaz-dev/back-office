@@ -21,7 +21,7 @@ const CoreBackButton: FunctionComponent<CoreBackButtonProps> = ({ className }) =
       onPress={() => router.back()}
       title='Back'
     >
-      <ArrowLeftIcon className="w-5 h-5" />
+      <ArrowLeftIcon color="primary" className="w-5 h-5" />
     </Button>
   );
 };
