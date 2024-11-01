@@ -93,4 +93,5 @@ export interface IProductsFieldProps {
   generalCategories?: IOption[];
   subCategories?: IOption[];
   finalCategories?: IOption[];
+  categoryOptions?: IOption[];
 }
