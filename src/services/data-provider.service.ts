@@ -28,7 +28,16 @@ const createUrl = (endpoint: string, params?: Record<string, unknown>): URL => {
 // Process API response
 async function processResponse<T>(response: Response): Promise<ApiResponse<T>> {
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    // throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    return {
+      data: [] as T,
+      ok: false,
+      status: response.status,
+      headers: response.headers,
+      total: 0,
+      totalPages: 0,
+      currentPage: 0,
+    };
   }
 
   const data = await response.json();
