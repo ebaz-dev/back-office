@@ -1,3 +1,5 @@
+import { InputProps } from "@nextui-org/react";
+
 export interface IColumn {
   uid: string;
   name: string;
@@ -11,11 +13,12 @@ export interface IColumn {
   isCreatable?: boolean;
   isEditable?: boolean;
   allowSorting?: boolean;
+  inputProps?: InputProps;
   /* eslint-disable @typescript-eslint/no-explicit-any */
   customCell?: (customValue: any) => React.ReactNode;
 }
 
 export interface IOption {
-  value: string | number;
+  value: string | number | boolean;
   label: string;
 }

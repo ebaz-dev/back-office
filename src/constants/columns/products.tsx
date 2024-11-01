@@ -13,7 +13,7 @@ export const ProductsColumns = (
       placeholder: 'Зураг',
       description: 'Олон зураг сонгож болно',
       isCreatable: false,
-      allowSorting: true,
+      allowSorting: false,
       customCell: (customValue: string[]) => (
         <CoreGroupImages images={customValue} />
       ),
@@ -26,7 +26,8 @@ export const ProductsColumns = (
       fieldType: 'input',
       placeholder: 'Ебазаар бүтээгдэхүүний ID',
       isFilterable: true,
-      isEditable: true,
+      isEditable: false,
+      isCreatable: false,
       allowSorting: true,
     },
     {
@@ -40,6 +41,9 @@ export const ProductsColumns = (
       isCreatable: true,
       isEditable: true,
       allowSorting: true,
+      inputProps: {
+        isRequired: true
+      },
     },
     {
       uid: 'barCode',
@@ -50,7 +54,11 @@ export const ProductsColumns = (
       placeholder: 'Бүтээгдэхүүний баркод',
       isFilterable: true,
       isCreatable: true,
-      isEditable: true
+      isEditable: true,
+      inputProps: {
+        isRequired: true,
+        type: 'number'
+      }
     },
     {
       uid: 'sku',
@@ -63,6 +71,10 @@ export const ProductsColumns = (
       isCreatable: true,
       isEditable: true,
       allowSorting: true,
+      inputProps: {
+        isRequired: true,
+        type: 'number'
+      },
     },
     {
       uid: 'inCase',
@@ -70,19 +82,34 @@ export const ProductsColumns = (
       defaultValue: product?.inCase,
       label: 'Хайрцаган дахь тоо',
       fieldType: 'input',
+      inputProps: {
+        type: 'number'
+      },
       placeholder: 'Хайрцаган дахь тоо',
       isCreatable: true,
       isEditable: true
     },
     {
-      uid: 'inventory.availableStock',
-      name: 'availableStock',
-      defaultValue: product?.inventory?.availableStock,
-      label: 'Сагслах тоо',
-      fieldType: 'input',
-      placeholder: 'Сагслах тоо',
+      uid: 'customerId',
+      name: 'customerId',
+      defaultValue: product?.customerId,
+      label: 'Нийлүүлэгч ID',
+      fieldType: 'select',
+      placeholder: 'Нийлүүлэгч ID',
+      options: props?.supplierOptions || [],
+      isCreatable: false,
+      isEditable: false,
+    },
+    {
+      uid: 'categoryIds',
+      name: 'categoryIds',
+      // defaultValue: product?.categoryIds,
+      label: 'Ангилал ID',
+      fieldType: 'select',
+      placeholder: 'Ангилал ID',
+      options: props?.categoryOptions || [],
       isCreatable: true,
-      isEditable: true
+      isEditable: true,
     },
     {
       uid: 'inventory.totalStock',
@@ -98,62 +125,47 @@ export const ProductsColumns = (
       uid: 'price',
       name: 'price',
       defaultValue: '',
-      label: 'Үнэ',
+      label: 'Үнэ (price)',
       fieldType: 'input',
-      placeholder: 'Үнэ',
-      isCreatable: true
-    },
-    {
-      uid: 'customer.name',
-      name: 'supplier',
-      defaultValue: product?.customer?.name,
-      label: 'Нийлүүлэгч',
-      fieldType: 'autocomplete',
-      placeholder: 'Нийлүүлэгч',
-      options: props?.supplierOptions || [],
+      placeholder: 'Үнэ (price)',
       isCreatable: true,
-      isEditable: true
+      inputProps: {
+        type: 'number'
+      },
     },
     {
-      uid: 'brands.name',
-      name: 'brands',
+      uid: 'cost',
+      name: 'cost',
+      defaultValue: '',
+      label: 'Үнэ (cost)',
+      fieldType: 'input',
+      placeholder: 'Үнэ (cost)',
+      isCreatable: true,
+      inputProps: {
+        type: 'number'
+      },
+    },
+    {
+      uid: 'brandId',
+      name: 'brandId',
       defaultValue: '',
       label: 'Брэнд',
       fieldType: 'autocomplete',
       placeholder: 'Брэнд',
       options: props?.brandOptions || [],
       isCreatable: true,
-      isFilterable: true
+      isEditable: true,
+      isFilterable: true,
     },
     {
-      uid: 'categories.2.name',
-      name: 'generalCategory',
-      defaultValue: '',
-      label: 'Ерөнхий ангилал',
-      fieldType: 'autocomplete',
-      placeholder: 'Ерөнхий ангилал',
-      options: props?.generalCategories || [],
-      isCreatable: true
-    },
-    {
-      uid: 'categories.1.name',
-      name: 'subCategory',
-      defaultValue: '',
-      label: 'Дэд ангилал',
-      fieldType: 'autocomplete',
-      placeholder: 'Дэд ангилал',
-      options: props?.subCategories || [],
-      isCreatable: true
-    },
-    {
-      uid: 'categories.0.name',
-      name: 'finalCategory',
-      defaultValue: '',
-      label: 'Эцсийн ангилал',
-      fieldType: 'autocomplete',
-      placeholder: 'Эцсийн ангилал',
-      options: props?.finalCategories || [],
-      isCreatable: true
+      uid: 'description',
+      name: 'description',
+      defaultValue: product?.description,
+      label: 'Тайлбар',
+      fieldType: 'input',
+      placeholder: 'Тайлбар',
+      isCreatable: true,
+      isEditable: true
     },
     {
       uid: 'isActive',
@@ -170,16 +182,6 @@ export const ProductsColumns = (
       isEditable: true
     },
     {
-      uid: 'unit',
-      name: 'unit',
-      defaultValue: '',
-      label: 'Хэмжих нэгж',
-      fieldType: 'select',
-      placeholder: 'Хэмжих нэгж',
-      options: [],
-      isCreatable: true
-    },
-    {
       uid: 'isAlcohol',
       name: 'isAlcohol',
       defaultValue: '',
@@ -187,8 +189,8 @@ export const ProductsColumns = (
       fieldType: 'select',
       placeholder: 'Алкохолны төрөл эсэх',
       options: [
-        { value: 'true', label: 'Тийм' },
-        { value: 'false', label: 'Үгүй' }
+        { value: true, label: 'Тийм' },
+        { value: false, label: 'Үгүй' }
       ],
       isCreatable: true
     },
@@ -204,5 +206,18 @@ export const ProductsColumns = (
         { value: 'false', label: 'Үгүй' }
       ],
       isCreatable: true
+    },
+    {
+      uid: 'priority',
+      name: 'priority',
+      defaultValue: product?.priority,
+      label: 'Эрэлтийн эрх',
+      fieldType: 'input',
+      placeholder: 'Эрэлтийн эрх',
+      isCreatable: true,
+      isEditable: true,
+      inputProps: {
+        type: 'number'
+      }
     }
   ];

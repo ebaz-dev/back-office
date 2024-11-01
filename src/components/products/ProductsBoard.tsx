@@ -15,7 +15,7 @@ interface ProductsBoardProps {
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   const { products, totalPage, currentPage, brands } = props;
   const filterOptions = {
-    brands: brands.map(brand => ({
+    brandId: brands.map(brand => ({
       label: brand.name,
       value: brand.id
     }))

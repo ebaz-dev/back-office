@@ -1,20 +1,14 @@
-'use client';
-
 import CoreContainer from "@/components/core/CoreContainer";
 import ProductsCreateForm from "@/components/products/ProductsCreateForm";
+import { getProductBrands } from "@/services/products.service";
 
-import { useRouter } from "next/navigation";
-
-const ProductsCreatePage = () => {
-  const router = useRouter();
-
-  const onClose = () => {
-    router.back();
-  };
-
+const ProductsCreatePage = async () => {
+  const productsBrandsData = await getProductBrands();
   return (
     <CoreContainer title="Нэг бүтээгдэхүүний бүртгэл">
-      <ProductsCreateForm onClose={onClose} />
+      <ProductsCreateForm
+        brands={productsBrandsData?.data || []}
+      />
     </CoreContainer>
   );
 };
