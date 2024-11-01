@@ -18,6 +18,7 @@ export const fetchRoleData = createAsyncThunk(
     const data: IRoleState = {
       role: "BACKOFFICE_ADMIN",
       permissions: {
+        dashboard: ["list", "create", "update", "delete", "show"],
         merchant: ["list", "create", "update", "delete", "show"],
         product: ["list", "create", "update", "delete", "show"],
         order: ["list", "create", "update", "delete", "show"],
