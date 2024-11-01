@@ -14,7 +14,7 @@ export type GetOneParamsType = {
   id: number;
 };
 export type UpdateParamsType = {
-  data: Record<string, unknown>;
+  data: any;
 } & GetOneParamsType;
 
 export type DeleteParamsType = {

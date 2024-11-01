@@ -4,7 +4,7 @@ import { fetcher } from "@/lib/fetch";
 import { convertObjectToParam } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { ProductCreateFormSchema } from "@/utils/definitions/products";
+import { ProductCreateFormSchema, ProductUpdateFormSchema } from "@/utils/definitions/products";
 import { getCookie } from "./cookies";
 import { createProduct, updateProduct } from "@/services/products.service";
 
@@ -51,28 +51,18 @@ export async function createProductAction(prevState: any, formData: FormData) {
     ...rest,
   };
 
-  console.log("Body", body);
-
-  const res = await createProduct(body);
-  // try {
-  //   await fetcher('/product/bo', 'POST', body).then((res) => {
-  //     console.log("Bnuuuu", res);
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  // }
-
+  await createProduct(body);
   return {
     message: "Product Created Successfully!",
     errors: {},
   };
 }
 export async function updateProductAction(
+  id: any,
   formData: FormData,
-  productId: number
 ) {
   // Validate form using Zod
-  const validatedFields = ProductCreateFormSchema.safeParse({
+  const validatedFields = ProductUpdateFormSchema.safeParse({
     name: formData.get("name"),
     barCode: formData.get("barCode"),
     sku: formData.get("sku"),
@@ -97,13 +87,7 @@ export async function updateProductAction(
   }
 
   const data = validatedFields.data;
-
-  const res = await updateProduct(productId, data);
-
-  console.log("=====UPDATE RES======")
-  console.log(res)
-  console.log("=====UPDATE RES END======")
-
+  await updateProduct(id, data);
   return {
     message: "Product Updated Successfully!",
     errors: {},

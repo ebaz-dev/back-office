@@ -24,4 +24,10 @@ export const ProductCreateFormSchema = z.object({
   cityTax: z.boolean().default(false)
 });
 
+// TODO: add all fields
+export const ProductUpdateFormSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters long.' }).trim(),
+  barCode: z.string().min(1, { message: 'Bar code is required.' }),
+});
+
 export type ProductCreateFormState = z.infer<typeof ProductCreateFormSchema>;

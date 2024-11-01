@@ -129,6 +129,7 @@ export const ProductsColumns = (
       fieldType: 'input',
       placeholder: 'Үнэ (price)',
       isCreatable: true,
+      isEditable: true,
       inputProps: {
         type: 'number'
       },
@@ -141,6 +142,7 @@ export const ProductsColumns = (
       fieldType: 'input',
       placeholder: 'Үнэ (cost)',
       isCreatable: true,
+      isEditable: true,
       inputProps: {
         type: 'number'
       },
@@ -192,7 +194,8 @@ export const ProductsColumns = (
         { value: true, label: 'Тийм' },
         { value: false, label: 'Үгүй' }
       ],
-      isCreatable: true
+      isCreatable: true,
+      isEditable: true
     },
     {
       uid: 'cityTax',
@@ -205,7 +208,8 @@ export const ProductsColumns = (
         { value: 'true', label: 'Тийм' },
         { value: 'false', label: 'Үгүй' }
       ],
-      isCreatable: true
+      isCreatable: true,
+      isEditable: true
     },
     {
       uid: 'priority',
