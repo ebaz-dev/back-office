@@ -33,19 +33,19 @@ const CoreBreadcrumb: FunctionComponent<CoreBreadcrumbProps> = () => {
       className="flex items-center gap-2 py-2"
       itemClasses={{
         item: [
-          'text-gray-500',
-          'data-[current=true]:text-gray-900',
+          'text-foreground',
+          'data-[current=true]:text-foreground',
           'text-sm'
         ].join(' '),
-        separator: 'text-gray-400',
+        separator: 'text-foreground',
       }}
     >
       <BreadcrumbItem>
-        <Link href="/" className="hover:text-gray-900">Home</Link>
+        <Link href="/" className="hover:text-foreground">Home</Link>
       </BreadcrumbItem>
       {breadcrumbs.map((breadcrumb) => (
         <BreadcrumbItem key={breadcrumb.path}>
-          <Link href={breadcrumb.path} className="hover:text-gray-900">
+          <Link href={breadcrumb.path} className="hover:text-foreground">
             {breadcrumb.label}
           </Link>
         </BreadcrumbItem>
