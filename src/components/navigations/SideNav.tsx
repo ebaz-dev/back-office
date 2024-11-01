@@ -7,6 +7,7 @@ import { Button } from '@nextui-org/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import CoreSvgIcon from '@/components/core/CoreSvgIcon';
 import CoreImage from '@/components/core/CoreImage';
+import { useAppSelector } from "@/lib/hooks";
 
 interface SideNavProps {
   isOpen: boolean;
@@ -17,6 +18,11 @@ const SideNav: FunctionComponent<SideNavProps> = props => {
   const { isOpen, setIsOpen } = props;
 
   const pathname = usePathname();
+  const permissions = useAppSelector((state) => state.role.permissions);
+
+  console.log("=====PERMISSIONS=====")
+  console.log(permissions)
+  console.log("=====PERMISSIONS END=====")
 
   return (
     <div
