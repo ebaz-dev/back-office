@@ -21,7 +21,7 @@ export async function getProduct<IProduct>(id: number) {
 }
 
 export async function createProduct<IProduct>(data: IProduct) {
-  const res = await dataProvider.create<IProduct>(`/product/bo`, { data });
+  const res = await dataProvider.create<IProduct>(`/product/bo`, data);
   return res.data;
 }
 
