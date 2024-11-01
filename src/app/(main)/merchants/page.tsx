@@ -1,6 +1,6 @@
 import CoreList from "@/components/core/CoreList";
 import { SearchParamsType } from "@/types/common.types";
-import { getMerchants } from "@/services/merchant.service";
+import { getMerchants } from "@/services/customer.service";
 import { MERCHANT_COLUMNS } from "@/constants/columns/merchant";
 
 interface MerchantListProps {

@@ -17,3 +17,7 @@ export async function getMerchants(
 
   return dataProvider.getList<IMerchant[]>("/customer/bo/merchant", params);
 }
+
+export async function getSuppliers(): Promise<ApiResponse<any[]>> {
+  return dataProvider.getList<IMerchant[]>("/customer/bo/supplier");
+}
