@@ -1,10 +1,21 @@
-'use client';
+"use client";
 
-import { Button, useDisclosure, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
+import {
+  Button,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  menu,
+} from "@nextui-org/react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter } from "next/navigation";
+import CoreCanAccess from "./CoreCanAccess";
+import { PERMISSION_ACTIONS } from "@/constants/common";
 
-export default function CoreActions() {
+export default function CoreActions({ resource }: { resource: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,29 +31,43 @@ export default function CoreActions() {
       onClose();
       router.refresh();
     } catch (error) {
-      console.error('Error deleting product:', error);
+      console.error("Error deleting product:", error);
     }
   };
 
   return (
     <>
       <div className="flex gap-2">
-        <Button
-          size="sm"
-          color="primary"
-          onClick={handleEdit}
-          startContent={<PencilIcon className="h-[14px] w-[14px]" />}
+        <CoreCanAccess
+          permissionToCheck={{
+            resource,
+            action: PERMISSION_ACTIONS.UPDATE,
+          }}
         >
-          Өөрчлөх
-        </Button>
-        <Button
-          size="sm"
-          color="danger"
-          onClick={onOpen}
-          startContent={<TrashIcon className="h-[14px] w-[14px]" />}
+          <Button
+            size="sm"
+            color="primary"
+            onClick={handleEdit}
+            startContent={<PencilIcon className="h-[14px] w-[14px]" />}
+          >
+            Өөрчлөх
+          </Button>
+        </CoreCanAccess>
+        <CoreCanAccess
+          permissionToCheck={{
+            resource,
+            action: PERMISSION_ACTIONS.DELETE,
+          }}
         >
-          Устгах
-        </Button>
+          <Button
+            size="sm"
+            color="danger"
+            onClick={onOpen}
+            startContent={<TrashIcon className="h-[14px] w-[14px]" />}
+          >
+            Устгах
+          </Button>
+        </CoreCanAccess>
       </div>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -67,4 +92,4 @@ export default function CoreActions() {
       </Modal>
     </>
   );
-} 
+}
