@@ -13,9 +13,20 @@ const MainLayout: FunctionComponent<MainLayoutProps> = async ({ children }) => {
   const chosenSupplier = await getCookie("supplier");
   const suppliers = await getCustomers("type=supplier");
 
+  // TODO: fetch user roles
+
+  const role = {
+    role: "BACKOFFICE_ADMIN",
+    permissions: {
+      merchant: ["list", "create", "update", "delete", "show"],
+      product: ["list", "create", "update", "delete", "show"],
+      order: ["list", "create", "update", "delete", "show"],
+    },
+  };
+
   return (
     <SessionProvider>
-      <StoreProvider>
+      <StoreProvider role={role}>
         <NavProvider
           suppliers={suppliers?.data ?? []}
           chosenSupplier={chosenSupplier ? JSON.parse(chosenSupplier) : null}

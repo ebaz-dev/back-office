@@ -12,11 +12,7 @@ const initialState: IRoleState = {
 
 export const fetchRoleData = createAsyncThunk(
   "role/fetchRoleData",
-  async (supplierId: string) => {
-    console.log("===========FETCH DATA=========");
-    console.log(supplierId);
-    console.log("===========FETCH END=========");
-
+  async () => {
     // TODO: fetch role data using userId
 
     const data: IRoleState = {
