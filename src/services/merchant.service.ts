@@ -15,5 +15,5 @@ export async function getMerchants(
     supplierId,
   };
 
-  return dataProvider.getList<IMerchant[]>("/customer/bo/list", params);
+  return dataProvider.getList<IMerchant[]>("/customer/bo/merchant", params);
 }
