@@ -3,7 +3,7 @@ import { ICustomer } from "@/types/customer.types";
 import { tr } from "@/lib/utils";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { FunctionComponent, Key } from "react";
+import { FunctionComponent, Key, useEffect } from "react";
 import { useAppDispatch } from "@/lib/hooks";
 import { fetchRoleData } from "@/lib/reducers/roleReducer";
 
@@ -20,7 +20,9 @@ const CoreSelectSupplier: FunctionComponent<CoreSelectSupplierProps> = (
   const pathname = usePathname();
   const dispatch = useAppDispatch();
 
-  dispatch(fetchRoleData(chosenSupplier?.id));
+  useEffect(() => {
+    dispatch(fetchRoleData(chosenSupplier?.id));
+  }, [chosenSupplier]);
 
   const onSelectionChange = (key: Key | null) => {
     const findSupplier = suppliers.find((supplier) => supplier.id === key);
