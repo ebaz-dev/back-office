@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/react';
 import { ProductsColumns } from '@/lib/columns/products';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { clearAllFilterAction } from '@/app/actions/main';
-import { IBrand, IOption } from '@/lib/types';
+import { IBrand, IOption } from '@/types';
 
 interface ProductsFilterFormProps {
   brands: IBrand[];

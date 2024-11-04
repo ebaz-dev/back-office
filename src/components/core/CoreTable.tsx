@@ -1,6 +1,6 @@
 'use client';
 
-import { IColumn } from '@/lib/types';
+import { IColumn } from '@/types/table.types';
 import {
   getKeyValue,
   Pagination,

@@ -1,4 +1,4 @@
-import { IOrder, IProduct } from '@/lib/types';
+import { IOrder, IProduct } from '@/types';
 import { FunctionComponent } from 'react';
 import OrderedProduct from '@/components/order/OrderedProduct';
 

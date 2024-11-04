@@ -9,12 +9,14 @@ interface CoreImageUploaderProps {
   images: string[];
   setImages: (images: string[]) => void;
   className?: string;
+  type?: 'edit' | 'show';
 }
 
 const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
   images,
   setImages,
-  className
+  className,
+  type = 'show'
 }) => {
   const [showXButton, setShowXButton] = useState<number>(1000);
   const [isPending, startTransition] = useTransition();
@@ -50,30 +52,31 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
 
   return (
     <div className='flex gap-4 flex-wrap'>
-      <label
-        className={cn(
-          'w-40 h-40 flex items-center justify-center border border-dashed border-default rounded-md hover:border-primary cursor-pointer',
-          className
-        )}
-      >
-        <PlusCircleIcon className='w-6 h-6 text-default' />
-
-        <input
-          type='file'
-          name='images'
-          className='hidden'
-          multiple
-          onChange={handleFileChange}
-        />
-      </label>
+      {type === 'edit' && (
+        <label
+          className={cn(
+            'w-40 h-40 flex items-center justify-center border border-dashed border-default rounded-md hover:border-primary cursor-pointer',
+            className
+          )}
+        >
+          <PlusCircleIcon className='w-6 h-6 text-default' />
+          <input
+            type='file'
+            name='images'
+            className='hidden'
+            multiple
+            onChange={handleFileChange}
+          />
+        </label>
+      )}
 
       {images.map((imageUrl: string, index: number) => {
         return (
           <div
             key={index}
             className='relative hover:outline outline-primary rounded-md'
-            onMouseEnter={() => setShowXButton(index)}
-            onMouseLeave={() => setShowXButton(1000)}
+            onMouseEnter={() => type === 'edit' && setShowXButton(index)}
+            onMouseLeave={() => type === 'edit' && setShowXButton(1000)}
           >
             <div
               className={cn(
@@ -82,31 +85,28 @@ const CoreImageUploader: FunctionComponent<CoreImageUploaderProps> = ({
               )}
             >
               <CoreImage
-                src={
-                  !imageUrl.includes('https')
-                    ? replaceMediaUrl(imageUrl)
-                    : imageUrl
-                }
+                src={!imageUrl.includes('https') ? replaceMediaUrl(imageUrl) : imageUrl}
               />
             </div>
 
-            <Button
-              isIconOnly
-              className={`absolute -top-2 -right-2 z-20 ${
-                index === showXButton ? 'flex' : 'hidden'
-              }`}
-              radius='full'
-              size='sm'
-              color='danger'
-              onPress={() => deleteImage(index)}
-            >
-              <XMarkIcon className='w-4 h-4' />
-            </Button>
+            {type === 'edit' && (
+              <Button
+                isIconOnly
+                className={`absolute -top-2 -right-2 z-20 ${index === showXButton ? 'flex' : 'hidden'
+                  }`}
+                radius='full'
+                size='sm'
+                color='danger'
+                onPress={() => deleteImage(index)}
+              >
+                <XMarkIcon className='w-4 h-4' />
+              </Button>
+            )}
           </div>
         );
       })}
 
-      {isPending && (
+      {isPending && type === 'edit' && (
         <div
           className={cn(
             'w-40 h-40 rounded-md overflow-hidden flex items-center justify-center',
