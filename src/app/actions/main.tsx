@@ -2,7 +2,7 @@
 
 import { deleteCookie, setCookie } from '@/app/actions/cookies';
 import { uploadImageFetcher } from '@/lib/fetch';
-import { ICustomer } from '@/lib/types';
+import { ICustomer } from '@/types/customer.types';
 import { redirect } from 'next/navigation';
 
 export const chooseSupplierAction = (supplier: ICustomer, pathname: string) => {
@@ -27,3 +27,8 @@ export const clearAllFilterAction = (pathname: string) => {
 
 export const uploadImageAction = async (formData: FormData) =>
   await uploadImageFetcher(formData);
+
+export const onQueryParamChangeAction = (url: string) => {
+  redirect(url);
+};
+

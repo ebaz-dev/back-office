@@ -1,4 +1,4 @@
-import { IColumn } from '@/lib/types';
+import { IColumn } from '@/types/table.types';
 import {
   Autocomplete,
   AutocompleteItem,
@@ -8,17 +8,20 @@ import {
   SelectItem
 } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
+import CoreInput from '@/components/core/CoreInput';
 
 interface CoreFormFieldsProps {
   fields: IColumn[];
   isClearable?: boolean;
   className?: string;
-  type?: 'create' | 'filter' | 'edit';
+  type?: 'create' | 'filter' | 'edit' | 'show';
+  errors?: {
+    [key: string]: string[];
+  };
 }
 
 const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
-  const { fields, isClearable, className, type } = props;
-
+  const { fields, isClearable, className, type, errors } = props;
   return fields.map((field: IColumn, index: number) => {
     const {
       name,
@@ -29,7 +32,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
       defaultValue,
       isFilterable,
       isCreatable,
-      isEditable
+      isEditable,
+      inputProps
     } = field;
 
     if (!isFilterable && type === 'filter') {
@@ -44,6 +48,27 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
       return null;
     }
 
+    if (type === 'show') {
+      return (
+        <Input
+          key={index}
+          type='text'
+          name={name}
+          defaultValue={defaultValue?.toString() || '-'}
+          label={label}
+          disableAnimation
+          isReadOnly
+          className={className}
+          size='md'
+          labelPlacement='outside'
+          variant='bordered'
+          classNames={{
+            label: 'text-xs'
+          }}
+        />
+      );
+    }
+
     if (fieldType === 'datepicker') {
       return (
         <DatePicker
@@ -54,6 +79,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           labelPlacement='outside'
           variant='bordered'
           dateInputClassNames={{ label: 'text-xs' }}
+          errorMessage={errors?.[name]?.[0]}
+          isInvalid={!!errors?.[name]?.[0]}
         />
       );
     }
@@ -70,6 +97,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           isClearable={isClearable}
           className={className}
           labelPlacement='outside'
+          errorMessage={errors?.[name]?.[0]}
+          isInvalid={!!errors?.[name]?.[0]}
           size='md'
           variant='bordered'
           inputProps={{
@@ -80,7 +109,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
         >
           {option => (
             <AutocompleteItem
-              key={option.value}
+              key={option.value.toString()}
               textValue={option.value.toString()}
             >
               {option.label}
@@ -102,6 +131,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
           labelPlacement='outside'
           placeholder={placeholder}
           variant='bordered'
+          errorMessage={errors?.[name]?.[0]}
+          isInvalid={!!errors?.[name]?.[0]}
           size='md'
           classNames={{
             label: 'text-xs'
@@ -117,9 +148,9 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
     }
 
     return (
-      <Input
+      <CoreInput
+        {...inputProps}
         key={index}
-        type={fieldType}
         name={name}
         multiple
         defaultValue={defaultValue?.toString()}
@@ -127,6 +158,8 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
         placeholder={placeholder}
         className={className}
         size='md'
+        errorMessage={errors?.[name]?.[0]}
+        isInvalid={!!errors?.[name]?.[0]}
         labelPlacement='outside'
         variant='bordered'
         classNames={{

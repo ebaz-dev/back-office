@@ -1,19 +1,9 @@
 'use client';
 
-import { FunctionComponent, Key, useState } from 'react';
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  useDisclosure
-} from '@nextui-org/react';
-import { IBrand, IProduct } from '@/lib/types';
-import CoreTable from '@/components/core/CoreTable';
-import CoreLoading from '@/components/core/CoreLoading';
-import ProductsDetail from '@/components/products/ProductsDetail';
-import ProductsFilterForm from '@/components/products/ProductsFilterForm';
-import { ProductsColumns } from '@/lib/columns/products';
+import { FunctionComponent } from 'react';
+import { IBrand, IProduct } from '@/types/product.types';
+import { ProductsColumns } from '@/constants/columns/products';
+import CoreList from '@/components/core/CoreList';
 
 interface ProductsBoardProps {
   brands: IBrand[];
@@ -24,54 +14,21 @@ interface ProductsBoardProps {
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   const { products, totalPage, currentPage, brands } = props;
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [selectedProduct, setSelectedProduct] = useState<IProduct | undefined>(
-    undefined
-  );
-
-  const onRowAction = async (key: Key) => {
-    onOpen();
-
-    const product: IProduct | undefined = products.find(
-      item => item.id === key
-    );
-
-    setSelectedProduct(product);
-  };
+  const filterOptions = {
+    brandId: brands.map(brand => ({
+      label: brand.name,
+      value: brand.id
+    }))
+  }
 
   return (
-    <div className='h-full flex flex-col gap-4'>
-      <div className='flex-1'>
-        <CoreTable
-          columns={ProductsColumns()}
-          data={products}
-          totalPage={totalPage}
-          currentPage={currentPage}
-          onRowAction={onRowAction}
-          customTopContents={<ProductsFilterForm brands={brands} />}
-        />
-      </div>
-
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
-        <ModalContent>
-          {() => (
-            <>
-              <ModalHeader className='flex flex-col gap-1'>
-                {selectedProduct?.name}
-              </ModalHeader>
-              <ModalBody className='pb-4'>
-                {!selectedProduct ? (
-                  <CoreLoading />
-                ) : (
-                  <ProductsDetail product={selectedProduct} />
-                )}
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </div>
+    <CoreList
+      columns={ProductsColumns()}
+      data={products}
+      totalPages={totalPage}
+      currentPage={currentPage}
+      filterOptions={filterOptions}
+    />
   );
 };
 

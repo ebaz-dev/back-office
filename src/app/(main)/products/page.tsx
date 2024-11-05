@@ -1,34 +1,14 @@
-import { getCookie } from '@/app/actions/cookies';
 import ProductsBoard from '@/components/products/ProductsBoard';
-import { getProductBrands, getProducts } from '@/lib/requests';
-import { convertObjectToParam } from '@/lib/utils';
-import { FunctionComponent } from 'react';
+import { getProductBrands, getProducts } from '@/services/products.service';
+import { ProductSearchParams } from '@/types';
 
 interface ProductsPageProps {
-  searchParams: {
-    page: string;
-    id: string;
-    sku: string;
-    name: string;
-    barCode: string;
-  };
+  searchParams: ProductSearchParams;
 }
 
-const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
-  searchParams
-}) => {
-  const supplier = await getCookie('supplier');
-
-  const supplierId = supplier ? JSON.parse(supplier).id : '';
-
-  const currentParams = convertObjectToParam({
-    ...searchParams,
-    customerId: supplierId
-  });
-
-  const productsData = getProducts(currentParams);
-
-  const productsBrandsData = getProductBrands(supplierId);
+const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
+  const productsData = getProducts(searchParams);
+  const productsBrandsData = getProductBrands();
 
   const [products, brands] = await Promise.all([
     productsData,
@@ -37,10 +17,10 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
 
   return (
     <ProductsBoard
-      brands={brands?.data || []}
       products={products?.data || []}
+      brands={brands?.data || []}
       totalPage={products?.totalPages}
-      currentPage={products?.currentPage}
+      currentPage={products?.currentPage || 1}
     />
   );
 };

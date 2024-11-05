@@ -1,31 +1,97 @@
 'use server';
 
-import { ProductsColumns } from '@/lib/columns/products';
 import { fetcher } from '@/lib/fetch';
-import { IColumn } from '@/lib/types';
 import { convertObjectToParam } from '@/lib/utils';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
-export async function createProductAction(
-  state: { images: string[] },
-  formData: FormData
-) {
-  const fieldOptions = Object.fromEntries(
-    ProductsColumns().map((product: IColumn) => [
-      product.name,
-      formData.get(product.name)
-    ])
-  );
-
-  await fetcher(`/product/create/`, 'POST', {
-    ...fieldOptions,
-    images: state.images
+import {
+  ProductCreateFormSchema,
+  ProductUpdateFormSchema
+} from '@/utils/definitions/products';
+import { getCookie } from './cookies';
+import { createProduct, updateProduct } from '@/services/products.service';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export async function createProductAction(prevState: any, formData: FormData) {
+  // Validate form using Zod
+  const validatedFields = ProductCreateFormSchema.safeParse({
+    name: formData.get('name'),
+    barCode: formData.get('barCode'),
+    sku: formData.get('sku'),
+    categoryId: formData.get('categoryId'),
+    brandId: formData.get('brandId'),
+    description: formData.get('description'),
+    price: Number(formData.get('price')),
+    cost: Number(formData.get('cost')),
+    inCase: Number(formData.get('inCase')),
+    priority: Number(formData.get('priority')),
+    isActive: formData.get('isActive') === 'true',
+    isAlcohol: formData.get('isAlcohol') === 'true',
+    cityTax: formData.get('cityTax') === 'true'
   });
-}
 
-export async function updateProductAction(formData: FormData) {
-  console.log(formData);
+  // If form validation fails, return errors
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Product.'
+    };
+  }
+
+  // Get the validated data
+  const data = validatedFields.data;
+
+  const supplier = await getCookie('supplier');
+  const supplierId = supplier ? JSON.parse(supplier).id : '';
+
+  const { cost, price, ...rest } = data;
+
+  const body = {
+    prices: {
+      price,
+      cost
+    },
+    customerId: supplierId,
+    ...rest
+  };
+
+  await createProduct(body);
+  return {
+    message: 'Product Created Successfully!',
+    errors: {}
+  };
+}
+export async function updateProductAction(id: any, formData: FormData) {
+  // Validate form using Zod
+  const validatedFields = ProductUpdateFormSchema.safeParse({
+    name: formData.get('name'),
+    barCode: formData.get('barCode'),
+    sku: formData.get('sku'),
+    categoryId: formData.get('categoryId'),
+    brandId: formData.get('brandId'),
+    description: formData.get('description'),
+    price: Number(formData.get('price')),
+    cost: Number(formData.get('cost')),
+    inCase: Number(formData.get('inCase')),
+    priority: Number(formData.get('priority')),
+    isActive: formData.get('isActive') === 'true',
+    isAlcohol: formData.get('isAlcohol') === 'true',
+    cityTax: formData.get('cityTax') === 'true'
+  });
+
+  // If form validation fails, return errors
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Product.'
+    };
+  }
+
+  const data = validatedFields.data;
+  await updateProduct(id, data);
+  return {
+    message: 'Product Updated Successfully!',
+    errors: {}
+  };
 }
 
 export async function filterProductsAction(formData: FormData) {

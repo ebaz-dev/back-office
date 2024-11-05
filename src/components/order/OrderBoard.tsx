@@ -3,7 +3,7 @@
 import { FunctionComponent, Key, useState } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { OrderColumns } from '@/lib/columns/orders';
-import { IOrder } from '@/lib/types';
+import { IOrder } from '@/types/order.types';
 import {
   Modal,
   ModalBody,

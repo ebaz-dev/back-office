@@ -2,7 +2,9 @@
 
 import MainNav from '@/components/navigations/MainNav';
 import SideNav from '@/components/navigations/SideNav';
-import { ICustomer } from '@/lib/types';
+import CoreBreadcrumb from '@/components/core/CoreBreadcrumb';
+import CoreBackButton from '@/components/core/CoreBackButton';
+import { ICustomer } from '@/types/customer.types';
 import { FunctionComponent, ReactNode, useState } from 'react';
 
 interface NavProviderProps {
@@ -29,6 +31,13 @@ const NavProvider: FunctionComponent<NavProviderProps> = props => {
             suppliers={suppliers}
             chosenSupplier={chosenSupplier}
           />
+        </div>
+
+        <div className='p-4'>
+          <div className='px-4 flex items-center bg-background rounded-lg'>
+            <CoreBackButton />
+            <CoreBreadcrumb />
+          </div>
         </div>
 
         <div className='p-4 flex-1 overflow-auto'>{children}</div>

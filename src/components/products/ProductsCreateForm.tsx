@@ -1,24 +1,31 @@
+'use client';
+
 import { FunctionComponent, useState } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
 import { createProductAction } from '@/app/actions/products';
-import { IOption, IProductsFieldProps } from '@/lib/types';
+import { IBrand, IOption, IProductsFieldProps } from '@/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
-import { ProductsColumns } from '@/lib/columns/products';
+import { ProductsColumns } from '@/constants/columns/products';
 import CoreImageUploader from '@/components/core/CoreImageUploader';
-
+import { useFormState } from 'react-dom';
+import { Card, CardBody } from '@nextui-org/react';
 interface ProductsCreateFormProps {
-  onClose: () => void;
+  brands: IBrand[];
 }
 
 const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
-  onClose
+  brands
 }) => {
   const [images, setImages] = useState<string[]>([]);
-  const createProduct = createProductAction.bind(null, { images });
+  const [state, action] = useFormState(createProductAction, undefined);
 
-  const supplierOptions: IOption[] = [{ value: '123123', label: 'supplier 1' }];
 
-  const brandOptions: IOption[] = [{ value: '123123asd', label: 'brand 1' }];
+  const supplierOptions: IOption[] = [{ value: 123123, label: 'supplier 1' }];
+
+  const brandOptions: IOption[] = brands.map(brand => ({
+    value: brand.id,
+    label: brand.name
+  }));
 
   const generalCategories: IOption[] = [{ value: '1223', label: 'gen 1' }];
 
@@ -35,7 +42,12 @@ const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
   };
 
   return (
-    <form action={createProduct} className='flex flex-col gap-4'>
+    <form action={action} className='flex flex-col gap-4'>
+      {state?.message && (
+        <Card className='bg-danger text-white text-xs'>
+          <CardBody>{state?.message}</CardBody>
+        </Card>
+      )}
       <CoreImageUploader
         images={images}
         setImages={setImages}
@@ -43,10 +55,14 @@ const ProductsCreateForm: FunctionComponent<ProductsCreateFormProps> = ({
       />
 
       <div className='w-full grid grid-cols-3 gap-4'>
-        <CoreFormFields fields={ProductsColumns(fieldOptions)} type='create' />
+        <CoreFormFields
+          fields={ProductsColumns(fieldOptions).filter(field => field.isCreatable)}
+          type='create'
+          errors={state?.errors}
+        />
       </div>
 
-      <CoreSubmitButton text='Хадгалах' onPress={onClose} />
+      <CoreSubmitButton text='Хадгалах' />
     </form>
   );
 };

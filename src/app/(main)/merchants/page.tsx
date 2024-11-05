@@ -1,41 +1,36 @@
-import { getCookie } from '@/app/actions/cookies';
-import MerchantBoard from '@/components/merchants/MerchantBoard';
-import { getCustomers } from '@/lib/requests';
-import { convertObjectToParam } from '@/lib/utils';
-import { FunctionComponent } from 'react';
+import CoreList from "@/components/core/CoreList";
+import { SearchParamsType } from "@/types/common.types";
+import { getMerchants } from "@/services/customer.service";
+import { MERCHANT_COLUMNS } from "@/constants/columns/merchant";
 
-interface MerchantsPageProps {
-  searchParams: {
-    page: string;
-    name: string;
-    phone: string;
-  };
+interface MerchantListProps {
+  searchParams: SearchParamsType;
 }
 
-const MerchantsPage: FunctionComponent<MerchantsPageProps> = async ({
-  searchParams
-}) => {
-  const supplier = await getCookie('supplier');
+export default async function MerchantList({
+  searchParams,
+}: MerchantListProps) {
+  const merchants = await getMerchants(searchParams);
 
-  const supplierId = supplier ? JSON.parse(supplier).id : '';
-
-  const currentParams = convertObjectToParam({
-    ...searchParams,
-    type: 'merchant',
-    supplierId: supplierId
-  });
-
-  const merchantsData = getCustomers(currentParams);
-
-  const [merchants] = await Promise.all([merchantsData]);
+  /* dummy options start */
+  const filterOptions = {
+    // column name
+    optionTest: [
+      { value: "otter", label: "Otter" },
+      { value: "crocodile", label: "Crocodile" },
+      { value: "elephant", label: "Elephant" },
+      { value: "lion", label: "Lion" },
+    ],
+  };
+  /* dummy options end */
 
   return (
-    <MerchantBoard
-      merchants={merchants?.data ?? []}
+    <CoreList
+      data={merchants?.data}
+      columns={MERCHANT_COLUMNS}
+      totalPages={merchants?.totalPages}
       currentPage={merchants?.currentPage}
-      totalPage={merchants?.totalPages}
+      filterOptions={filterOptions}
     />
   );
-};
-
-export default MerchantsPage;
+}

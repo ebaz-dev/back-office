@@ -7,6 +7,8 @@ import { Button } from '@nextui-org/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import CoreSvgIcon from '@/components/core/CoreSvgIcon';
 import CoreImage from '@/components/core/CoreImage';
+import CoreCanAccess from '../core/CoreCanAccess';
+import { PERMISSION_ACTIONS } from '@/constants/common';
 
 interface SideNavProps {
   isOpen: boolean;
@@ -53,27 +55,34 @@ const SideNav: FunctionComponent<SideNavProps> = props => {
             const isActive = pathname.startsWith(menu.pathname);
 
             return (
-              <Button
+              <CoreCanAccess
+                permissionToCheck={{
+                  resource: menu.resource,
+                  action: PERMISSION_ACTIONS.LIST
+                }}
                 key={index}
-                as={Link}
-                href={menu.pathname}
-                color={isActive ? 'primary' : 'default'}
-                size='sm'
-                fullWidth
-                className={`min-w-full ${
-                  isOpen ? 'justify-start' : 'justify-center'
-                }`}
-                variant={isActive ? 'solid' : 'ghost'}
-                isIconOnly={!isOpen}
-                startContent={
-                  <CoreSvgIcon
-                    src={`/menu/${menu.icon}.svg`}
-                    className={`${isActive && 'bg-white'}`}
-                  />
-                }
               >
-                {isOpen && tr(menu.label)}
-              </Button>
+                <Button
+                  as={Link}
+                  href={menu.pathname}
+                  color={isActive ? 'primary' : 'default'}
+                  size='sm'
+                  fullWidth
+                  className={`min-w-full ${
+                    isOpen ? 'justify-start' : 'justify-center'
+                  }`}
+                  variant={isActive ? 'solid' : 'ghost'}
+                  isIconOnly={!isOpen}
+                  startContent={
+                    <CoreSvgIcon
+                      src={`/menu/${menu.icon}.svg`}
+                      className={`${isActive && 'bg-white'}`}
+                    />
+                  }
+                >
+                  {isOpen && tr(menu.label)}
+                </Button>
+              </CoreCanAccess>
             );
           })}
         </div>
