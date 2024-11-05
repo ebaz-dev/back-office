@@ -1,6 +1,6 @@
-import { getOrders } from "@/services/orders.service";
-import OrderBoard from "@/components/order/OrderBoard";
-import { OrderSearchParams } from "@/types/order.types";
+import { getOrders } from '@/services/orders.service';
+import OrderBoard from '@/components/order/OrderBoard';
+import { OrderSearchParams } from '@/types/order.types';
 
 interface OrderPageProps {
   searchParams: OrderSearchParams;
