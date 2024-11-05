@@ -33,7 +33,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
       isFilterable,
       isCreatable,
       isEditable,
-      inputProps,
+      inputProps
     } = field;
 
     if (!isFilterable && type === 'filter') {
@@ -47,7 +47,6 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
     if (!isEditable && type === 'edit') {
       return null;
     }
-    
 
     if (type === 'show') {
       return (
@@ -110,7 +109,7 @@ const CoreFormFields: FunctionComponent<CoreFormFieldsProps> = props => {
         >
           {option => (
             <AutocompleteItem
-              key={option.value}
+              key={option.value.toString()}
               textValue={option.value.toString()}
             >
               {option.label}

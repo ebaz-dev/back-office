@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Button,
@@ -7,13 +7,12 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  menu,
-} from "@nextui-org/react";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { usePathname, useRouter } from "next/navigation";
-import CoreCanAccess from "./CoreCanAccess";
-import { PERMISSION_ACTIONS } from "@/constants/common";
+  ModalFooter
+} from '@nextui-org/react';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { usePathname, useRouter } from 'next/navigation';
+import CoreCanAccess from './CoreCanAccess';
+import { PERMISSION_ACTIONS } from '@/constants/common';
 
 export default function CoreActions({ resource }: { resource: string }) {
   const router = useRouter();
@@ -31,24 +30,24 @@ export default function CoreActions({ resource }: { resource: string }) {
       onClose();
       router.refresh();
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.error('Error deleting product:', error);
     }
   };
 
   return (
     <>
-      <div className="flex gap-2">
+      <div className='flex gap-2'>
         <CoreCanAccess
           permissionToCheck={{
             resource,
-            action: PERMISSION_ACTIONS.UPDATE,
+            action: PERMISSION_ACTIONS.UPDATE
           }}
         >
           <Button
-            size="sm"
-            color="primary"
+            size='sm'
+            color='primary'
             onClick={handleEdit}
-            startContent={<PencilIcon className="h-[14px] w-[14px]" />}
+            startContent={<PencilIcon className='h-[14px] w-[14px]' />}
           >
             Өөрчлөх
           </Button>
@@ -56,14 +55,14 @@ export default function CoreActions({ resource }: { resource: string }) {
         <CoreCanAccess
           permissionToCheck={{
             resource,
-            action: PERMISSION_ACTIONS.DELETE,
+            action: PERMISSION_ACTIONS.DELETE
           }}
         >
           <Button
-            size="sm"
-            color="danger"
+            size='sm'
+            color='danger'
             onClick={onOpen}
-            startContent={<TrashIcon className="h-[14px] w-[14px]" />}
+            startContent={<TrashIcon className='h-[14px] w-[14px]' />}
           >
             Устгах
           </Button>
@@ -72,17 +71,17 @@ export default function CoreActions({ resource }: { resource: string }) {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
-          {(onClose) => (
+          {onClose => (
             <>
               <ModalHeader>Устгах</ModalHeader>
               <ModalBody>
                 Та энэ бүтээгдэхүүнийг устгахдаа итгэлтэй байна уу?
               </ModalBody>
               <ModalFooter>
-                <Button variant="light" onPress={onClose}>
+                <Button variant='light' onPress={onClose}>
                   Үгүй
                 </Button>
-                <Button color="danger" onPress={handleDelete}>
+                <Button color='danger' onPress={handleDelete}>
                   Устгах
                 </Button>
               </ModalFooter>

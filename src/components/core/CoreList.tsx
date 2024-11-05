@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   getKeyValue,
@@ -9,18 +9,18 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
-} from "@nextui-org/react";
-import { Key, useCallback, useEffect, useState } from "react";
-import CoreEmpty from "./CoreEmpty";
-import { onQueryParamChangeAction } from "@/app/actions/main";
-import { useMemo } from "react";
-import { addOptionsToColumns, getNestedValue } from "@/lib/utils";
-import { useSearchParams, useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
-import { FilterOptionsType, IColumn } from "@/types";
-import CoreListFilter from "@/components/core/CoreListFilter";
-import CorePagination from "./CorePagination";
+  TableRow
+} from '@nextui-org/react';
+import { Key, useCallback, useEffect, useState } from 'react';
+import CoreEmpty from './CoreEmpty';
+import { onQueryParamChangeAction } from '@/app/actions/main';
+import { useMemo } from 'react';
+import { addOptionsToColumns, getNestedValue } from '@/lib/utils';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { FilterOptionsType, IColumn } from '@/types';
+import CoreListFilter from '@/components/core/CoreListFilter';
+import CorePagination from './CorePagination';
 
 const CoreList = <T extends { id: string | number }>({
   data,
@@ -28,7 +28,7 @@ const CoreList = <T extends { id: string | number }>({
   totalPages,
   currentPage,
   filterOptions,
-  onRowAction,
+  onRowAction
 }: {
   data: T[];
   columns: IColumn[];
@@ -39,8 +39,12 @@ const CoreList = <T extends { id: string | number }>({
 }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentParams = new URLSearchParams(Array.from(searchParams.entries()));
+
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({});
+
+  const currentParams = useMemo(() => {
+    return new URLSearchParams(Array.from(searchParams.entries()));
+  }, [searchParams]);
 
   const router = useRouter();
 
@@ -54,7 +58,7 @@ const CoreList = <T extends { id: string | number }>({
 
   const onPageChange = useCallback(
     (value: number) => {
-      currentParams.set("page", value.toString());
+      currentParams.set('page', value.toString());
       setIsLoading(true);
       onQueryParamChangeAction(`${pathname}?${currentParams}`);
     },
@@ -70,7 +74,7 @@ const CoreList = <T extends { id: string | number }>({
         pathname={pathname}
       />
     ),
-    [columns]
+    [columns, pathname, filterOptions]
   );
 
   const bottomContent = useMemo(() => {
@@ -85,68 +89,70 @@ const CoreList = <T extends { id: string | number }>({
 
   const renderCell = useCallback(
     (item: T, columnKey: string) => {
-      const filtered = columns.find((col) => col.uid === columnKey);
+      const filtered = columns.find(col => col.uid === columnKey);
       const cellValue = getKeyValue(
-        getNestedValue(item, columnKey.split(".")),
+        getNestedValue(item, columnKey.split('.')),
         columnKey
       );
       return filtered && filtered.customCell ? (
         filtered.customCell(cellValue)
       ) : (
-        <div className="line-clamp-2">{cellValue || "--"}</div>
+        <div className='line-clamp-2'>{cellValue || '--'}</div>
       );
     },
     [columns]
   );
 
-  const onSortChange = useCallback((sort: SortDescriptor) => {
-    const { column, direction } = sort;
+  const onSortChange = useCallback(
+    (sort: SortDescriptor) => {
+      const { column, direction } = sort;
 
-    currentParams.set("sortBy", column as string);
-    currentParams.set("sortOrder", direction as string);
+      currentParams.set('sortBy', column as string);
+      currentParams.set('sortOrder', direction as string);
 
-    setSortDescriptor(sort);
-    onQueryParamChangeAction(`${pathname}?${currentParams}`);
-  }, []);
+      setSortDescriptor(sort);
+      onQueryParamChangeAction(`${pathname}?${currentParams}`);
+    },
+    [currentParams, pathname]
+  );
 
   const onDefaultRowAction = (key: Key) => {
-
     if (onRowAction) {
       onRowAction(key);
     }
 
     router.push(`${pathname}/${key}`);
-  }
+  };
 
   return (
-    <div className="h-full flex flex-col gap-4">
-      <div className="flex-1">
+    <div className='h-full flex flex-col gap-4'>
+      <div className='flex-1'>
         <Table
-          aria-label="core table"
+          aria-label='core table'
           topContent={topContent}
-          topContentPlacement="outside"
+          topContentPlacement='outside'
           bottomContent={bottomContent}
-          bottomContentPlacement="outside"
-          selectionMode={isClient ? "multiple" : "none"}
-          selectionBehavior="toggle"
+          bottomContentPlacement='outside'
+          selectionMode={isClient ? 'multiple' : 'none'}
+          selectionBehavior='toggle'
           sortDescriptor={sortDescriptor}
-          onSortChange={(sort) => onSortChange(sort)}
+          onSortChange={sort => onSortChange(sort)}
           isHeaderSticky
           onRowAction={onDefaultRowAction}
           classNames={
             data.length === 0
               ? {
-                base: "h-full",
-                table: "h-full",
-                tbody: "h-full",
-                wrapper: "h-full",
-              }
+                  base: 'h-full',
+                  table: 'h-full',
+                  tbody: 'h-full',
+                  wrapper: 'h-full'
+                }
               : {}
           }
         >
           <TableHeader>
             <TableHeader columns={columns}>
-              {(column) => (
+              {column => (
                 <TableColumn
                   key={column.uid}
                   allowsSorting={column.allowSorting}
@@ -163,10 +169,10 @@ const CoreList = <T extends { id: string | number }>({
             isLoading={isLoading}
             loadingContent={<Spinner />}
           >
-            {(item) => (
+            {item => (
               <TableRow key={item.id}>
-                {(columnKey) => (
-                  <TableCell className="text-xs text-center">
+                {columnKey => (
+                  <TableCell className='text-xs text-center'>
                     {renderCell(item, columnKey.toString())}
                   </TableCell>
                 )}
