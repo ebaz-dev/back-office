@@ -28,9 +28,9 @@ export const MenuList = [
     pathname: '/merchants'
   },
   {
-    icon: 'notification',
+    icon: 'notifications',
     label: 'Мэдэгдэл',
-    pathname: '/notification'
+    pathname: '/notifications'
   },
   {
     icon: 'feedback',
