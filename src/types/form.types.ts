@@ -1,9 +1,13 @@
-import { IOption } from "@/types/table.types";
+export interface IOption {
+  value: string | number;
+  label: string;
+}
 
 export interface IFormField {
-  type: string;
   name: string;
+  type?: string;
   label?: string;
-  placeholder?: string;
   options?: IOption[];
+  placeholder?: string;
+  fieldType?: 'input' | 'select' | 'datepicker' | 'autocomplete';
 }

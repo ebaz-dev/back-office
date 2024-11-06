@@ -1,14 +1,10 @@
-import CoreContainer from "@/components/core/CoreContainer";
-import ProductsCreateForm from "@/components/products/ProductsCreateForm";
-import { getProductBrands } from "@/services/products.service";
+import CoreContainer from '@/components/core/CoreContainer';
+import ProductsCreateForm from '@/components/products/ProductsCreateForm';
 
 const ProductsCreatePage = async () => {
-  const productsBrandsData = await getProductBrands();
   return (
-    <CoreContainer title="Нэг бүтээгдэхүүний бүртгэл">
-      <ProductsCreateForm
-        brands={productsBrandsData?.data || []}
-      />
+    <CoreContainer title='Нэг бүтээгдэхүүний бүртгэл'>
+      <ProductsCreateForm />
     </CoreContainer>
   );
 };

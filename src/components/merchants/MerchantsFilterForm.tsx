@@ -1,11 +1,9 @@
 import { FunctionComponent, useRef } from 'react';
-import CoreFormFields from '@/components/core/CoreFormFields';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { clearAllFilterAction } from '@/app/actions/main';
-import { CustomerColumns } from '@/lib/columns/customers';
 import { filterMerchantAction } from '@/app/actions/merchants';
 
 interface MerchantFilterFormProps {}
@@ -16,7 +14,7 @@ const MerchantFilterForm: FunctionComponent<MerchantFilterFormProps> = ({}) => {
   const clearAllFilter = async () => {
     ref.current?.reset();
 
-    await clearAllFilterAction('/merchants');
+    clearAllFilterAction('/merchants');
   };
 
   return (
@@ -25,12 +23,6 @@ const MerchantFilterForm: FunctionComponent<MerchantFilterFormProps> = ({}) => {
       ref={ref}
       className='grid grid-cols-7 gap-2 items-end'
     >
-      <CoreFormFields
-        type='filter'
-        fields={CustomerColumns()}
-        className='max-w-xs'
-      />
-
       <CoreSubmitButton
         text='Хайх'
         startContent={<FunnelIcon className='w-4 h-4' />}

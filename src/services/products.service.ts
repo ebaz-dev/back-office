@@ -1,15 +1,16 @@
 import dataProvider from '@/services/data-provider.service';
-import type { IBrand, IProduct, OrderSearchParams } from '@/types';
-import type { ApiResponse } from '@/types/data-provider.types';
+import { IProduct, ProductSearchParams, ApiResponse, IBrand } from '@/types';
 import { getCookie } from '@/app/actions/cookies';
 
-export async function getProducts(searchParams: OrderSearchParams): Promise<ApiResponse<IProduct[]>> {
+export async function getProducts(
+  searchParams: ProductSearchParams
+): Promise<ApiResponse<IProduct[]>> {
   const supplier = await getCookie('supplier');
   const supplierId = supplier ? JSON.parse(supplier).id : '';
 
   const params = {
     ...searchParams,
-    supplierId,
+    supplierId
   };
 
   return dataProvider.getList<IProduct[]>('/product/bo', params);

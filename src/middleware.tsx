@@ -8,7 +8,7 @@ const protectedRoutes = [
   '/orders',
   '/products',
   '/merchants',
-  '/notification',
+  '/notifications',
   '/feedback',
   '/settings'
 ];

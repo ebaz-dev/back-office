@@ -1,32 +1,25 @@
+'use client';
+
 import { FunctionComponent, useRef } from 'react';
 import CoreFormFields from '@/components/core/CoreFormFields';
 import { filterProductsAction } from '@/app/actions/products';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
-import { ProductsColumns } from '@/lib/columns/products';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { clearAllFilterAction } from '@/app/actions/main';
-import { IBrand, IOption } from '@/types';
+import { PRODUCTS_FILTER_FIELDS } from '@/components/products/constants';
 
-interface ProductsFilterFormProps {
-  brands: IBrand[];
-}
+interface ProductsFilterFormProps {}
 
-const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
-  brands
-}) => {
+const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = () => {
   const ref = useRef<HTMLFormElement>(null);
 
-  const clearAllFilter = async () => {
+  const clearAllFilter = () => {
     ref.current?.reset();
 
-    await clearAllFilterAction('/products');
+    clearAllFilterAction('/products');
   };
-
-  const brandOptions: IOption[] = brands.map(brand => {
-    return { value: brand.id, label: brand.name };
-  });
 
   return (
     <form
@@ -34,11 +27,7 @@ const ProductsFilterForm: FunctionComponent<ProductsFilterFormProps> = ({
       ref={ref}
       className='grid grid-cols-7 gap-2 items-end'
     >
-      <CoreFormFields
-        type='filter'
-        fields={ProductsColumns({ brandOptions })}
-        className='max-w-xs'
-      />
+      <CoreFormFields fields={PRODUCTS_FILTER_FIELDS} />
 
       <CoreSubmitButton
         text='Хайх'

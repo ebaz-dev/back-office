@@ -1,11 +1,10 @@
-import { FilterType } from "@/types/data-provider.types";
+import { FilterType } from '@/types';
 
 export type SearchParamsType = {
   page?: number;
   limit?: number;
-  sortBy?: string; // field name
-  sortOrder?: string; // asc or desc
-  // TODO: add filter type
+  sortBy?: string;
+  sortOrder?: string;
   filter?: FilterType | FilterType[];
 };
 

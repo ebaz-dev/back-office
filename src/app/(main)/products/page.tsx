@@ -1,12 +1,15 @@
 import ProductsBoard from '@/components/products/ProductsBoard';
 import { getProductBrands, getProducts } from '@/services/products.service';
 import { ProductSearchParams } from '@/types';
+import { FunctionComponent } from 'react';
 
 interface ProductsPageProps {
   searchParams: ProductSearchParams;
 }
 
-const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
+const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
+  searchParams
+}) => {
   const productsData = getProducts(searchParams);
   const productsBrandsData = getProductBrands();
 
