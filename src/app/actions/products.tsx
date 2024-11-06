@@ -8,7 +8,7 @@ import {
   ProductCreateFormSchema,
   ProductUpdateFormSchema
 } from '@/utils/definitions/products';
-import { getCookie } from './cookies';
+import { getCookie } from '@/app/actions/cookies';
 import { createProduct } from '@/services/products.service';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export async function createProductAction(prevState: any, formData: FormData) {
@@ -62,7 +62,6 @@ export async function createProductAction(prevState: any, formData: FormData) {
 }
 
 export async function updateProductAction(prevState: any, formData: FormData) {
-  // Validate form using Zod
   const validatedFields = ProductUpdateFormSchema.safeParse({
     name: formData.get('name'),
     barCode: formData.get('barCode'),
@@ -79,7 +78,6 @@ export async function updateProductAction(prevState: any, formData: FormData) {
     cityTax: formData.get('cityTax') === 'true'
   });
 
-  // If form validation fails, return errors
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
