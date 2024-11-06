@@ -18,7 +18,7 @@ export const MenuList = [
   {
     icon: 'order',
     label: 'Захиалга',
-    pathname: '/order',
+    pathname: '/orders',
     resource: RESOURCES.ORDER
   },
   {

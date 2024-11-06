@@ -1,6 +1,6 @@
 'use client';
 
-import { IProduct } from '@/types/product.types';
+import { IProduct } from '@/types/products.types';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import ProductsEditForm from '@/components/products/ProductsEditForm';
@@ -21,23 +21,17 @@ const ProductsDetail: FunctionComponent<ProductsDetailProps> = props => {
       color='primary'
       variant='underlined'
       classNames={{
-        tabList: "gap-6",
-        cursor: "w-full",
-        panel: "h-[calc(80vh-120px)]",
-        tab: "max-w-fit px-8",
+        tabList: 'gap-6',
+        cursor: 'w-full',
+        panel: 'h-[calc(80vh-120px)]',
+        tab: 'max-w-fit px-8'
       }}
     >
       <Tab key='editInfo' title='Дэлгэрэнгүй мэдээлэл'>
-        <ProductsEditForm
-          product={product}
-          type={type}
-        />
+        <ProductsEditForm product={product} type={type} />
       </Tab>
       <Tab key='photos' title='Бүтээгдэхүүний зурагнууд'>
-        <ProductsGallery
-          product={product}
-          type={type}
-        />
+        <ProductsGallery product={product} type={type} />
       </Tab>
     </Tabs>
   );

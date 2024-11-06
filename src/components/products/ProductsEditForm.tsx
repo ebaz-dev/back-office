@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { ProductsColumns } from '@/lib/columns/products';
 import CoreFormFields from '@/components/core/CoreFormFields';
-import { IProduct } from '@/types/product.types';
+import { IProduct } from '@/types/products.types';
 import { updateProductAction } from '@/app/actions/products';
 import { useFormState } from 'react-dom';
 import { Card, CardBody } from '@nextui-org/react';

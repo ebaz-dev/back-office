@@ -1,4 +1,4 @@
-import { IProduct } from '@/types/product.types';
+import { IProduct } from '@/types/products.types';
 import { SearchParamsType } from '@/types/common.types';
 
 export interface OrderSearchParams extends SearchParamsType {}

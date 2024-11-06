@@ -18,13 +18,17 @@ const createRequestConfig = (method: string, body?: unknown): RequestInit => ({
 
 const createUrl = (endpoint: string, params?: Record<string, unknown>): URL => {
   const url = new URL(`${API_URL}${endpoint}`);
+
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined) {
+      if (key === 'page' || key === 'limit') {
         url.searchParams.append(key, String(value));
+      } else {
+        url.searchParams.append(`filter[${key}]`, String(value));
       }
     });
   }
+
   return url;
 };
 
@@ -65,7 +69,9 @@ async function request<T>(
   try {
     const url = createUrl(endpoint, options?.params);
     const config = createRequestConfig(method, options?.body);
+
     const response = await fetch(url, config);
+
     return processResponse<T>(response);
   } catch (error) {
     console.error('API request failed:', error);
