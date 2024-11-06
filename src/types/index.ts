@@ -5,3 +5,4 @@ export * from './customer.types';
 export * from './form.types';
 export * from './table.types';
 export * from './common.types';
+export * from './merchants.types';

@@ -1,5 +1,3 @@
-import { RESOURCES } from '@/constants/common';
-
 export const API_URL = process.env.API_URL;
 
 export const MEDIA_URL = process.env.MEDIA_URL;
@@ -12,37 +10,31 @@ export const MenuList = [
   {
     icon: 'dashboard',
     label: 'Хяналтын самбар',
-    pathname: '/dashboard',
-    resource: RESOURCES.DASHBOARD
+    pathname: '/dashboard'
   },
   {
     icon: 'order',
     label: 'Захиалга',
-    pathname: '/orders',
-    resource: RESOURCES.ORDER
+    pathname: '/orders'
   },
   {
     icon: 'products',
     label: 'Бүтээгдэхүүн',
-    pathname: '/products',
-    resource: RESOURCES.PRODUCT
+    pathname: '/products'
   },
   {
     icon: 'merchants',
     label: 'Харилцагч',
-    pathname: '/merchants',
-    resource: RESOURCES.MERCHANT
+    pathname: '/merchants'
   },
   {
     icon: 'notification',
     label: 'Мэдэгдэл',
-    pathname: '/notification',
-    resource: RESOURCES.NOTIFICATION
+    pathname: '/notification'
   },
   {
     icon: 'feedback',
     label: 'Санал хүсэлт',
-    pathname: '/feedback',
-    resource: RESOURCES.FEEDBACK
+    pathname: '/feedback'
   }
 ];

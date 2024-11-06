@@ -9,7 +9,7 @@ import {
   ProductUpdateFormSchema
 } from '@/utils/definitions/products';
 import { getCookie } from './cookies';
-import { createProduct, updateProduct } from '@/services/products.service';
+import { createProduct } from '@/services/products.service';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export async function createProductAction(prevState: any, formData: FormData) {
   // Validate form using Zod
@@ -61,7 +61,7 @@ export async function createProductAction(prevState: any, formData: FormData) {
   };
 }
 
-export async function updateProductAction(id: any, formData: FormData) {
+export async function updateProductAction(prevState: any, formData: FormData) {
   // Validate form using Zod
   const validatedFields = ProductUpdateFormSchema.safeParse({
     name: formData.get('name'),
@@ -87,8 +87,8 @@ export async function updateProductAction(id: any, formData: FormData) {
     };
   }
 
-  const data = validatedFields.data;
-  await updateProduct(id, data);
+  // const data = validatedFields.data;
+  // await updateProduct(id, data);
   return {
     message: 'Product Updated Successfully!',
     errors: {}

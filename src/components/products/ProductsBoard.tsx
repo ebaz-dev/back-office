@@ -12,15 +12,6 @@ interface ProductsBoardProps {
 }
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
-  const { products, totalPage, currentPage, brands } = props;
-
-  const filterOptions = {
-    brandId: brands.map(brand => ({
-      label: brand.name,
-      value: brand.id
-    }))
-  };
-
   return (
     <div className='h-full flex flex-col gap-4'>
       <Card>

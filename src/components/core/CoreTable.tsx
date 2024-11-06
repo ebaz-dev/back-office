@@ -1,4 +1,4 @@
-import { ITableItemType, IColumn, IOrder, IProduct } from '@/types';
+import { ITableItemType, IColumn } from '@/types';
 import {
   Pagination,
   Spinner,
