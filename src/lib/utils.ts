@@ -75,7 +75,9 @@ export const statusColorMap: Record<string, ChipProps['color']> = {
   pending: 'warning',
   cancelled: 'danger',
   confirmed: 'success',
-  delivered: 'secondary'
+  delivered: 'secondary',
+  true: 'success',
+  false: 'danger'
 };
 
 export const addOptionsToColumns = (

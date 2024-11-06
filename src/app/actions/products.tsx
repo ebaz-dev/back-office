@@ -60,6 +60,7 @@ export async function createProductAction(prevState: any, formData: FormData) {
     errors: {}
   };
 }
+
 export async function updateProductAction(id: any, formData: FormData) {
   // Validate form using Zod
   const validatedFields = ProductUpdateFormSchema.safeParse({

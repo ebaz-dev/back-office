@@ -1,5 +1,5 @@
 import dataProvider from '@/services/data-provider.service';
-import type { IBrand, IProduct, ProductSearchParams } from '@/types';
+import type { IProduct, ProductSearchParams } from '@/types';
 import type { ApiResponse } from '@/types';
 import { getCookie } from '@/app/actions/cookies';
 

@@ -1,4 +1,4 @@
-import { IColumn } from '@/types';
+import { ITableItemType, IColumn, IOrder, IProduct } from '@/types';
 import {
   Pagination,
   Spinner,
@@ -17,32 +17,27 @@ import {
   useState
 } from 'react';
 import CoreEmpty from '@/components/core/CoreEmpty';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { onPageChangeAction } from '@/app/actions/main';
 
-interface Item {
-  id: string;
-}
-
-interface CoreTableProps<T extends Item> {
-  data: T[];
+interface CoreTableProps<ITableItemType> {
+  data: ITableItemType[];
   columns: IColumn[];
-  renderCell: (item: T, columnKey: React.Key) => React.ReactNode;
+  renderCell: (item: ITableItemType, columnKey: React.Key) => React.ReactNode;
   totalPage: number;
   currentPage: number;
 }
 
-const CoreTable: FunctionComponent<CoreTableProps<Item>> = props => {
+const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
   const { columns, data, renderCell, totalPage, currentPage } = props;
 
+  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsClient(true);
     setIsLoading(false);
   }, [data]);
 
@@ -77,13 +72,18 @@ const CoreTable: FunctionComponent<CoreTableProps<Item>> = props => {
     ) : null;
   }, [currentPage, totalPage, onPageChange]);
 
+  const onRowAction = (key: React.Key) => {
+    setIsLoading(true);
+    router.push(`${pathname}/${key}`);
+  };
+
   return (
     <Table
       aria-label='custom cells'
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
-      selectionMode={isClient ? 'multiple' : 'none'}
+      selectionMode='single'
       classNames={
         data.length === 0
           ? {
@@ -94,6 +94,7 @@ const CoreTable: FunctionComponent<CoreTableProps<Item>> = props => {
             }
           : {}
       }
+      onRowAction={onRowAction}
     >
       <TableHeader columns={columns}>
         {column => <TableColumn key={column.uid}>{column.label}</TableColumn>}

@@ -1,16 +1,16 @@
 import { FunctionComponent } from 'react';
 import { IOrder } from '@/types';
-import OrderTable from '@/components/orders/OrderTable';
-import OrderFilterForm from '@/components/orders/OrderFilterForm';
+import OrderTable from '@/components/orders/OrdersTable';
+import OrderFilterForm from '@/components/orders/OrdersFilterForm';
 import { Card, CardBody } from '@nextui-org/react';
 
-interface OrderBoardProps {
+interface OrdersBoardProps {
   orders: IOrder[];
   currentPage: number;
   totalPage: number;
 }
 
-const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
+const OrdersBoard: FunctionComponent<OrdersBoardProps> = props => {
   return (
     <div className='h-full flex flex-col gap-4'>
       <Card>
@@ -24,4 +24,4 @@ const OrderBoard: FunctionComponent<OrderBoardProps> = props => {
   );
 };
 
-export default OrderBoard;
+export default OrdersBoard;

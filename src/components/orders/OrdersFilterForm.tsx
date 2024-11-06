@@ -10,9 +10,9 @@ import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { filterOrdersAction } from '@/app/actions/orders';
 import { clearAllFilterAction } from '@/app/actions/main';
 
-interface OrderFilterFormProps {}
+interface OrdersFilterFormProps {}
 
-const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = ({}) => {
+const OrdersFilterForm: FunctionComponent<OrdersFilterFormProps> = ({}) => {
   const ref = useRef<HTMLFormElement>(null);
 
   const clearAllFilter = () => {
@@ -46,4 +46,4 @@ const OrderFilterForm: FunctionComponent<OrderFilterFormProps> = ({}) => {
   );
 };
 
-export default OrderFilterForm;
+export default OrdersFilterForm;

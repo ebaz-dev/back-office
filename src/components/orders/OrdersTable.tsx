@@ -7,15 +7,15 @@ import { getValueByPath, replaceText, statusColorMap } from '@/lib/utils';
 import CoreGroupImages from '@/components/core/CoreGroupImages';
 import { Chip } from '@nextui-org/react';
 import moment from 'moment';
-import { ORDER_COLUMNS } from '@/lib/columns/orders';
+import { ORDER_COLUMNS } from '@/components/orders/constants';
 
-interface OrderTableProps {
+interface OrdersTableProps {
   orders: IOrder[];
   totalPage: number;
   currentPage: number;
 }
 
-const OrderTable: FunctionComponent<OrderTableProps> = props => {
+const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
   const { orders, totalPage, currentPage } = props;
 
   const renderCell = useCallback((order: IOrder, columnKey: React.Key) => {
@@ -71,4 +71,4 @@ const OrderTable: FunctionComponent<OrderTableProps> = props => {
   );
 };
 
-export default OrderTable;
+export default OrdersTable;

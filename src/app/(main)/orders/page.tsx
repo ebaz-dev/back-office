@@ -1,5 +1,5 @@
 import { getOrders } from '@/services/orders.service';
-import OrderBoard from '@/components/orders/OrderBoard';
+import OrdersBoard from '@/components/orders/OrdersBoard';
 import { OrderSearchParams } from '@/types';
 import { FunctionComponent } from 'react';
 
@@ -15,7 +15,7 @@ const OrderPage: FunctionComponent<OrderPageProps> = async ({
   const orders = await getOrders(searchParams);
 
   return (
-    <OrderBoard
+    <OrdersBoard
       orders={orders.data}
       currentPage={Number(page) || 1}
       totalPage={orders?.totalPages || 0}
