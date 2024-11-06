@@ -1,4 +1,4 @@
-import { IColumn } from '@/types/table.types';
+import { IColumn } from '@/types';
 import moment from 'moment';
 
 export const CustomerColumns = (): IColumn[] => [

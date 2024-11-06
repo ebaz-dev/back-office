@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { IOrder } from '@/types/orders.types';
+import { IOrder } from '@/types';
 import OrderTable from '@/components/orders/OrderTable';
 import OrderFilterForm from '@/components/orders/OrderFilterForm';
 import { Card, CardBody } from '@nextui-org/react';

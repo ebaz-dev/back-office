@@ -1,7 +1,7 @@
 'use client';
 
 import { FunctionComponent, useState } from 'react';
-import { IProduct } from '@/types/products.types';
+import { IProduct } from '@/types';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import CoreImageUploader from '@/components/core/CoreImageUploader';
 import { updateProductImageAction } from '@/app/actions/products';

@@ -3,7 +3,7 @@
 import { FunctionComponent } from 'react';
 import CoreTable from '@/components/core/CoreTable';
 import { CustomerColumns } from '@/lib/columns/customers';
-import { ICustomer } from '@/types/customer.types';
+import { ICustomer } from '@/types';
 import MerchantFilterForm from '@/components/merchants/MerchantFilterForm';
 
 interface MerchantBoardProps {

@@ -2,7 +2,7 @@
 
 import MainNav from '@/components/navigations/MainNav';
 import SideNav from '@/components/navigations/SideNav';
-import { ICustomer } from '@/types/customer.types';
+import { ICustomer } from '@/types';
 import { FunctionComponent, ReactNode, useState } from 'react';
 
 interface NavProviderProps {

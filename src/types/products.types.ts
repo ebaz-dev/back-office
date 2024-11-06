@@ -1,6 +1,6 @@
-import { ICustomer } from "@/types/customer.types";
-import { IOption } from "@/types/table.types";
-import { SearchParamsType } from "@/types/common.types";
+import { ICustomer } from '@/types';
+import { IOption } from '@/types';
+import { SearchParamsType } from '@/types';
 
 export interface ProductSearchParams extends SearchParamsType {
   id: string;
@@ -40,7 +40,6 @@ export interface IProduct {
   customer: ICustomer;
   price: number;
 }
-
 
 export interface IProductAttribute {
   attributeId: string;

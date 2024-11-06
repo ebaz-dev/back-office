@@ -1,4 +1,4 @@
-import { FilterType } from '@/types/data-provider.types';
+import { FilterType } from '@/types';
 
 export type SearchParamsType = {
   page?: number;

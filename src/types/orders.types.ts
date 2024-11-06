@@ -1,12 +1,8 @@
-import { IProduct } from '@/types/products.types';
-import { SearchParamsType } from '@/types/common.types';
+import { IProduct } from '@/types';
+import { SearchParamsType } from '@/types';
 
-export interface OrderSearchParams extends SearchParamsType {}
-
-export interface OrderFilterParams {
+export interface OrderSearchParams extends SearchParamsType {
   orderNo?: string;
-  orderedAt?: string;
-  deliveryDate?: string;
 }
 
 export interface IOrder {

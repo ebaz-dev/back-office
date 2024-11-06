@@ -1,6 +1,6 @@
 import { getOrders } from '@/services/orders.service';
 import OrderBoard from '@/components/orders/OrderBoard';
-import { OrderSearchParams } from '@/types/orders.types';
+import { OrderSearchParams } from '@/types';
 import { FunctionComponent } from 'react';
 
 interface OrderPageProps {

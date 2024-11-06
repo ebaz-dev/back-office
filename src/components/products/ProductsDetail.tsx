@@ -1,6 +1,6 @@
 'use client';
 
-import { IProduct } from '@/types/products.types';
+import { IProduct } from '@/types';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import ProductsEditForm from '@/components/products/ProductsEditForm';

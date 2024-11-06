@@ -4,7 +4,7 @@ import {
   GetListParamsType,
   GetOneParamsType,
   UpdateParamsType
-} from '@/types/data-provider.types';
+} from '@/types';
 import { cookies } from 'next/headers';
 
 const createRequestConfig = (method: string, body?: unknown): RequestInit => ({

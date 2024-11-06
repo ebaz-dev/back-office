@@ -1,6 +1,6 @@
 import dataProvider from '@/services/data-provider.service';
-import type { IOrder, OrderSearchParams } from '@/types/orders.types';
-import type { ApiResponse } from '@/types/data-provider.types';
+import type { IOrder, OrderSearchParams } from '@/types';
+import type { ApiResponse } from '@/types';
 import { getCookie } from '@/app/actions/cookies';
 
 export async function getOrders(

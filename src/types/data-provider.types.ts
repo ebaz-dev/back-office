@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SearchParamsType } from '@/types/common.types';
+import { SearchParamsType } from '@/types';
 
 export type FilterType = {
   field?: string;

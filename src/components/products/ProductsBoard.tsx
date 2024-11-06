@@ -1,7 +1,7 @@
 'use client';
 
 import { FunctionComponent } from 'react';
-import { IBrand, IProduct } from '@/types/products.types';
+import { IBrand, IProduct } from '@/types';
 import { ProductsColumns } from '@/constants/columns/products';
 import CoreList from '@/components/core/CoreList';
 
