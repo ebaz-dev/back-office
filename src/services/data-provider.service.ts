@@ -1,18 +1,21 @@
 import { API_URL } from '@/config';
-import { ApiResponse, GetListParamsType, GetOneParamsType, UpdateParamsType } from '@/types/data-provider.types';
+import {
+  ApiResponse,
+  GetListParamsType,
+  GetOneParamsType,
+  UpdateParamsType
+} from '@/types/data-provider.types';
 import { cookies } from 'next/headers';
 
-// Base request configuration
 const createRequestConfig = (method: string, body?: unknown): RequestInit => ({
   method,
   headers: {
     'Content-Type': 'application/json',
     Cookie: cookies().get('session')?.value?.replace(',', '; ') || ''
   },
-  body: body ? JSON.stringify(body) : undefined,
+  body: body ? JSON.stringify(body) : undefined
 });
 
-// Create URL with query parameters
 const createUrl = (endpoint: string, params?: Record<string, unknown>): URL => {
   const url = new URL(`${API_URL}${endpoint}`);
   if (params) {
@@ -25,10 +28,8 @@ const createUrl = (endpoint: string, params?: Record<string, unknown>): URL => {
   return url;
 };
 
-// Process API response
 async function processResponse<T>(response: Response): Promise<ApiResponse<T>> {
   if (!response.ok) {
-    // throw new Error(`API Error: ${response.status} ${response.statusText}`);
     return {
       data: [] as T,
       ok: false,
@@ -36,7 +37,7 @@ async function processResponse<T>(response: Response): Promise<ApiResponse<T>> {
       headers: response.headers,
       total: 0,
       totalPages: 0,
-      currentPage: 0,
+      currentPage: 0
     };
   }
 
@@ -49,11 +50,10 @@ async function processResponse<T>(response: Response): Promise<ApiResponse<T>> {
     headers: response.headers,
     total: data?.total || 0,
     totalPages: data?.totalPages || 0,
-    currentPage: data?.currentPage || 0,
+    currentPage: data?.currentPage || 0
   };
 }
 
-// Main request function
 async function request<T>(
   endpoint: string,
   method: string = 'GET',
@@ -69,13 +69,15 @@ async function request<T>(
     return processResponse<T>(response);
   } catch (error) {
     console.error('API request failed:', error);
-    throw error; // Let the caller handle the error
+    throw error;
   }
 }
 
-// Data provider functions
 const dataProvider = {
-  async getList<T>(resource: string, params?: GetListParamsType): Promise<ApiResponse<T>> {
+  async getList<T>(
+    resource: string,
+    params?: GetListParamsType
+  ): Promise<ApiResponse<T>> {
     const { page = 1, limit = 10, sortOrder, ...rest } = params || {};
     const customSortOrder = sortOrder === 'ascending' ? 'asc' : 'desc';
 
@@ -83,13 +85,16 @@ const dataProvider = {
       page,
       limit,
       sortOrder: customSortOrder,
-      ...rest,
+      ...rest
     };
 
     return request<T>(resource, 'GET', { params: queryParams });
   },
 
-  async getOne<T>(resource: string, { id }: GetOneParamsType): Promise<ApiResponse<T>> {
+  async getOne<T>(
+    resource: string,
+    { id }: GetOneParamsType
+  ): Promise<ApiResponse<T>> {
     return request<T>(`${resource}/${id}`);
   },
 
@@ -106,7 +111,10 @@ const dataProvider = {
     });
   },
 
-  async delete<T>(resource: string, { id }: GetOneParamsType): Promise<ApiResponse<T>> {
+  async delete<T>(
+    resource: string,
+    { id }: GetOneParamsType
+  ): Promise<ApiResponse<T>> {
     return request<T>(`${resource}/${id}`, 'DELETE');
   },
 
@@ -116,4 +124,3 @@ const dataProvider = {
 };
 
 export default dataProvider;
-

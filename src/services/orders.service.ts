@@ -14,5 +14,5 @@ export async function getOrders(
     supplierId
   };
 
-  return dataProvider.getList<IOrder[]>('/order/bo/order', params);
+  return dataProvider.getList<IOrder[]>('/order/bo', params);
 }

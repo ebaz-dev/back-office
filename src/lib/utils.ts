@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MEDIA_URL } from '@/config';
 import { FilterOptionsType, IColumn } from '@/types';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { ChipProps } from '@nextui-org/react';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,6 +27,15 @@ export const getNestedValue = <T>(
     }
     return undefined;
   }, obj);
+};
+
+export const getValueByPath = (obj: Record<string, any>, path: string): any => {
+  const keys = path.split('.');
+
+  return keys.reduce(
+    (acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined),
+    obj
+  );
 };
 
 export const replaceMediaUrl = (imageUrl: string) =>
@@ -59,17 +70,28 @@ export const replaceText = (text: string) => {
   return text;
 };
 
-export const addOptionsToColumns = (columns: IColumn[], options: FilterOptionsType) => {
-  const updatedColumns = columns.map((column) => {
+export const statusColorMap: Record<string, ChipProps['color']> = {
+  created: 'default',
+  pending: 'warning',
+  cancelled: 'danger',
+  confirmed: 'success',
+  delivered: 'secondary'
+};
+
+export const addOptionsToColumns = (
+  columns: IColumn[],
+  options: FilterOptionsType
+) => {
+  const updatedColumns = columns.map(column => {
     // If column name matches an options key, add those options to the column
     if (column.name && options[column.name]) {
       return {
         ...column,
-        options: options[column.name],
+        options: options[column.name]
       };
     }
     return column;
   });
 
   return updatedColumns;
-}
+};

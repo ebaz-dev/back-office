@@ -1,8 +1,5 @@
-'use client';
-
-import { IColumn } from '@/types/table.types';
+import { IColumn } from '@/types';
 import {
-  getKeyValue,
   Pagination,
   Spinner,
   Table,
@@ -13,17 +10,15 @@ import {
   TableRow
 } from '@nextui-org/react';
 import {
-  Key,
-  ReactNode,
+  FunctionComponent,
   useCallback,
   useEffect,
   useMemo,
   useState
 } from 'react';
+import CoreEmpty from '@/components/core/CoreEmpty';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { onPageChangeAction } from '@/app/actions/main';
-import CoreEmpty from '@/components/core/CoreEmpty';
-import { getNestedValue } from '@/lib/utils';
 
 interface Item {
   id: string;
@@ -32,22 +27,13 @@ interface Item {
 interface CoreTableProps<T extends Item> {
   data: T[];
   columns: IColumn[];
+  renderCell: (item: T, columnKey: React.Key) => React.ReactNode;
   totalPage: number;
   currentPage: number;
-  rowsPerPage?: number;
-  customTopContents?: ReactNode;
-  onRowAction?: (key: Key) => void;
 }
 
-const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
-  const {
-    columns,
-    data,
-    customTopContents,
-    totalPage,
-    currentPage,
-    onRowAction
-  } = props;
+const CoreTable: FunctionComponent<CoreTableProps<Item>> = props => {
+  const { columns, data, renderCell, totalPage, currentPage } = props;
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -68,18 +54,11 @@ const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
 
       currentParams.set('page', value.toString());
 
-      setIsLoading(true), onPageChangeAction(`${pathname}?${currentParams}`);
+      setIsLoading(true);
+      onPageChangeAction(`${pathname}?${currentParams}`);
     },
     [searchParams, setIsLoading, pathname]
   );
-
-  const topContent = useMemo(() => {
-    return (
-      <div className='bg-content1 p-4 rounded-large shadow-small flex gap-2 justify-between'>
-        {customTopContents}
-      </div>
-    );
-  }, [customTopContents]);
 
   const bottomContent = useMemo(() => {
     return totalPage > 0 ? (
@@ -98,35 +77,13 @@ const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
     ) : null;
   }, [currentPage, totalPage, onPageChange]);
 
-  const renderCell = useCallback(
-    (item: T, columnKey: string) => {
-      const filtered = columns.find(col => col.uid === columnKey);
-
-      const cellValue = getKeyValue(
-        getNestedValue(item, columnKey.split('.')),
-        columnKey
-      );
-
-      if (filtered && filtered.customCell) {
-        return filtered.customCell(cellValue);
-      }
-
-      return <div className='line-clamp-2'>{cellValue || '--'}</div>;
-    },
-    [columns]
-  );
-
   return (
     <Table
-      aria-label='core table'
-      topContent={topContent}
-      topContentPlacement='outside'
+      aria-label='custom cells'
+      isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
       selectionMode={isClient ? 'multiple' : 'none'}
-      selectionBehavior='toggle'
-      isHeaderSticky
-      onRowAction={onRowAction}
       classNames={
         data.length === 0
           ? {
@@ -138,23 +95,20 @@ const CoreTable = <T extends Item>(props: CoreTableProps<T>): JSX.Element => {
           : {}
       }
     >
-      <TableHeader>
-        <TableHeader columns={columns}>
-          {column => <TableColumn key={column.uid}>{column.label}</TableColumn>}
-        </TableHeader>
+      <TableHeader columns={columns}>
+        {column => <TableColumn key={column.uid}>{column.label}</TableColumn>}
       </TableHeader>
-
       <TableBody
         items={data ?? []}
-        emptyContent={<CoreEmpty />}
         isLoading={isLoading}
+        emptyContent={<CoreEmpty />}
         loadingContent={<Spinner />}
       >
         {item => (
           <TableRow key={item.id}>
             {columnKey => (
-              <TableCell className='text-xs text-center'>
-                {renderCell(item, columnKey.toString())}
+              <TableCell className='text-xs'>
+                {renderCell(item, columnKey)}
               </TableCell>
             )}
           </TableRow>

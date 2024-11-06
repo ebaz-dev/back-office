@@ -1,20 +1,26 @@
 import { getOrders } from '@/services/orders.service';
 import OrderBoard from '@/components/order/OrderBoard';
 import { OrderSearchParams } from '@/types/order.types';
+import { FunctionComponent } from 'react';
 
 interface OrderPageProps {
   searchParams: OrderSearchParams;
 }
 
-export default async function OrderPage({ searchParams }: OrderPageProps) {
-  const page = searchParams?.page || 1;
+const OrderPage: FunctionComponent<OrderPageProps> = async ({
+  searchParams
+}) => {
+  const { page } = searchParams;
+
   const orders = await getOrders(searchParams);
 
   return (
     <OrderBoard
       orders={orders.data}
-      currentPage={page}
+      currentPage={Number(page) || 1}
       totalPage={orders?.totalPages || 0}
     />
   );
-}
+};
+
+export default OrderPage;
