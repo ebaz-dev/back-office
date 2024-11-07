@@ -6,8 +6,10 @@ export const ORDER_COLUMNS = [
   { uid: 'createdAt', label: 'Захиалсан өдөр' },
   { uid: 'deliveryDate', label: 'Хүргүүлэх өдөр' },
   { uid: 'status', label: 'Төлөв' },
+  { uid: 'totalPrice', label: 'Нийт үнийн дүн' },
   { uid: 'supplier.name', label: 'Нийлүүлэгч' },
-  { uid: 'user.phoneNumber', label: 'Утасны дугаар' }
+  { uid: 'merchant.name', label: 'Харилцагчийн нэр' },
+  { uid: 'merchant.phone', label: 'Харилцагчийн утасны дугаар' }
 ];
 
 export const ORDER_FILTER_FIELDS: IFormField[] = [

@@ -16,3 +16,8 @@ export async function getOrders(
 
   return dataProvider.getList<IOrder[]>('/order/bo', params);
 }
+
+export async function getOrder<IOrder>(id: number) {
+  const res = await dataProvider.getOne<IOrder>(`/order/bo`, { id });
+  return res.data;
+}

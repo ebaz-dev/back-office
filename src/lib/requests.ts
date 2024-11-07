@@ -10,7 +10,7 @@ export const getCustomers = async (currentParams: string) =>
   await fetcher(`/customer/bo/list?${currentParams}&limit=10`);
 
 export const getProductBrands = async (supplierId: string) =>
-  await fetcher(`/product/brands?customerId=${supplierId}&limit=all`);
+  await fetcher(`/product/brands?supplierId=${supplierId}&limit=all`);
 
 export const getProductCategories = async () =>
   await fetcher(`/product/categories?limit=all`);
