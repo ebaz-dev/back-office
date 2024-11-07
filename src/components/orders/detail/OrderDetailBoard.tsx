@@ -1,17 +1,14 @@
-import { replaceText, statusColorMap, tr } from '@/lib/utils';
 import { IOrder } from '@/types';
 import {
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Chip,
   Divider
 } from '@nextui-org/react';
-import moment from 'moment';
 import { FunctionComponent } from 'react';
-import OrderStatus from './OrderStatus';
-import OrderProductsTable from './OrderProductsTable';
+import OrderStatus from '@/components/orders/detail/OrderStatus';
+import OrderProductsTable from '@/components/orders/detail/OrderProductsTable';
 
 interface OrderDetailBoardProps {
   order: IOrder;
