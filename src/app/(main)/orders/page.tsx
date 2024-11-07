@@ -10,15 +10,13 @@ interface OrderPageProps {
 const OrderPage: FunctionComponent<OrderPageProps> = async ({
   searchParams
 }) => {
-  const { page } = searchParams;
-
   const orders = await getOrders(searchParams);
 
   return (
     <OrdersBoard
       orders={orders.data}
-      currentPage={Number(page) || 1}
-      totalPage={orders?.totalPages || 0}
+      currentPage={orders.currentPage}
+      totalPage={orders.totalPages}
     />
   );
 };

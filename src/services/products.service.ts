@@ -10,7 +10,7 @@ export async function getProducts(
 
   const params = {
     ...searchParams,
-    supplierId
+    customerId: supplierId
   };
 
   return dataProvider.getList<IProduct[]>('/product/bo', params);
