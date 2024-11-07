@@ -44,7 +44,7 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
         case 'products':
           const images: string[] = [];
 
-          if (order.products) {
+          if ('products' in order && Array.isArray(order.products)) {
             order.products.forEach((product: IProduct) => {
               if (product && product.images) {
                 images.push(...product.images);
