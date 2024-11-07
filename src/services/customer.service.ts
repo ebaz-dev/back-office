@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import dataProvider from '@/services/data-provider.service';
 import type { SearchParamsType } from '@/types';
 import type { ApiResponse } from '@/types';
 import { getCookie } from '@/app/actions/cookies';
 import { IMerchant } from '@/types';
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export async function getMerchants(
   searchParams: SearchParamsType
 ): Promise<ApiResponse<IMerchant[]>> {

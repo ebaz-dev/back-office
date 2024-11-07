@@ -20,10 +20,10 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = async ({
 
   return (
     <ProductsBoard
-      products={products?.data || []}
-      brands={brands?.data || []}
-      totalPage={products?.totalPages}
-      currentPage={products?.currentPage || 1}
+      products={products.data}
+      brands={brands.data}
+      totalPage={products.totalPages}
+      currentPage={products.currentPage}
     />
   );
 };
