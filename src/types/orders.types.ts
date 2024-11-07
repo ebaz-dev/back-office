@@ -1,4 +1,4 @@
-import { IProduct } from '@/types';
+import { ICustomer, IProduct } from '@/types';
 import { SearchParamsType } from '@/types';
 
 export interface OrderSearchParams extends SearchParamsType {
@@ -6,16 +6,15 @@ export interface OrderSearchParams extends SearchParamsType {
 }
 
 export interface IOrder {
-  status?: string;
-  supplierId?: string;
-  merchantId?: string;
-  userId?: string;
-  cartId?: string;
-  products?: IProduct[];
-  orderedAt?: Date | string;
-  deliveryDate?: Date | string;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  version?: number;
+  orderNo: string;
+  status: string;
+  products: IProduct[];
+  giftProducts: [];
+  deliveryDate: Date | string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   id: string;
+  supplier: ICustomer;
+  merchant: ICustomer;
+  user: { phoneNumber: string; id: string };
 }

@@ -50,7 +50,7 @@ export async function createProductAction(prevState: any, formData: FormData) {
       price,
       cost
     },
-    customerId: supplierId,
+    supplierId,
     ...rest
   };
 
