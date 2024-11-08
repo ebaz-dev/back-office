@@ -138,7 +138,7 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
             {columnKey => (
               <TableCell className='text-xs'>
                 <div className='line-clamp-2 flex items-center justify-center'>
-                  {renderCell(item, columnKey)}
+                  {renderCell(item, columnKey) || '--'}
                 </div>
               </TableCell>
             )}

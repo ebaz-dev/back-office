@@ -27,7 +27,7 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
 
   const renderCell = useCallback(
     (order: ITableItemType, columnKey: React.Key) => {
-      const cellValue = getValueByPath(order, columnKey.toString()) || '--';
+      const cellValue = getValueByPath(order, columnKey.toString());
 
       switch (columnKey) {
         case 'totalPrice':
