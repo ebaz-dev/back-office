@@ -11,7 +11,7 @@ interface ProductsBoardProps {
 
 const ProductsBoard: FunctionComponent<ProductsBoardProps> = props => {
   return (
-    <div className='h-full flex flex-col gap-4'>
+    <div className='h-full'>
       <ProductsTable {...props} />
     </div>
   );

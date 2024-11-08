@@ -77,17 +77,15 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
   );
 
   return (
-    <div className='flex-1'>
-      <CoreTable
-        data={orders}
-        columns={ORDER_COLUMNS}
-        renderCell={renderCell}
-        totalPage={totalPage}
-        currentPage={currentPage}
-        onRowAction={key => changePathAction(`/orders/${key}`)}
-        customTopContent={<OrdersFilterForm />}
-      />
-    </div>
+    <CoreTable
+      data={orders}
+      columns={ORDER_COLUMNS}
+      renderCell={renderCell}
+      totalPage={totalPage}
+      currentPage={currentPage}
+      onRowAction={key => changePathAction(`/orders/${key}`)}
+      customTopContent={<OrdersFilterForm />}
+    />
   );
 };
 

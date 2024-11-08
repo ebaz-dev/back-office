@@ -108,16 +108,6 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
       selectionMode='single'
-      classNames={
-        data.length === 0
-          ? {
-              base: 'h-full',
-              table: 'h-full',
-              tbody: 'h-full',
-              wrapper: 'h-full'
-            }
-          : {}
-      }
       onRowAction={onDefaultRowAction}
     >
       <TableHeader columns={columns}>
