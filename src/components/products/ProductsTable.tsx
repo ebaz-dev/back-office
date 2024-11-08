@@ -7,6 +7,8 @@ import { getValueByPath } from '@/lib/utils';
 import { PRODUCTS_COLUMNS } from '@/components/products/constants';
 import CoreGroupImages from '@/components/core/CoreGroupImages';
 import { Switch } from '@nextui-org/react';
+import { changePathAction } from '@/app/actions/main';
+import ProductsFilterForm from '@/components/products/ProductsFilterForm';
 
 interface ProductsTableProps {
   products: IProduct[];
@@ -29,7 +31,7 @@ const ProductsTable: FunctionComponent<ProductsTableProps> = props => {
           return <CoreGroupImages images={cellValue} />;
 
         default:
-          return <div className='line-clamp-2'>{cellValue}</div>;
+          return cellValue;
       }
     },
     []
@@ -43,6 +45,8 @@ const ProductsTable: FunctionComponent<ProductsTableProps> = props => {
         renderCell={renderCell}
         totalPage={totalPage}
         currentPage={currentPage}
+        onRowAction={key => changePathAction(`/products/${key}`)}
+        customTopContent={<ProductsFilterForm />}
       />
     </div>
   );

@@ -25,8 +25,7 @@ export const getValueByPath = (obj: Record<string, any>, path: string): any => {
   );
 };
 
-export const replaceMediaUrl = (imageUrl: string) =>
-  `${MEDIA_URL}/original/${imageUrl}`;
+export const replaceMediaUrl = (imageUrl: string) => `${MEDIA_URL}/${imageUrl}`;
 
 export const removeEmptyValuesFromObject = (object: Record<string, unknown>) =>
   Object.fromEntries(

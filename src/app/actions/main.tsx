@@ -17,17 +17,9 @@ export const removeSupplierAction = (pathname: string) => {
   redirect(pathname);
 };
 
-export const onPageChangeAction = (url: string) => {
-  redirect(url);
-};
-
-export const clearAllFilterAction = (pathname: string) => {
+export const changePathAction = (pathname: string) => {
   redirect(pathname);
 };
 
 export const uploadImageAction = async (formData: FormData) =>
   await uploadImageFetcher(formData);
-
-export const onQueryParamChangeAction = (url: string) => {
-  redirect(url);
-};

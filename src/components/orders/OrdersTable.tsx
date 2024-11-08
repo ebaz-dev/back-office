@@ -3,11 +3,18 @@
 import { IOrder, IProduct, ITableItemType } from '@/types';
 import { FunctionComponent, useCallback } from 'react';
 import CoreTable from '@/components/core/CoreTable';
-import { getValueByPath, replaceText, statusColorMap } from '@/lib/utils';
+import {
+  formatUnit,
+  getValueByPath,
+  replaceText,
+  statusColorMap
+} from '@/lib/utils';
 import CoreGroupImages from '@/components/core/CoreGroupImages';
 import { Chip } from '@nextui-org/react';
 import moment from 'moment';
 import { ORDER_COLUMNS } from '@/components/orders/constants';
+import { changePathAction } from '@/app/actions/main';
+import OrdersFilterForm from '@/components/orders/OrdersFilterForm';
 
 interface OrdersTableProps {
   orders: IOrder[];
@@ -20,14 +27,22 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
 
   const renderCell = useCallback(
     (order: ITableItemType, columnKey: React.Key) => {
-      const cellValue = getValueByPath(order, columnKey.toString());
+      const cellValue = getValueByPath(order, columnKey.toString()) || '--';
 
       switch (columnKey) {
+        case 'totalPrice':
+          return formatUnit(cellValue, '₮');
+
         case 'deliveryDate':
           return moment(cellValue).format('YYYY-MM-DD');
 
         case 'createdAt':
-          return moment(cellValue).format('HH:MM:ss, YYYY-MM-DD');
+          return (
+            <div>
+              <p>{moment(cellValue).format('HH:MM:ss')}</p>
+              <p>{moment(cellValue).format('YYYY-MM-DD')}</p>
+            </div>
+          );
 
         case 'status':
           return (
@@ -69,6 +84,8 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
         renderCell={renderCell}
         totalPage={totalPage}
         currentPage={currentPage}
+        onRowAction={key => changePathAction(`/orders/${key}`)}
+        customTopContent={<OrdersFilterForm />}
       />
     </div>
   );
