@@ -1,11 +1,5 @@
 import { IOrder } from '@/types';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider
-} from '@nextui-org/react';
+import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 import OrderStatus from '@/components/orders/detail/OrderStatus';
 import OrderProductsTable from '@/components/orders/detail/OrderProductsTable';
