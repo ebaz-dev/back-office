@@ -16,5 +16,6 @@ export interface IOrder {
   id: string;
   supplier: ICustomer;
   merchant: ICustomer;
+  totalPrice: number;
   user: { phoneNumber: string; id: string };
 }
