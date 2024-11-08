@@ -100,7 +100,11 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
       onRowAction={onDefaultRowAction}
     >
       <TableHeader columns={columns}>
-        {column => <TableColumn key={column.uid}>{column.label}</TableColumn>}
+        {column => (
+          <TableColumn key={column.uid} className='text-center'>
+            {column.label}
+          </TableColumn>
+        )}
       </TableHeader>
       <TableBody
         items={data ?? []}
@@ -111,8 +115,10 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
         {item => (
           <TableRow key={item.id}>
             {columnKey => (
-              <TableCell className='text-xs'>
-                {renderCell(item, columnKey)}
+              <TableCell className='text-xs text-center'>
+                <div className='line-clamp-2'>
+                  {renderCell(item, columnKey)}
+                </div>
               </TableCell>
             )}
           </TableRow>

@@ -1,3 +1,4 @@
+import { replaceMediaUrl } from '@/lib/utils';
 import { Avatar, AvatarGroup } from '@nextui-org/react';
 import { FunctionComponent } from 'react';
 
@@ -13,7 +14,7 @@ const CoreGroupImages: FunctionComponent<CoreGroupImagesProps> = ({
   return (
     <AvatarGroup max={max} size='md'>
       {images?.map((src: string, index: number) => {
-        return <Avatar key={index} src={src} />;
+        return <Avatar key={index} src={replaceMediaUrl(src)} />;
       })}
     </AvatarGroup>
   );
