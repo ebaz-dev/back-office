@@ -10,7 +10,7 @@ interface OrdersBoardProps {
 
 const OrdersBoard: FunctionComponent<OrdersBoardProps> = props => {
   return (
-    <div className='h-full flex flex-col gap-4 w-full'>
+    <div className='h-full'>
       <OrderTable {...props} />
     </div>
   );

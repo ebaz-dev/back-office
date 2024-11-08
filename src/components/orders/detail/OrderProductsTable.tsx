@@ -31,7 +31,7 @@ const OrderProductsTable: FunctionComponent<OrderProductsTableProps> = ({
 
   return (
     <div className='space-y-2'>
-      <p className='font-semibold'>{tr('Бүтээгдэхүүнүүд')}</p>
+      <p className='font-medium'>{tr('Бүтээгдэхүүнүүд')}</p>
 
       <CoreTable
         data={products}

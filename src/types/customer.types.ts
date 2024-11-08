@@ -1,5 +1,6 @@
 export interface ICustomer {
   id: string;
+  customerNo: string;
   parentId: string;
   name: string;
   regNo: string;

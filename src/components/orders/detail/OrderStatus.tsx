@@ -14,7 +14,9 @@ const OrderStatus: FunctionComponent<OrderStatusProps> = ({ order }) => {
   return (
     <form className='flex gap-4 items-center w-full'>
       <div>
-        <p className='font-semibold'>Order No: {order.orderNo}</p>
+        <p className='font-medium'>
+          {tr('Захиалгын дугаар')}: {order.orderNo}
+        </p>
         <p className='text-xs'>
           {moment(order.createdAt).format('ddd, MMMM D, YYYY')}
         </p>

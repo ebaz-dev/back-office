@@ -108,16 +108,6 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
       selectionMode='single'
-      classNames={
-        data.length === 0
-          ? {
-              base: 'h-full',
-              table: 'h-full',
-              tbody: 'h-full',
-              wrapper: 'h-full'
-            }
-          : {}
-      }
       onRowAction={onDefaultRowAction}
     >
       <TableHeader columns={columns}>
@@ -137,8 +127,10 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
           <TableRow key={item.id}>
             {columnKey => (
               <TableCell className='text-xs'>
-                <div className='line-clamp-2 flex items-center justify-center text-center'>
-                  {renderCell(item, columnKey) || '--'}
+                <div className='flex items-center justify-center text-center'>
+                  <div className='line-clamp-2'>
+                    {renderCell(item, columnKey) || '--'}
+                  </div>
                 </div>
               </TableCell>
             )}

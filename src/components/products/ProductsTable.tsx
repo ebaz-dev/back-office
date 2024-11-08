@@ -38,17 +38,15 @@ const ProductsTable: FunctionComponent<ProductsTableProps> = props => {
   );
 
   return (
-    <div className='flex-1'>
-      <CoreTable
-        data={products}
-        columns={PRODUCTS_COLUMNS}
-        renderCell={renderCell}
-        totalPage={totalPage}
-        currentPage={currentPage}
-        onRowAction={key => changePathAction(`/products/${key}`)}
-        customTopContent={<ProductsFilterForm />}
-      />
-    </div>
+    <CoreTable
+      data={products}
+      columns={PRODUCTS_COLUMNS}
+      renderCell={renderCell}
+      totalPage={totalPage}
+      currentPage={currentPage}
+      onRowAction={key => changePathAction(`/products/${key}`)}
+      customTopContent={<ProductsFilterForm />}
+    />
   );
 };
 
