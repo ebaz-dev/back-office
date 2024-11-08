@@ -17,8 +17,8 @@ import {
   useState
 } from 'react';
 import CoreEmpty from '@/components/core/CoreEmpty';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { onPageChangeAction } from '@/app/actions/main';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { changePathAction } from '@/app/actions/main';
 
 interface CoreTableProps<ITableItemType> {
   data: ITableItemType[];
@@ -26,12 +26,13 @@ interface CoreTableProps<ITableItemType> {
   renderCell: (item: ITableItemType, columnKey: React.Key) => React.ReactNode;
   totalPage: number;
   currentPage: number;
+  onRowAction?: (key: React.Key) => void;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
-  const { columns, data, renderCell, totalPage, currentPage } = props;
+  const { columns, data, renderCell, totalPage, currentPage, onRowAction } =
+    props;
 
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -50,7 +51,7 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
       currentParams.set('page', value.toString());
 
       setIsLoading(true);
-      onPageChangeAction(`${pathname}?${currentParams}`);
+      changePathAction(`${pathname}?${currentParams}`);
     },
     [searchParams, setIsLoading, pathname]
   );
@@ -72,9 +73,11 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
     ) : null;
   }, [currentPage, totalPage, onPageChange]);
 
-  const onRowAction = (key: React.Key) => {
-    setIsLoading(true);
-    router.push(`${pathname}/${key}`);
+  const onDefaultRowAction = (key: React.Key) => {
+    if (onRowAction) {
+      setIsLoading(true);
+      onRowAction(key);
+    }
   };
 
   return (
@@ -94,7 +97,7 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
             }
           : {}
       }
-      onRowAction={onRowAction}
+      onRowAction={onDefaultRowAction}
     >
       <TableHeader columns={columns}>
         {column => <TableColumn key={column.uid}>{column.label}</TableColumn>}

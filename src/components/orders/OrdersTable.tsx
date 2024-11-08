@@ -8,6 +8,7 @@ import CoreGroupImages from '@/components/core/CoreGroupImages';
 import { Chip } from '@nextui-org/react';
 import moment from 'moment';
 import { ORDER_COLUMNS } from '@/components/orders/constants';
+import { changePathAction } from '@/app/actions/main';
 
 interface OrdersTableProps {
   orders: IOrder[];
@@ -69,6 +70,7 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
         renderCell={renderCell}
         totalPage={totalPage}
         currentPage={currentPage}
+        onRowAction={key => changePathAction(`/orders/${key}`)}
       />
     </div>
   );

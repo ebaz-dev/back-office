@@ -3,7 +3,7 @@ import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { tr } from '@/lib/utils';
 import { Button } from '@nextui-org/react';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
-import { clearAllFilterAction } from '@/app/actions/main';
+import { changePathAction } from '@/app/actions/main';
 import { filterMerchantAction } from '@/app/actions/merchants';
 
 interface MerchantFilterFormProps {}
@@ -14,7 +14,7 @@ const MerchantFilterForm: FunctionComponent<MerchantFilterFormProps> = ({}) => {
   const clearAllFilter = async () => {
     ref.current?.reset();
 
-    clearAllFilterAction('/merchants');
+    changePathAction('/merchants');
   };
 
   return (

@@ -8,7 +8,7 @@ import { ORDER_FILTER_FIELDS } from '@/components/orders/constants';
 import CoreSubmitButton from '@/components/core/CoreSubmitButton';
 import { BackspaceIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { filterOrdersAction } from '@/app/actions/orders';
-import { clearAllFilterAction } from '@/app/actions/main';
+import { changePathAction } from '@/app/actions/main';
 
 interface OrdersFilterFormProps {}
 
@@ -18,7 +18,7 @@ const OrdersFilterForm: FunctionComponent<OrdersFilterFormProps> = ({}) => {
   const clearAllFilter = () => {
     ref.current?.reset();
 
-    clearAllFilterAction('/orders');
+    changePathAction('/orders');
   };
 
   return (
