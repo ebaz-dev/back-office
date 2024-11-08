@@ -56,7 +56,7 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
           return <CoreGroupImages images={images} />;
 
         default:
-          return cellValue;
+          return <div className='line-clamp-2'>{cellValue}</div>;
       }
     },
     []
