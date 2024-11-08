@@ -30,7 +30,7 @@ const ProductsTable: FunctionComponent<ProductsTableProps> = props => {
           return <CoreGroupImages images={cellValue} />;
 
         default:
-          return <div className='line-clamp-2'>{cellValue}</div>;
+          return cellValue;
       }
     },
     []

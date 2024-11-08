@@ -115,8 +115,8 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
         {item => (
           <TableRow key={item.id}>
             {columnKey => (
-              <TableCell className='text-xs text-center'>
-                <div className='line-clamp-2'>
+              <TableCell className='text-xs'>
+                <div className='line-clamp-2 flex items-center justify-center'>
                   {renderCell(item, columnKey)}
                 </div>
               </TableCell>
