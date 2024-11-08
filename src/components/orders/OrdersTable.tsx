@@ -14,6 +14,7 @@ import { Chip } from '@nextui-org/react';
 import moment from 'moment';
 import { ORDER_COLUMNS } from '@/components/orders/constants';
 import { changePathAction } from '@/app/actions/main';
+import OrdersFilterForm from '@/components/orders/OrdersFilterForm';
 
 interface OrdersTableProps {
   orders: IOrder[];
@@ -84,6 +85,7 @@ const OrdersTable: FunctionComponent<OrdersTableProps> = props => {
         totalPage={totalPage}
         currentPage={currentPage}
         onRowAction={key => changePathAction(`/orders/${key}`)}
+        customTopContent={<OrdersFilterForm />}
       />
     </div>
   );

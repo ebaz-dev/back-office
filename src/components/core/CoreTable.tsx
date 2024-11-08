@@ -1,5 +1,7 @@
 import { ITableItemType, IColumn } from '@/types';
 import {
+  Card,
+  CardBody,
   Pagination,
   Spinner,
   Table,
@@ -27,11 +29,19 @@ interface CoreTableProps<ITableItemType> {
   totalPage: number;
   currentPage: number;
   onRowAction?: (key: React.Key) => void;
+  customTopContent?: React.ReactNode;
 }
 
 const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
-  const { columns, data, renderCell, totalPage, currentPage, onRowAction } =
-    props;
+  const {
+    columns,
+    data,
+    renderCell,
+    totalPage,
+    currentPage,
+    onRowAction,
+    customTopContent
+  } = props;
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -55,6 +65,15 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
     },
     [searchParams, setIsLoading, pathname]
   );
+
+  const topContent = useMemo(() => {
+    if (customTopContent)
+      return (
+        <Card>
+          <CardBody>{customTopContent}</CardBody>
+        </Card>
+      );
+  }, [customTopContent]);
 
   const bottomContent = useMemo(() => {
     return totalPage > 0 ? (
@@ -84,6 +103,8 @@ const CoreTable: FunctionComponent<CoreTableProps<ITableItemType>> = props => {
     <Table
       aria-label='custom cells'
       isHeaderSticky
+      topContent={topContent}
+      topContentPlacement='outside'
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
       selectionMode='single'
