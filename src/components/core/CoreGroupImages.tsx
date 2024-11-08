@@ -12,9 +12,15 @@ const CoreGroupImages: FunctionComponent<CoreGroupImagesProps> = ({
   max = 3
 }) => {
   return (
-    <AvatarGroup max={max} size='md'>
+    <AvatarGroup max={max} size='md' classNames={{ count: 'bg-default-100' }}>
       {images?.map((src: string, index: number) => {
-        return <Avatar key={index} src={replaceMediaUrl(src)} />;
+        return (
+          <Avatar
+            key={index}
+            src={replaceMediaUrl(src)}
+            classNames={{ base: 'bg-default-100' }}
+          />
+        );
       })}
     </AvatarGroup>
   );
